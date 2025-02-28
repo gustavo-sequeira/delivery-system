@@ -3,7 +3,8 @@ program delivery;
 uses
   Vcl.Forms,
   uFrmPrincipal in 'views\uFrmPrincipal.pas' {frmPrincipal},
-  uCliente in 'models\uCliente.pas';
+  uCliente in 'models\uCliente.pas',
+  uConexaoFirebird in 'config\uConexaoFirebird.pas';
 
 {$R *.res}
 
