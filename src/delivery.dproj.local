@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2024/07/31 14:24:20.000.054,=C:\Users\seque\OneDrive\Documentos\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2025/02/28 15:05:16.545,=C:\Users\seque\OneDrive\Documentos\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2025/02/28 15:06:08.139,C:\projetos\repositorios\portfolio\delivery-system\src\views\uFrmPrincipal.dfm=C:\Users\seque\OneDrive\Documentos\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
+    <Transaction>2025/02/28 15:06:08.139,C:\projetos\repositorios\portfolio\delivery-system\src\views\uFrmPrincipal.pas=C:\Users\seque\OneDrive\Documentos\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2025/02/28 15:06:27.530,C:\projetos\repositorios\portfolio\delivery-system\src\delivery.dproj=C:\Users\seque\OneDrive\Documentos\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>2025/02/28 15:07:59.178,=C:\projetos\repositorios\portfolio\delivery-system\src\Unit1.pas</Transaction>
+    <Transaction>2025/02/28 15:08:24.320,C:\projetos\repositorios\portfolio\delivery-system\src\models\uCliente.pas=C:\projetos\repositorios\portfolio\delivery-system\src\Unit1.pas</Transaction>
+  </Transactions>
+</BorlandProject>
