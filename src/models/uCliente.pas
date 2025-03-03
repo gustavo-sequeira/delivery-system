@@ -38,6 +38,7 @@ type
     function GetDataCadastro: TDateTime;
 
   public
+    constructor create;
     property ID: Integer read GetID write SetID;
     property Nome: string read GetNome write SetNome;
     property CPF: string read GetCPF write SetCPF;
@@ -69,6 +70,12 @@ end;
 procedure TCliente.SetNome(const Value: string);
 begin
   FNome := Value;
+end;
+
+constructor TCliente.create;
+begin
+  inherited Create;
+  FDataCadastro := Now;
 end;
 
 function TCliente.GetCPF: string;

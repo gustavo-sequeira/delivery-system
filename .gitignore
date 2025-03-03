@@ -3,6 +3,8 @@ src/models/__recovery/
 src/views/__recovery/
 src/delivery.dproj
 src/delivery.dproj.local
+delivery.identcache
+
 *.dcu
 *.~*
 *.res
