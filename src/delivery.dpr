@@ -9,7 +9,9 @@ uses
   uItemPedido in 'models\uItemPedido.pas',
   uPedido in 'models\uPedido.pas',
   uProduto in 'models\uProduto.pas',
-  uFrmBaseCadastro in 'views\pattern\uFrmBaseCadastro.pas' {frmBaseCadastro};
+  uFrmBaseCadastro in 'views\pattern\uFrmBaseCadastro.pas' {frmBaseCadastro},
+  uFrmClientes in 'views\uFrmClientes.pas' {frmClientes},
+  uClienteController in 'controllers\uClienteController.pas';
 
 {$R *.res}
 
@@ -18,5 +20,6 @@ begin
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TfrmPrincipal, frmPrincipal);
   Application.CreateForm(TfrmBaseCadastro, frmBaseCadastro);
+  Application.CreateForm(TfrmClientes, frmClientes);
   Application.Run;
 end.

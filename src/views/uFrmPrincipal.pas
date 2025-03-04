@@ -13,8 +13,10 @@ type
     Panel2: TPanel;
     Panel3: TPanel;
     Panel4: TPanel;
-    Button1: TButton;
-    procedure Button1Click(Sender: TObject);
+    Label1: TLabel;
+    procedure Label1MouseEnter(Sender: TObject);
+    procedure Label1MouseLeave(Sender: TObject);
+    procedure Label1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -29,20 +31,31 @@ implementation
 {$R *.dfm}
 
 uses
-  uConexaoFirebird, uFrmBaseCadastro;
+  uConexaoFirebird, uFrmBaseCadastro, uFrmClientes;
 
-procedure TfrmPrincipal.Button1Click(Sender: TObject);
+procedure TfrmPrincipal.Label1Click(Sender: TObject);
 var
-  frm: TfrmBaseCadastro;
+  frmClientes: TFrmClientes;
 begin
 
-  frm := TfrmBaseCadastro.Create(Self); // Cria o formulário filho
-  frm.BorderStyle := bsNone; // Remove a borda
-  frm.Parent := Panel2; // Define o Panel como o "pai" do Form
-  frm.Align := alClient; // Faz o Form ocupar todo o Panel
-  frm.Show;
+  frmClientes := TFrmClientes.Create(Self);
+  try
+    frmClientes.Parent := Panel2;
+    frmClientes.Show;
+  finally
+   // frmClientes.Free;
+  end;
+end;
 
+procedure TfrmPrincipal.Label1MouseEnter(Sender: TObject);
+begin
+  if Label1.Enabled then
+    Label1.Color := clSilver;
+end;
 
+procedure TfrmPrincipal.Label1MouseLeave(Sender: TObject);
+begin
+ Label1.Color := clWhite;
 end;
 
 end.

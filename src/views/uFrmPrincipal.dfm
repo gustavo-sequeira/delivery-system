@@ -1,11 +1,11 @@
 object frmPrincipal: TfrmPrincipal
   Left = 0
   Top = 0
-  BorderIcons = []
-  BorderStyle = bsNone
+  BorderIcons = [biSystemMenu, biMaximize]
+  BorderStyle = bsSingle
   Caption = 'frmPrincipal'
-  ClientHeight = 700
-  ClientWidth = 1011
+  ClientHeight = 661
+  ClientWidth = 995
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -17,53 +17,71 @@ object frmPrincipal: TfrmPrincipal
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 1011
+    Width = 995
     Height = 193
     Align = alTop
     Caption = 'pnlMenuSuperior'
     Color = clGradientActiveCaption
     ParentBackground = False
     TabOrder = 0
+    ExplicitWidth = 1011
     object Panel3: TPanel
-      Left = 704
+      Left = 688
       Top = 1
       Width = 306
       Height = 191
       Align = alRight
       Caption = 'pnlLogin'
       TabOrder = 0
-      ExplicitHeight = 71
-    end
-    object Button1: TButton
-      Left = 312
-      Top = 32
-      Width = 75
-      Height = 25
-      Caption = 'Button1'
-      TabOrder = 1
-      OnClick = Button1Click
+      ExplicitLeft = 704
     end
   end
   object Panel2: TPanel
     Left = 0
     Top = 193
-    Width = 1011
-    Height = 507
+    Width = 995
+    Height = 468
     Align = alClient
+    BevelOuter = bvNone
+    Color = clWhite
     ParentBackground = False
     TabOrder = 1
-    ExplicitTop = 73
-    ExplicitHeight = 627
+    ExplicitWidth = 1011
+    ExplicitHeight = 507
     object Panel4: TPanel
-      Left = 1
-      Top = 1
-      Width = 1009
+      Left = 0
+      Top = 0
+      Width = 995
       Height = 24
       Align = alTop
-      Caption = 'p'
-      Color = clFuchsia
+      BevelOuter = bvNone
+      Color = clWhite
       ParentBackground = False
       TabOrder = 0
+      ExplicitLeft = 1
+      ExplicitTop = 1
+      ExplicitWidth = 1009
+      object Label1: TLabel
+        AlignWithMargins = True
+        Left = 3
+        Top = 3
+        Width = 150
+        Height = 18
+        Align = alLeft
+        Alignment = taCenter
+        AutoSize = False
+        Caption = 'CLIENTES'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clNavy
+        Font.Height = -12
+        Font.Name = 'Segoe UI'
+        Font.Style = [fsBold]
+        ParentFont = False
+        Transparent = False
+        OnClick = Label1Click
+        OnMouseEnter = Label1MouseEnter
+        OnMouseLeave = Label1MouseLeave
+      end
     end
   end
 end

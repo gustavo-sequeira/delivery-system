@@ -6,34 +6,43 @@ object frmBaseCadastro: TfrmBaseCadastro
   Caption = 'frmBaseCadastro'
   ClientHeight = 622
   ClientWidth = 1141
-  Color = clWhite
+  Color = clCream
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
+  OnCreate = FormCreate
   OnResize = FormResize
   TextHeight = 15
   object pnlMenu: TPanel
-    Left = 0
-    Top = 0
+    AlignWithMargins = True
+    Left = 3
+    Top = 23
     Width = 217
-    Height = 622
+    Height = 579
+    Margins.Top = 23
+    Margins.Bottom = 20
     Align = alLeft
+    BevelOuter = bvNone
+    Color = clWhite
     ParentBackground = False
-    ParentColor = True
     TabOrder = 0
+    ExplicitTop = 3
+    ExplicitHeight = 616
     object Label1: TLabel
       AlignWithMargins = True
-      Left = 21
-      Top = 543
-      Width = 192
+      Left = 20
+      Top = 531
+      Width = 177
       Height = 28
+      Hint = 'Sair da tela'
       Margins.Left = 20
-      Margins.Bottom = 50
+      Margins.Right = 20
+      Margins.Bottom = 20
       Align = alBottom
       Caption = 'SAIR'
-      Color = clRed
+      Color = clWhite
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clRed
       Font.Height = -20
@@ -41,137 +50,126 @@ object frmBaseCadastro: TfrmBaseCadastro
       Font.Style = [fsBold]
       ParentColor = False
       ParentFont = False
+      Transparent = False
       OnClick = Label1Click
+      OnMouseEnter = Label1MouseEnter
+      OnMouseLeave = Label1MouseLeave
+      ExplicitLeft = 21
+      ExplicitTop = 543
       ExplicitWidth = 44
     end
-    object Label3: TLabel
+    object lblMenuPesquisa: TLabel
       AlignWithMargins = True
-      Left = 21
-      Top = 178
-      Width = 192
+      Left = 20
+      Top = 75
+      Width = 177
       Height = 28
+      Hint = 'Pesquisa de resgistros'
       Margins.Left = 20
+      Margins.Right = 20
       Align = alTop
-      Caption = 'PESQUISAR'
+      Caption = 'PESQUISA'
+      Color = clWhite
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clNavy
       Font.Height = -20
       Font.Name = 'Segoe UI'
       Font.Style = [fsBold]
+      ParentColor = False
       ParentFont = False
-      OnClick = Label3Click
-      ExplicitWidth = 107
+      Transparent = False
+      OnClick = lblMenuPesquisaClick
+      OnMouseEnter = lblMenuPesquisaMouseEnter
+      OnMouseLeave = lblMenuPesquisaMouseLeave
+      ExplicitWidth = 94
     end
-    object Label4: TLabel
+    object lblMenuNovo: TLabel
       AlignWithMargins = True
-      Left = 21
-      Top = 144
-      Width = 192
+      Left = 20
+      Top = 109
+      Width = 177
       Height = 28
+      Hint = 'Incluir um novo registro'
       Margins.Left = 20
-      Align = alTop
-      Caption = 'EXCLUIR'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clRed
-      Font.Height = -20
-      Font.Name = 'Segoe UI'
-      Font.Style = [fsBold]
-      ParentFont = False
-      ExplicitWidth = 79
-    end
-    object Label5: TLabel
-      AlignWithMargins = True
-      Left = 21
-      Top = 110
-      Width = 192
-      Height = 28
-      Margins.Left = 20
-      Align = alTop
-      Caption = 'EDITAR'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clNavy
-      Font.Height = -20
-      Font.Name = 'Segoe UI'
-      Font.Style = [fsBold]
-      ParentFont = False
-      ExplicitWidth = 70
-    end
-    object Label6: TLabel
-      AlignWithMargins = True
-      Left = 21
-      Top = 76
-      Width = 192
-      Height = 28
-      Margins.Left = 20
+      Margins.Right = 20
       Align = alTop
       Caption = 'NOVO'
+      Color = clWhite
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clNavy
       Font.Height = -20
       Font.Name = 'Segoe UI'
       Font.Style = [fsBold]
+      ParentColor = False
       ParentFont = False
-      OnClick = Label6Click
+      Transparent = False
+      OnClick = lblMenuNovoClick
+      OnMouseEnter = lblMenuNovoMouseEnter
+      OnMouseLeave = lblMenuNovoMouseLeave
+      ExplicitLeft = 21
+      ExplicitTop = 110
       ExplicitWidth = 59
     end
-    object Label7: TLabel
+    object lblMenuSalvar: TLabel
       AlignWithMargins = True
-      Left = 21
-      Top = 212
-      Width = 192
+      Left = 20
+      Top = 143
+      Width = 177
       Height = 28
+      Hint = 'Salvar registro'
       Margins.Left = 20
+      Margins.Right = 20
       Align = alTop
       Caption = 'SALVAR'
+      Color = clWhite
+      Enabled = False
       Font.Charset = DEFAULT_CHARSET
-      Font.Color = clGreen
+      Font.Color = clNavy
       Font.Height = -20
       Font.Name = 'Segoe UI'
       Font.Style = [fsBold]
+      ParentColor = False
       ParentFont = False
-      OnClick = Label3Click
+      Transparent = False
+      OnClick = lblMenuSalvarClick
+      OnMouseEnter = lblMenuSalvarMouseEnter
+      OnMouseLeave = lblMenuSalvarMouseLeave
+      ExplicitLeft = 21
+      ExplicitTop = 212
       ExplicitWidth = 73
     end
-    object Label9: TLabel
+    object lblMenuCancelar: TLabel
       AlignWithMargins = True
-      Left = 21
-      Top = 280
-      Width = 192
+      Left = 20
+      Top = 177
+      Width = 177
       Height = 28
+      Hint = 'Cancelar opera'#231#227'o'
       Margins.Left = 20
-      Align = alTop
-      Caption = 'CONFIRMAR'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clGreen
-      Font.Height = -20
-      Font.Name = 'Segoe UI'
-      Font.Style = [fsBold]
-      ParentFont = False
-      OnClick = Label3Click
-      ExplicitWidth = 118
-    end
-    object Label10: TLabel
-      AlignWithMargins = True
-      Left = 21
-      Top = 246
-      Width = 192
-      Height = 28
-      Margins.Left = 20
+      Margins.Right = 20
       Align = alTop
       Caption = 'CANCELAR'
+      Color = clWhite
+      Enabled = False
       Font.Charset = DEFAULT_CHARSET
-      Font.Color = clRed
+      Font.Color = clNavy
       Font.Height = -20
       Font.Name = 'Segoe UI'
       Font.Style = [fsBold]
+      ParentColor = False
       ParentFont = False
-      OnClick = Label3Click
+      Transparent = False
+      OnClick = lblMenuCancelarClick
+      OnMouseEnter = lblMenuCancelarMouseEnter
+      OnMouseLeave = lblMenuCancelarMouseLeave
+      ExplicitLeft = 21
+      ExplicitTop = 246
       ExplicitWidth = 102
     end
     object Panel2: TPanel
-      Left = 1
-      Top = 1
-      Width = 215
+      Left = 0
+      Top = 0
+      Width = 217
       Height = 72
       Align = alTop
       BevelOuter = bvNone
@@ -179,13 +177,16 @@ object frmBaseCadastro: TfrmBaseCadastro
       ParentColor = True
       ParentCtl3D = False
       TabOrder = 0
+      ExplicitLeft = 1
+      ExplicitTop = 1
+      ExplicitWidth = 215
     end
   end
   object pnlCentral: TPanel
     Left = 288
-    Top = 8
+    Top = 24
     Width = 673
-    Height = 606
+    Height = 577
     BevelOuter = bvNone
     Color = clWhite
     Ctl3D = False
@@ -209,9 +210,6 @@ object frmBaseCadastro: TfrmBaseCadastro
       ParentCtl3D = False
       ParentFont = False
       TabOrder = 0
-      ExplicitLeft = 1
-      ExplicitTop = 1
-      ExplicitWidth = 671
       object Label2: TLabel
         AlignWithMargins = True
         Left = 3
@@ -231,7 +229,6 @@ object frmBaseCadastro: TfrmBaseCadastro
         BevelOuter = bvNone
         ParentColor = True
         TabOrder = 0
-        ExplicitWidth = 454
         object Shape1: TShape
           AlignWithMargins = True
           Left = 3
@@ -239,7 +236,7 @@ object frmBaseCadastro: TfrmBaseCadastro
           Width = 450
           Height = 5
           Align = alTop
-          Brush.Color = clBisque
+          Brush.Color = clCream
           Pen.Style = psClear
           Shape = stRoundRect
           ExplicitLeft = 4
@@ -254,7 +251,7 @@ object frmBaseCadastro: TfrmBaseCadastro
           Height = 5
           Margins.Left = 20
           Align = alTop
-          Brush.Color = clBisque
+          Brush.Color = clCream
           Pen.Style = psClear
           Shape = stRoundRect
           ExplicitLeft = 8
@@ -269,7 +266,7 @@ object frmBaseCadastro: TfrmBaseCadastro
           Height = 5
           Margins.Left = 40
           Align = alTop
-          Brush.Color = clBisque
+          Brush.Color = clCream
           Pen.Style = psClear
           Shape = stRoundRect
           ExplicitLeft = 8
@@ -284,7 +281,7 @@ object frmBaseCadastro: TfrmBaseCadastro
           Height = 5
           Margins.Left = 60
           Align = alTop
-          Brush.Color = clBisque
+          Brush.Color = clCream
           Pen.Style = psClear
           Shape = stRoundRect
           ExplicitLeft = 8
@@ -299,7 +296,7 @@ object frmBaseCadastro: TfrmBaseCadastro
           Height = 5
           Margins.Left = 80
           Align = alTop
-          Brush.Color = clBisque
+          Brush.Color = clCream
           Pen.Style = psClear
           Shape = stRoundRect
           ExplicitLeft = 8
@@ -314,7 +311,7 @@ object frmBaseCadastro: TfrmBaseCadastro
           Height = 5
           Margins.Left = 100
           Align = alTop
-          Brush.Color = clBisque
+          Brush.Color = clCream
           Pen.Style = psClear
           Shape = stRoundRect
           ExplicitLeft = 8
@@ -328,59 +325,84 @@ object frmBaseCadastro: TfrmBaseCadastro
       Top = 72
       Width = 673
       Height = 534
-      Align = alClient
+      Align = alTop
       BevelOuter = bvNone
-      Caption = 'pnlManutencao'
-      ParentColor = True
+      Color = clWhite
       TabOrder = 1
       Visible = False
-      ExplicitLeft = 72
-      ExplicitTop = 152
-      ExplicitWidth = 185
-      ExplicitHeight = 41
+      object Label16: TLabel
+        Left = 220
+        Top = 472
+        Width = 177
+        Height = 28
+        Hint = 'Pesquisar registro'
+        Alignment = taCenter
+        AutoSize = False
+        Caption = 'PESQUISAR'
+        Color = clWhite
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clNavy
+        Font.Height = -20
+        Font.Name = 'Segoe UI'
+        Font.Style = [fsBold]
+        ParentColor = False
+        ParentFont = False
+        Transparent = False
+        Visible = False
+        OnClick = Label16Click
+        OnMouseEnter = Label16MouseEnter
+        OnMouseLeave = Label16MouseLeave
+      end
     end
     object pnlPesquisa: TPanel
-      Left = 0
-      Top = 72
+      Left = 41
+      Top = 135
       Width = 673
-      Height = 534
-      Align = alClient
+      Height = 385
       BevelOuter = bvNone
       ParentColor = True
       TabOrder = 2
       Visible = False
-      ExplicitLeft = 220
-      ExplicitTop = 232
-      ExplicitWidth = 185
-      ExplicitHeight = 41
-      object pnlPesquisaFiltro: TPanel
-        Left = 0
-        Top = 0
-        Width = 673
-        Height = 41
-        Align = alTop
-        BevelOuter = bvNone
-        Caption = 'pnlPesquisaFiltro'
-        ParentColor = True
-        TabOrder = 0
-        ExplicitLeft = 288
-        ExplicitTop = 136
-        ExplicitWidth = 185
-      end
-      object DBGrid1: TDBGrid
+      object DBGrid: TDBGrid
         AlignWithMargins = True
         Left = 3
-        Top = 44
+        Top = 3
         Width = 667
-        Height = 487
-        Align = alClient
-        TabOrder = 1
+        Height = 189
+        Align = alTop
+        BorderStyle = bsNone
+        Color = clWhite
+        DataSource = DataSource
+        Options = [dgTitles, dgIndicator, dgColLines, dgRowLines, dgTabs, dgTitleHotTrack]
+        TabOrder = 0
         TitleFont.Charset = DEFAULT_CHARSET
         TitleFont.Color = clWindowText
         TitleFont.Height = -12
         TitleFont.Name = 'Segoe UI'
         TitleFont.Style = []
+        OnDrawColumnCell = DBGridDrawColumnCell
       end
     end
+  end
+  object FDGUIxWaitCursor: TFDGUIxWaitCursor
+    Provider = 'Forms'
+    Left = 240
+    Top = 24
+  end
+  object DataSource: TDataSource
+    DataSet = FDMemTable
+    Left = 240
+    Top = 80
+  end
+  object FDMemTable: TFDMemTable
+    FetchOptions.AssignedValues = [evMode]
+    FetchOptions.Mode = fmAll
+    ResourceOptions.AssignedValues = [rvSilentMode]
+    ResourceOptions.SilentMode = True
+    UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
+    UpdateOptions.CheckRequired = False
+    UpdateOptions.AutoCommitUpdates = True
+    Left = 240
+    Top = 144
   end
 end
