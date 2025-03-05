@@ -11,7 +11,9 @@ uses
   uProduto in 'models\uProduto.pas',
   uFrmBaseCadastro in 'views\pattern\uFrmBaseCadastro.pas' {frmBaseCadastro},
   uFrmClientes in 'views\uFrmClientes.pas' {frmClientes},
-  uClienteController in 'controllers\uClienteController.pas';
+  uClienteController in 'controllers\uClienteController.pas',
+  uFrmProdutos in 'views\uFrmProdutos.pas' {frmProdutos},
+  uProdutoController in 'controllers\uProdutoController.pas';
 
 {$R *.res}
 
@@ -21,5 +23,6 @@ begin
   Application.CreateForm(TfrmPrincipal, frmPrincipal);
   Application.CreateForm(TfrmBaseCadastro, frmBaseCadastro);
   Application.CreateForm(TfrmClientes, frmClientes);
+  Application.CreateForm(TfrmProdutos, frmProdutos);
   Application.Run;
 end.

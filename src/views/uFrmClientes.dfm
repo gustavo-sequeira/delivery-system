@@ -5,27 +5,24 @@ inherited frmClientes: TfrmClientes
   inherited pnlMenu: TPanel
     StyleElements = [seFont, seClient, seBorder]
     inherited Label1: TLabel
+      Width = 177
       StyleElements = [seFont, seClient, seBorder]
-      ExplicitLeft = 20
-      ExplicitTop = 544
     end
     inherited lblMenuPesquisa: TLabel
+      Width = 177
       StyleElements = [seFont, seClient, seBorder]
     end
     inherited lblMenuNovo: TLabel
+      Width = 177
       StyleElements = [seFont, seClient, seBorder]
-      ExplicitLeft = 20
-      ExplicitTop = 109
     end
     inherited lblMenuSalvar: TLabel
+      Width = 177
       StyleElements = [seFont, seClient, seBorder]
-      ExplicitLeft = 20
-      ExplicitTop = 143
     end
     inherited lblMenuCancelar: TLabel
+      Width = 177
       StyleElements = [seFont, seClient, seBorder]
-      ExplicitLeft = 20
-      ExplicitTop = 177
     end
     inherited Panel2: TPanel
       StyleElements = [seFont, seClient, seBorder]
@@ -37,6 +34,7 @@ inherited frmClientes: TfrmClientes
       StyleElements = [seFont, seClient, seBorder]
       inherited Label2: TLabel
         Width = 149
+        Height = 66
         Caption = 'Clientes'
         StyleElements = [seFont, seClient, seBorder]
         ExplicitWidth = 149
@@ -45,23 +43,31 @@ inherited frmClientes: TfrmClientes
         Left = 155
         Width = 518
         StyleElements = [seFont, seClient, seBorder]
+        ExplicitLeft = 155
+        ExplicitWidth = 518
         inherited Shape1: TShape
           Width = 512
+          ExplicitWidth = 512
         end
         inherited Shape2: TShape
           Width = 495
+          ExplicitWidth = 495
         end
         inherited Shape3: TShape
           Width = 475
+          ExplicitWidth = 475
         end
         inherited Shape4: TShape
           Width = 455
+          ExplicitWidth = 455
         end
         inherited Shape5: TShape
           Width = 435
+          ExplicitWidth = 435
         end
         inherited Shape6: TShape
           Width = 415
+          ExplicitWidth = 415
         end
       end
     end

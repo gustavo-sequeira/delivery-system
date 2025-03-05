@@ -142,6 +142,11 @@
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="controllers\uClienteController.pas"/>
+        <DCCReference Include="views\uFrmProdutos.pas">
+            <Form>frmProdutos</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="controllers\uProdutoController.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

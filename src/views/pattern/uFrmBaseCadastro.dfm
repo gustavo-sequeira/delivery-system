@@ -28,8 +28,6 @@ object frmBaseCadastro: TfrmBaseCadastro
     Color = clWhite
     ParentBackground = False
     TabOrder = 0
-    ExplicitTop = 3
-    ExplicitHeight = 616
     object Label1: TLabel
       AlignWithMargins = True
       Left = 20
@@ -54,8 +52,6 @@ object frmBaseCadastro: TfrmBaseCadastro
       OnClick = Label1Click
       OnMouseEnter = Label1MouseEnter
       OnMouseLeave = Label1MouseLeave
-      ExplicitLeft = 21
-      ExplicitTop = 543
       ExplicitWidth = 44
     end
     object lblMenuPesquisa: TLabel
@@ -106,8 +102,6 @@ object frmBaseCadastro: TfrmBaseCadastro
       OnClick = lblMenuNovoClick
       OnMouseEnter = lblMenuNovoMouseEnter
       OnMouseLeave = lblMenuNovoMouseLeave
-      ExplicitLeft = 21
-      ExplicitTop = 110
       ExplicitWidth = 59
     end
     object lblMenuSalvar: TLabel
@@ -134,8 +128,6 @@ object frmBaseCadastro: TfrmBaseCadastro
       OnClick = lblMenuSalvarClick
       OnMouseEnter = lblMenuSalvarMouseEnter
       OnMouseLeave = lblMenuSalvarMouseLeave
-      ExplicitLeft = 21
-      ExplicitTop = 212
       ExplicitWidth = 73
     end
     object lblMenuCancelar: TLabel
@@ -162,8 +154,6 @@ object frmBaseCadastro: TfrmBaseCadastro
       OnClick = lblMenuCancelarClick
       OnMouseEnter = lblMenuCancelarMouseEnter
       OnMouseLeave = lblMenuCancelarMouseLeave
-      ExplicitLeft = 21
-      ExplicitTop = 246
       ExplicitWidth = 102
     end
     object Panel2: TPanel
@@ -177,9 +167,6 @@ object frmBaseCadastro: TfrmBaseCadastro
       ParentColor = True
       ParentCtl3D = False
       TabOrder = 0
-      ExplicitLeft = 1
-      ExplicitTop = 1
-      ExplicitWidth = 215
     end
   end
   object pnlCentral: TPanel
