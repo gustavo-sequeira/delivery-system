@@ -1,6 +1,8 @@
 object frmBaseCadastro: TfrmBaseCadastro
   Left = 0
   Top = 0
+  Margins.Top = 23
+  Margins.Bottom = 20
   Align = alClient
   BorderStyle = bsNone
   Caption = 'frmBaseCadastro'
@@ -27,7 +29,7 @@ object frmBaseCadastro: TfrmBaseCadastro
     BevelOuter = bvNone
     Color = clWhite
     ParentBackground = False
-    TabOrder = 0
+    TabOrder = 1
     object Label1: TLabel
       AlignWithMargins = True
       Left = 20
@@ -170,20 +172,27 @@ object frmBaseCadastro: TfrmBaseCadastro
     end
   end
   object pnlCentral: TPanel
-    Left = 288
-    Top = 24
-    Width = 673
-    Height = 577
+    Left = 223
+    Top = 0
+    Width = 918
+    Height = 622
+    Margins.Top = 23
+    Margins.Bottom = 20
+    Align = alClient
     BevelOuter = bvNone
     Color = clWhite
     Ctl3D = False
     ParentBackground = False
     ParentCtl3D = False
-    TabOrder = 1
+    TabOrder = 0
+    ExplicitLeft = 288
+    ExplicitTop = 24
+    ExplicitWidth = 673
+    ExplicitHeight = 577
     object Panel1: TPanel
       Left = 0
       Top = 0
-      Width = 673
+      Width = 918
       Height = 72
       Align = alTop
       BevelOuter = bvNone
@@ -197,6 +206,7 @@ object frmBaseCadastro: TfrmBaseCadastro
       ParentCtl3D = False
       ParentFont = False
       TabOrder = 0
+      ExplicitWidth = 673
       object Label2: TLabel
         AlignWithMargins = True
         Left = 3
@@ -210,17 +220,18 @@ object frmBaseCadastro: TfrmBaseCadastro
       object Panel3: TPanel
         Left = 217
         Top = 0
-        Width = 456
+        Width = 701
         Height = 72
         Align = alClient
         BevelOuter = bvNone
         ParentColor = True
         TabOrder = 0
+        ExplicitWidth = 456
         object Shape1: TShape
           AlignWithMargins = True
           Left = 3
           Top = 58
-          Width = 450
+          Width = 695
           Height = 5
           Align = alTop
           Brush.Color = clCream
@@ -234,7 +245,7 @@ object frmBaseCadastro: TfrmBaseCadastro
           AlignWithMargins = True
           Left = 20
           Top = 47
-          Width = 433
+          Width = 678
           Height = 5
           Margins.Left = 20
           Align = alTop
@@ -249,7 +260,7 @@ object frmBaseCadastro: TfrmBaseCadastro
           AlignWithMargins = True
           Left = 40
           Top = 36
-          Width = 413
+          Width = 658
           Height = 5
           Margins.Left = 40
           Align = alTop
@@ -264,7 +275,7 @@ object frmBaseCadastro: TfrmBaseCadastro
           AlignWithMargins = True
           Left = 60
           Top = 25
-          Width = 393
+          Width = 638
           Height = 5
           Margins.Left = 60
           Align = alTop
@@ -279,7 +290,7 @@ object frmBaseCadastro: TfrmBaseCadastro
           AlignWithMargins = True
           Left = 80
           Top = 14
-          Width = 373
+          Width = 618
           Height = 5
           Margins.Left = 80
           Align = alTop
@@ -294,7 +305,7 @@ object frmBaseCadastro: TfrmBaseCadastro
           AlignWithMargins = True
           Left = 100
           Top = 3
-          Width = 353
+          Width = 598
           Height = 5
           Margins.Left = 100
           Align = alTop
@@ -310,13 +321,14 @@ object frmBaseCadastro: TfrmBaseCadastro
     object pnlManutencao: TPanel
       Left = 0
       Top = 72
-      Width = 673
+      Width = 918
       Height = 534
       Align = alTop
       BevelOuter = bvNone
       Color = clWhite
       TabOrder = 1
       Visible = False
+      ExplicitWidth = 673
       object Label16: TLabel
         Left = 220
         Top = 472
@@ -355,8 +367,7 @@ object frmBaseCadastro: TfrmBaseCadastro
         Left = 3
         Top = 3
         Width = 667
-        Height = 189
-        Align = alTop
+        Height = 70
         BorderStyle = bsNone
         Color = clWhite
         DataSource = DataSource

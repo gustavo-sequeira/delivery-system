@@ -5,23 +5,18 @@ inherited frmClientes: TfrmClientes
   inherited pnlMenu: TPanel
     StyleElements = [seFont, seClient, seBorder]
     inherited Label1: TLabel
-      Width = 177
       StyleElements = [seFont, seClient, seBorder]
     end
     inherited lblMenuPesquisa: TLabel
-      Width = 177
       StyleElements = [seFont, seClient, seBorder]
     end
     inherited lblMenuNovo: TLabel
-      Width = 177
       StyleElements = [seFont, seClient, seBorder]
     end
     inherited lblMenuSalvar: TLabel
-      Width = 177
       StyleElements = [seFont, seClient, seBorder]
     end
     inherited lblMenuCancelar: TLabel
-      Width = 177
       StyleElements = [seFont, seClient, seBorder]
     end
     inherited Panel2: TPanel
@@ -34,39 +29,38 @@ inherited frmClientes: TfrmClientes
       StyleElements = [seFont, seClient, seBorder]
       inherited Label2: TLabel
         Width = 149
-        Height = 66
         Caption = 'Clientes'
         StyleElements = [seFont, seClient, seBorder]
         ExplicitWidth = 149
       end
       inherited Panel3: TPanel
         Left = 155
-        Width = 518
+        Width = 763
         StyleElements = [seFont, seClient, seBorder]
         ExplicitLeft = 155
         ExplicitWidth = 518
         inherited Shape1: TShape
-          Width = 512
+          Width = 757
           ExplicitWidth = 512
         end
         inherited Shape2: TShape
-          Width = 495
+          Width = 740
           ExplicitWidth = 495
         end
         inherited Shape3: TShape
-          Width = 475
+          Width = 720
           ExplicitWidth = 475
         end
         inherited Shape4: TShape
-          Width = 455
+          Width = 700
           ExplicitWidth = 455
         end
         inherited Shape5: TShape
-          Width = 435
+          Width = 680
           ExplicitWidth = 435
         end
         inherited Shape6: TShape
-          Width = 415
+          Width = 660
           ExplicitWidth = 415
         end
       end
@@ -321,11 +315,11 @@ inherited frmClientes: TfrmClientes
       end
     end
     inherited pnlPesquisa: TPanel
-      Left = 400
-      Top = 238
+      Left = 552
+      Top = 118
       StyleElements = [seFont, seClient, seBorder]
-      ExplicitLeft = 400
-      ExplicitTop = 238
+      ExplicitLeft = 552
+      ExplicitTop = 118
       inherited DBGrid: TDBGrid
         OnCellClick = DBGridCellClick
         Columns = <

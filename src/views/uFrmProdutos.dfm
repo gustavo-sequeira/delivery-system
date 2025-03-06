@@ -1,27 +1,24 @@
 inherited frmProdutos: TfrmProdutos
   Caption = 'frmProdutos'
   StyleElements = [seFont, seClient, seBorder]
+  ExplicitLeft = -142
+  ExplicitTop = -171
   TextHeight = 15
   inherited pnlMenu: TPanel
     StyleElements = [seFont, seClient, seBorder]
     inherited Label1: TLabel
-      Width = 177
       StyleElements = [seFont, seClient, seBorder]
     end
     inherited lblMenuPesquisa: TLabel
-      Width = 177
       StyleElements = [seFont, seClient, seBorder]
     end
     inherited lblMenuNovo: TLabel
-      Width = 177
       StyleElements = [seFont, seClient, seBorder]
     end
     inherited lblMenuSalvar: TLabel
-      Width = 177
       StyleElements = [seFont, seClient, seBorder]
     end
     inherited lblMenuCancelar: TLabel
-      Width = 177
       StyleElements = [seFont, seClient, seBorder]
     end
     inherited Panel2: TPanel
@@ -34,43 +31,43 @@ inherited frmProdutos: TfrmProdutos
       StyleElements = [seFont, seClient, seBorder]
       inherited Label2: TLabel
         Width = 172
-        Height = 66
         Caption = 'Produtos'
         StyleElements = [seFont, seClient, seBorder]
         ExplicitWidth = 172
       end
       inherited Panel3: TPanel
         Left = 178
-        Width = 495
+        Width = 740
         StyleElements = [seFont, seClient, seBorder]
         inherited Shape1: TShape
-          Width = 489
+          Width = 734
         end
         inherited Shape2: TShape
-          Width = 472
+          Width = 717
         end
         inherited Shape3: TShape
-          Width = 452
+          Width = 697
         end
         inherited Shape4: TShape
-          Width = 432
+          Width = 677
         end
         inherited Shape5: TShape
-          Width = 412
+          Width = 657
         end
         inherited Shape6: TShape
-          Width = 392
+          Width = 637
         end
       end
     end
     inherited pnlManutencao: TPanel
+      TabOrder = 2
       StyleElements = [seFont, seClient, seBorder]
       inherited Label16: TLabel
         Left = 218
-        Top = 368
+        Top = 383
         StyleElements = [seFont, seClient, seBorder]
         ExplicitLeft = 218
-        ExplicitTop = 368
+        ExplicitTop = 383
       end
       object Label4: TLabel
         Left = 144
@@ -202,7 +199,7 @@ inherited frmProdutos: TfrmProdutos
         ParentFont = False
         TabOrder = 1
       end
-      object Edit1: TEdit
+      object edtDescricao: TEdit
         Left = 272
         Top = 105
         Width = 250
@@ -215,7 +212,7 @@ inherited frmProdutos: TfrmProdutos
         ParentFont = False
         TabOrder = 2
       end
-      object Edit2: TEdit
+      object edtPreco: TEdit
         Left = 272
         Top = 140
         Width = 250
@@ -228,7 +225,7 @@ inherited frmProdutos: TfrmProdutos
         ParentFont = False
         TabOrder = 3
       end
-      object Edit3: TEdit
+      object edtEstoque: TEdit
         Left = 272
         Top = 173
         Width = 250
@@ -241,7 +238,7 @@ inherited frmProdutos: TfrmProdutos
         ParentFont = False
         TabOrder = 4
       end
-      object Edit4: TEdit
+      object edtCategoria: TEdit
         Left = 272
         Top = 209
         Width = 250
@@ -254,7 +251,7 @@ inherited frmProdutos: TfrmProdutos
         ParentFont = False
         TabOrder = 5
       end
-      object Edit5: TEdit
+      object edtSubCategoria: TEdit
         Left = 272
         Top = 244
         Width = 250
@@ -267,7 +264,7 @@ inherited frmProdutos: TfrmProdutos
         ParentFont = False
         TabOrder = 6
       end
-      object Edit6: TEdit
+      object edtCodigo: TEdit
         Left = 272
         Top = 36
         Width = 250
@@ -280,7 +277,7 @@ inherited frmProdutos: TfrmProdutos
         ParentFont = False
         TabOrder = 0
       end
-      object Edit7: TEdit
+      object edtDataValidade: TEdit
         Left = 272
         Top = 281
         Width = 250
@@ -293,11 +290,11 @@ inherited frmProdutos: TfrmProdutos
         ParentFont = False
         TabOrder = 7
       end
-      object Edit8: TEdit
+      object memObservacao: TMemo
         Left = 272
-        Top = 316
-        Width = 250
-        Height = 27
+        Top = 317
+        Width = 249
+        Height = 60
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -16
@@ -308,16 +305,20 @@ inherited frmProdutos: TfrmProdutos
       end
     end
     inherited pnlPesquisa: TPanel
-      Left = 5850
-      Top = 2
+      Left = 637
+      Top = 69
+      TabOrder = 1
       StyleElements = [seFont, seClient, seBorder]
-      ExplicitLeft = 5850
-      ExplicitTop = 2
+      ExplicitLeft = 637
+      ExplicitTop = 69
       inherited DBGrid: TDBGrid
+        OnCellClick = DBGridCellClick
         Columns = <
           item
             Expanded = False
             FieldName = 'CODIGO'
+            Title.Caption = 'C'#243'digo'
+            Width = 50
             Visible = True
           end
           item
@@ -328,42 +329,49 @@ inherited frmProdutos: TfrmProdutos
           item
             Expanded = False
             FieldName = 'NOME'
+            Title.Caption = 'Nome'
             Width = 120
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'DESCRICAO'
+            Title.Caption = 'Descr'#231#227'o'
             Width = 120
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'DATA_VALIDADE'
-            Width = 100
+            Title.Caption = 'Validade'
+            Width = 65
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'PRECO'
+            Title.Caption = 'Pre'#231'o'
             Width = 50
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'ESTOQUE'
-            Width = 60
+            Title.Caption = 'Estoque'
+            Width = 50
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'CATEGORIA'
+            Title.Caption = 'Categoria'
             Width = 100
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'SUBCATEGORIA'
+            Title.Caption = 'Subcategoria'
             Width = 100
             Visible = True
           end
@@ -375,15 +383,17 @@ inherited frmProdutos: TfrmProdutos
           item
             Expanded = False
             FieldName = 'OBSERVACAO'
-            Width = 200
+            Width = -1
+            Visible = False
+          end
+          item
+            Expanded = False
+            Width = 40
             Visible = True
           end
           item
             Expanded = False
-            Visible = True
-          end
-          item
-            Expanded = False
+            Width = 40
             Visible = True
           end>
       end

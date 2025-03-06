@@ -1,4 +1,4 @@
-unit uFrmProdutos;
+ï»¿unit uFrmProdutos;
 
 interface
 
@@ -17,21 +17,20 @@ type
     Label4: TLabel;
     edtNome: TEdit;
     Label3: TLabel;
-    Edit1: TEdit;
+    edtDescricao: TEdit;
     Label5: TLabel;
-    Edit2: TEdit;
+    edtPreco: TEdit;
     Label6: TLabel;
-    Edit3: TEdit;
+    edtEstoque: TEdit;
     Label7: TLabel;
-    Edit4: TEdit;
+    edtCategoria: TEdit;
     Label8: TLabel;
-    Edit5: TEdit;
+    edtSubCategoria: TEdit;
     Label9: TLabel;
-    Edit6: TEdit;
+    edtCodigo: TEdit;
     Label10: TLabel;
-    Edit7: TEdit;
+    edtDataValidade: TEdit;
     Label11: TLabel;
-    Edit8: TEdit;
     FDMemTableID_PRODUTO: TIntegerField;
     FDMemTableNOME: TStringField;
     FDMemTableDESCRICAO: TStringField;
@@ -43,7 +42,10 @@ type
     FDMemTableDATA_VALIDADE: TSQLTimeStampField;
     FDMemTableSUBCATEGORIA: TStringField;
     FDMemTableOBSERVACAO: TStringField;
+    memObservacao: TMemo;
     procedure lblMenuSalvarClick(Sender: TObject);
+    procedure DBGridCellClick(Column: TColumn);
+    procedure Label16Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -60,6 +62,81 @@ uses
 
 {$R *.dfm}
 
+procedure TfrmProdutos.DBGridCellClick(Column: TColumn);
+var
+  vController: TProdutoController;
+begin
+  inherited;
+  vController := TProdutoController.Create;
+
+  try
+
+    if Column.Index = DBGrid.Columns.Count - 2 then
+    begin
+
+      lblMenuNovo.onClick(Self);
+
+      FTransactionState := tsEdit;
+
+      edtCodigo.Text := FDMemTableCODIGO.AsString;
+      edtNome.Text := FDMemTableNOME.AsString;
+      edtDescricao.Text := FDMemTableDESCRICAO.AsString;
+      edtPreco.Text := FloatToStr(FDMemTablePRECO.AsFloat);
+      edtEstoque.Text := IntToStr(FDMemTableESTOQUE.AsInteger);
+      edtCategoria.Text := FDMemTableCATEGORIA.AsString;
+      edtSubCategoria.Text := FDMemTableSUBCATEGORIA.AsString;
+      edtDataValidade.Text := DateToStr(FDMemTableDATA_VALIDADE.AsDateTime);
+      memObservacao.Text := FDMemTableOBSERVACAO.AsString;
+
+    end
+    else if Column.Index = DBGrid.Columns.Count - 1 then
+    begin
+      if MessageDlg('Deseja realmente excluir o registro?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+      begin
+        vController.ExcluirProduto(FDMemTableID_PRODUTO.AsInteger);
+        FDMemTable.Delete;
+      end;
+    end;
+  finally
+    vController.Free;
+  end;
+end;
+
+procedure TfrmProdutos.Label16Click(Sender: TObject);
+var
+  vController: TProdutoController;
+  vProduto: TProduto;
+begin
+  vController := TProdutoController.Create;
+  vProduto := TProduto.create;
+  try
+    vProduto.Codigo := edtCodigo.Text;
+    vProduto.Nome := edtNome.Text;
+    vProduto.Descricao := edtDescricao.Text;
+
+    if trim(edtPreco.Text) <> '' then
+      vProduto.Preco := StrToFloat(edtPreco.Text);
+
+    if trim(edtEstoque.Text)  <> '' then
+      vProduto.Estoque := StrToInt(edtEstoque.Text);
+
+    vProduto.Categoria := edtCategoria.Text;
+    vProduto.SubCategoria := edtSubCategoria.Text;
+
+    if trim(edtDataValidade.Text) <> '' then
+      vProduto.DataValidade := StrToDate(edtDataValidade.Text);
+
+    vProduto.Observacao := memObservacao.Text;
+
+    FDMemTable.CloneCursor(vController.ListarProdutos(vProduto));
+
+    inherited;
+  finally
+    vController.Free;
+    vProduto.Free;
+  end;
+end;
+
 procedure TfrmProdutos.lblMenuSalvarClick(Sender: TObject);
 var
   vController: TProdutoController;
@@ -70,32 +147,44 @@ begin
   vProduto := TProduto.create;
 
   try
-  {  if Trim(edtNome.Text) = '' then
-      vValidacao.Add('- Nome é um campo obrigatório');
 
-    if Trim(edtCpf.Text) = '' then
-      vValidacao.Add('- CPF é um campo obrigatório');
+    if Trim(edtNome.Text) = '' then
+      vValidacao.Add('- Nome Ã© um campo obrigatÃ³rio');
 
-    if Trim(edtTelefone.Text) = '' then
-      vValidacao.Add('- Telefone é um campo obrigatório');
+    if Trim(edtPreco.Text) = '' then
+      vValidacao.Add('- PreÃ§o Ã© um campo obrigatÃ³rio');
 
-    if Trim(edtEmail.Text) = '' then
-      vValidacao.Add('- Email é um campo obrigatório');
+    if Trim(edtEstoque.Text) = '' then
+      vValidacao.Add('- Estoque Ã© um campo obrigatÃ³rio');
 
-    if Trim(edtCEP.Text) = '' then
-      vValidacao.Add('- CEP é um campo obrigatório');
+    if Trim(edtCategoria.Text) = '' then
+      vValidacao.Add('- Categoria Ã© um campo obrigatÃ³rio');
 
-    if Trim(edtLogradouroNumero.Text) = '' then
-      vValidacao.Add('- Número do logradouro é um campo obrigatório');
-                      }
+    if Trim(edtSubCategoria.Text) = '' then
+      vValidacao.Add('- Subcategoria Ã© um campo obrigatÃ³rio');
+
+    if Trim(edtDataValidade.Text) = '' then
+      vValidacao.Add('- Data de validade Ã© um campo obrigatÃ³rio');
+
     if vValidacao.Count > 0 then
     begin
       MessageDlg(vValidacao.Text, mtError, [mbOK], 0);
       Abort;
     end;
 
-    vProduto.Nome := edtNome.Text;
 
+    vProduto.Codigo := edtCodigo.Text;
+    vProduto.Nome := edtNome.Text;
+    if Trim(edtDescricao.Text) <> '' then
+      vProduto.Descricao := edtDescricao.Text
+    else
+      vProduto.Descricao := edtNome.Text;
+    vProduto.Preco := StrToFloat(edtPreco.Text);
+    vProduto.Estoque := StrToInt(edtEstoque.Text);
+    vProduto.Categoria := edtCategoria.Text;
+    vProduto.SubCategoria := edtSubCategoria.Text;
+    vProduto.DataValidade := StrToDate(edtDataValidade.Text);
+    vProduto.Observacao := memObservacao.Text;
 
     vController := TProdutoController.Create;
     try
@@ -104,7 +193,7 @@ begin
           tsInsert:
             begin
               vController.InserirProduto(vProduto);
-              MessageDlg('Produto incluído com sucesso', mtInformation, [mbOK], 0);
+              MessageDlg('Produto incluÃ­do com sucesso', mtInformation, [mbOK], 0);
             end;
           tsEdit:
             begin

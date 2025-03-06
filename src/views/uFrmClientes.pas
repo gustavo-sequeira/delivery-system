@@ -66,11 +66,9 @@ uses
 procedure TfrmClientes.DBGridCellClick(Column: TColumn);
 var
   vController: TClienteController;
-  vCliente: TCliente;
 begin
   inherited;
   vController := TClienteController.Create;
-  vCliente := TCliente.create;
 
   try
 
@@ -102,7 +100,6 @@ begin
     end;
   finally
     vController.Free;
-    vCliente.Free;
   end;
 end;
 

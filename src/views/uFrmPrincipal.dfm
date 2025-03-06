@@ -18,32 +18,35 @@ object frmPrincipal: TfrmPrincipal
     Left = 0
     Top = 0
     Width = 995
-    Height = 193
+    Height = 89
     Align = alTop
-    Caption = 'pnlMenuSuperior'
-    Color = clGradientActiveCaption
+    Color = clWhite
     ParentBackground = False
     TabOrder = 0
     object Panel3: TPanel
       Left = 688
       Top = 1
       Width = 306
-      Height = 191
+      Height = 87
       Align = alRight
+      BevelOuter = bvNone
       Caption = 'pnlLogin'
       TabOrder = 0
+      ExplicitHeight = 191
     end
   end
   object Panel2: TPanel
     Left = 0
-    Top = 193
+    Top = 89
     Width = 995
-    Height = 468
+    Height = 572
     Align = alClient
     BevelOuter = bvNone
     Color = clWhite
     ParentBackground = False
     TabOrder = 1
+    ExplicitTop = 193
+    ExplicitHeight = 468
     object Panel4: TPanel
       Left = 0
       Top = 0
