@@ -14,15 +14,16 @@ type
   TfrmPedidos = class(TfrmBaseCadastro)
     Panel4: TPanel;
     Label9: TLabel;
-    edtCodigo: TEdit;
+    edtPedido: TEdit;
     Label3: TLabel;
-    Edit1: TEdit;
+    edtData: TEdit;
     Label4: TLabel;
-    Edit2: TEdit;
+    edtCliente: TEdit;
     Panel5: TPanel;
     Panel6: TPanel;
     Label5: TLabel;
     DBGrid1: TDBGrid;
+    procedure Label5Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -34,6 +35,22 @@ var
 
 implementation
 
+uses
+  uFrmItensPedido;
+
 {$R *.dfm}
+
+procedure TfrmPedidos.Label5Click(Sender: TObject);
+var
+  frmItensPedido: TFrmItensPedido;
+begin
+  frmItensPedido := TFrmItensPedido.Create(Self);
+  try
+    frmItensPedido.ShowModal;
+    frmItensPedido.ItemPedido.ID_Produto;
+  finally
+   frmItensPedido.Free;
+  end;
+end;
 
 end.

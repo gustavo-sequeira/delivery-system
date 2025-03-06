@@ -136,7 +136,7 @@ inherited frmPedidos: TfrmPedidos
           Font.Style = [fsBold]
           ParentFont = False
         end
-        object edtCodigo: TEdit
+        object edtPedido: TEdit
           Left = 398
           Top = 36
           Width = 250
@@ -149,7 +149,7 @@ inherited frmPedidos: TfrmPedidos
           ParentFont = False
           TabOrder = 0
         end
-        object Edit1: TEdit
+        object edtData: TEdit
           Left = 398
           Top = 69
           Width = 250
@@ -162,7 +162,7 @@ inherited frmPedidos: TfrmPedidos
           ParentFont = False
           TabOrder = 1
         end
-        object Edit2: TEdit
+        object edtCliente: TEdit
           Left = 398
           Top = 101
           Width = 250
@@ -213,9 +213,7 @@ inherited frmPedidos: TfrmPedidos
             ParentColor = False
             ParentFont = False
             Transparent = False
-            OnClick = lblMenuNovoClick
-            OnMouseEnter = lblMenuNovoMouseEnter
-            OnMouseLeave = lblMenuNovoMouseLeave
+            OnClick = Label5Click
             ExplicitHeight = 21
           end
         end

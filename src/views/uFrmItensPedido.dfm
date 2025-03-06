@@ -4,7 +4,7 @@ object frmItensPedido: TfrmItensPedido
   BorderStyle = bsSingle
   Caption = 'frmItensPedido'
   ClientHeight = 306
-  ClientWidth = 522
+  ClientWidth = 704
   Color = clWhite
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -13,7 +13,7 @@ object frmItensPedido: TfrmItensPedido
   Font.Style = []
   TextHeight = 15
   object Label9: TLabel
-    Left = 72
+    Left = 88
     Top = 39
     Width = 62
     Height = 21
@@ -26,7 +26,7 @@ object frmItensPedido: TfrmItensPedido
     ParentFont = False
   end
   object Label1: TLabel
-    Left = 72
+    Left = 88
     Top = 72
     Width = 49
     Height = 21
@@ -39,7 +39,7 @@ object frmItensPedido: TfrmItensPedido
     ParentFont = False
   end
   object Label2: TLabel
-    Left = 72
+    Left = 88
     Top = 105
     Width = 88
     Height = 21
@@ -52,11 +52,12 @@ object frmItensPedido: TfrmItensPedido
     ParentFont = False
   end
   object Label3: TLabel
-    Left = 72
+    Left = 88
     Top = 138
     Width = 87
     Height = 21
     Caption = 'CATEGORIA'
+    Enabled = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -16
@@ -65,11 +66,12 @@ object frmItensPedido: TfrmItensPedido
     ParentFont = False
   end
   object Label4: TLabel
-    Left = 72
+    Left = 88
     Top = 171
     Width = 118
     Height = 21
     Caption = 'SUBCATEGORIA'
+    Enabled = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -16
@@ -78,7 +80,7 @@ object frmItensPedido: TfrmItensPedido
     ParentFont = False
   end
   object Label5: TLabel
-    Left = 72
+    Left = 88
     Top = 204
     Width = 106
     Height = 21
@@ -91,14 +93,14 @@ object frmItensPedido: TfrmItensPedido
     ParentFont = False
   end
   object Label16: TLabel
-    Left = 172
+    Left = 263
     Top = 255
     Width = 177
     Height = 28
     Hint = 'Pesquisar registro'
     Alignment = taCenter
     AutoSize = False
-    Caption = 'PESQUISAR'
+    Caption = 'INCLUIR'
     Color = clWhite
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clNavy
@@ -108,52 +110,14 @@ object frmItensPedido: TfrmItensPedido
     ParentColor = False
     ParentFont = False
     Transparent = False
-    Visible = False
+    OnClick = Label16Click
   end
-  object edtCodigo: TEdit
-    Left = 200
-    Top = 36
-    Width = 250
-    Height = 29
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -16
-    Font.Name = 'Segoe UI'
-    Font.Style = []
-    ParentFont = False
-    TabOrder = 0
-  end
-  object Edit1: TEdit
-    Left = 200
-    Top = 69
-    Width = 250
-    Height = 29
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -16
-    Font.Name = 'Segoe UI'
-    Font.Style = []
-    ParentFont = False
-    TabOrder = 1
-  end
-  object Edit2: TEdit
-    Left = 200
-    Top = 102
-    Width = 250
-    Height = 29
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -16
-    Font.Name = 'Segoe UI'
-    Font.Style = []
-    ParentFont = False
-    TabOrder = 2
-  end
-  object Edit3: TEdit
-    Left = 200
+  object edtCategoria: TEdit
+    Left = 216
     Top = 135
-    Width = 250
+    Width = 400
     Height = 29
+    Enabled = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -16
@@ -162,11 +126,12 @@ object frmItensPedido: TfrmItensPedido
     ParentFont = False
     TabOrder = 3
   end
-  object Edit4: TEdit
-    Left = 200
+  object edtSubCategoria: TEdit
+    Left = 216
     Top = 168
-    Width = 250
+    Width = 400
     Height = 29
+    Enabled = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -16
@@ -175,10 +140,10 @@ object frmItensPedido: TfrmItensPedido
     ParentFont = False
     TabOrder = 4
   end
-  object Edit5: TEdit
-    Left = 200
+  object edtQuantidade: TEdit
+    Left = 216
     Top = 201
-    Width = 250
+    Width = 400
     Height = 29
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -187,5 +152,50 @@ object frmItensPedido: TfrmItensPedido
     Font.Style = []
     ParentFont = False
     TabOrder = 5
+  end
+  object cbxCodigo: TComboBox
+    Left = 216
+    Top = 35
+    Width = 400
+    Height = 29
+    CharCase = ecUpperCase
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 0
+    OnChange = cbxCodigoChange
+  end
+  object cbxNome: TComboBox
+    Left = 216
+    Top = 68
+    Width = 400
+    Height = 29
+    CharCase = ecUpperCase
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 1
+    OnChange = cbxNomeChange
+  end
+  object cbxDescricao: TComboBox
+    Left = 216
+    Top = 101
+    Width = 400
+    Height = 29
+    CharCase = ecUpperCase
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 2
+    OnChange = cbxDescricaoChange
   end
 end
