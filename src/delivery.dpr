@@ -14,7 +14,8 @@ uses
   uClienteController in 'controllers\uClienteController.pas',
   uFrmProdutos in 'views\uFrmProdutos.pas' {frmProdutos},
   uProdutoController in 'controllers\uProdutoController.pas',
-  uFrmPedidos in 'views\uFrmPedidos.pas' {frmPedidos};
+  uFrmPedidos in 'views\uFrmPedidos.pas' {frmPedidos},
+  uFrmItensPedido in 'views\uFrmItensPedido.pas' {frmItensPedido};
 
 {$R *.res}
 
@@ -22,9 +23,5 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TfrmPrincipal, frmPrincipal);
-  Application.CreateForm(TfrmBaseCadastro, frmBaseCadastro);
-  Application.CreateForm(TfrmClientes, frmClientes);
-  Application.CreateForm(TfrmProdutos, frmProdutos);
-  Application.CreateForm(TfrmPedidos, frmPedidos);
   Application.Run;
 end.

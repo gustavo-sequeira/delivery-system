@@ -16,12 +16,19 @@ type
     lblMenuClientes: TLabel;
     lblMenuProdutos: TLabel;
     lblMenuPedidos: TLabel;
+    lblMenuSairSistema: TLabel;
     procedure lblMenuClientesMouseEnter(Sender: TObject);
     procedure lblMenuClientesMouseLeave(Sender: TObject);
     procedure lblMenuClientesClick(Sender: TObject);
     procedure lblMenuProdutosClick(Sender: TObject);
     procedure lblMenuProdutosMouseEnter(Sender: TObject);
     procedure lblMenuProdutosMouseLeave(Sender: TObject);
+    procedure lblMenuPedidosMouseLeave(Sender: TObject);
+    procedure lblMenuPedidosMouseEnter(Sender: TObject);
+    procedure lblMenuPedidosClick(Sender: TObject);
+    procedure lblMenuSairSistemaClick(Sender: TObject);
+    procedure lblMenuSairSistemaMouseEnter(Sender: TObject);
+    procedure lblMenuSairSistemaMouseLeave(Sender: TObject);
   private
     { Private declarations }
   public
@@ -37,7 +44,7 @@ implementation
 
 uses
   uConexaoFirebird, uFrmBaseCadastro, uFrmClientes,
-  uFrmProdutos;
+  uFrmProdutos, uFrmPedidos;
 
 procedure TfrmPrincipal.lblMenuClientesClick(Sender: TObject);
 var
@@ -63,6 +70,30 @@ begin
  lblMenuClientes.Color := clWhite;
 end;
 
+procedure TfrmPrincipal.lblMenuPedidosClick(Sender: TObject);
+var
+  frmPedidos: TFrmPedidos;
+begin
+  frmPedidos := TFrmPedidos.Create(Self);
+  try
+    frmPedidos.Parent := Panel2;
+    frmPedidos.Show;
+  finally
+   // frmProdutos.Free;
+  end;
+end;
+
+procedure TfrmPrincipal.lblMenuPedidosMouseEnter(Sender: TObject);
+begin
+  if lblMenuPedidos.Enabled then
+    lblMenuPedidos.Color := clSilver;
+end;
+
+procedure TfrmPrincipal.lblMenuPedidosMouseLeave(Sender: TObject);
+begin
+  lblMenuPedidos.Color := clWhite;
+end;
+
 procedure TfrmPrincipal.lblMenuProdutosClick(Sender: TObject);
 var
   frmProdutos: TFrmProdutos;
@@ -85,6 +116,22 @@ end;
 procedure TfrmPrincipal.lblMenuProdutosMouseLeave(Sender: TObject);
 begin
   lblMenuProdutos.Color := clWhite;
+end;
+
+procedure TfrmPrincipal.lblMenuSairSistemaClick(Sender: TObject);
+begin
+  Self.Close;
+end;
+
+procedure TfrmPrincipal.lblMenuSairSistemaMouseEnter(Sender: TObject);
+begin
+  if lblMenuSairSistema.Enabled then
+    lblMenuSairSistema.Color := clSilver;
+end;
+
+procedure TfrmPrincipal.lblMenuSairSistemaMouseLeave(Sender: TObject);
+begin
+  lblMenuSairSistema.Color := clWhite;
 end;
 
 end.

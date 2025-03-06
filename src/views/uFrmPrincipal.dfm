@@ -2,10 +2,10 @@ object frmPrincipal: TfrmPrincipal
   Left = 0
   Top = 0
   BorderIcons = [biSystemMenu, biMaximize]
-  BorderStyle = bsSingle
+  BorderStyle = bsNone
   Caption = 'frmPrincipal'
-  ClientHeight = 661
-  ClientWidth = 995
+  ClientHeight = 700
+  ClientWidth = 1011
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -17,14 +17,15 @@ object frmPrincipal: TfrmPrincipal
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 995
+    Width = 1011
     Height = 89
     Align = alTop
     Color = clWhite
     ParentBackground = False
     TabOrder = 0
+    ExplicitWidth = 995
     object Panel3: TPanel
-      Left = 688
+      Left = 704
       Top = 1
       Width = 306
       Height = 87
@@ -32,31 +33,34 @@ object frmPrincipal: TfrmPrincipal
       BevelOuter = bvNone
       Caption = 'pnlLogin'
       TabOrder = 0
+      ExplicitLeft = 688
       ExplicitHeight = 191
     end
   end
   object Panel2: TPanel
     Left = 0
     Top = 89
-    Width = 995
-    Height = 572
+    Width = 1011
+    Height = 611
     Align = alClient
     BevelOuter = bvNone
     Color = clWhite
     ParentBackground = False
     TabOrder = 1
     ExplicitTop = 193
+    ExplicitWidth = 995
     ExplicitHeight = 468
     object Panel4: TPanel
       Left = 0
       Top = 0
-      Width = 995
+      Width = 1011
       Height = 24
       Align = alTop
       BevelOuter = bvNone
       Color = clWhite
       ParentBackground = False
       TabOrder = 0
+      ExplicitWidth = 995
       object lblMenuClientes: TLabel
         AlignWithMargins = True
         Left = 3
@@ -118,10 +122,33 @@ object frmPrincipal: TfrmPrincipal
         Font.Style = [fsBold]
         ParentFont = False
         Transparent = False
-        OnClick = lblMenuProdutosClick
-        OnMouseEnter = lblMenuProdutosMouseEnter
-        OnMouseLeave = lblMenuProdutosMouseLeave
+        OnClick = lblMenuPedidosClick
+        OnMouseEnter = lblMenuPedidosMouseEnter
+        OnMouseLeave = lblMenuPedidosMouseLeave
         ExplicitLeft = 431
+        ExplicitTop = 6
+      end
+      object lblMenuSairSistema: TLabel
+        AlignWithMargins = True
+        Left = 858
+        Top = 3
+        Width = 150
+        Height = 18
+        Align = alRight
+        Alignment = taCenter
+        AutoSize = False
+        Caption = 'SAIR DO SISTEMA'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clRed
+        Font.Height = -12
+        Font.Name = 'Segoe UI'
+        Font.Style = [fsBold]
+        ParentFont = False
+        Transparent = False
+        OnClick = lblMenuSairSistemaClick
+        OnMouseEnter = lblMenuSairSistemaMouseEnter
+        OnMouseLeave = lblMenuSairSistemaMouseLeave
+        ExplicitLeft = 587
         ExplicitTop = 6
       end
     end

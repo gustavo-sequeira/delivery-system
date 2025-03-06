@@ -12,6 +12,17 @@ uses
 
 type
   TfrmPedidos = class(TfrmBaseCadastro)
+    Panel4: TPanel;
+    Label9: TLabel;
+    edtCodigo: TEdit;
+    Label3: TLabel;
+    Edit1: TEdit;
+    Label4: TLabel;
+    Edit2: TEdit;
+    Panel5: TPanel;
+    Panel6: TPanel;
+    Label5: TLabel;
+    DBGrid1: TDBGrid;
   private
     { Private declarations }
   public
