@@ -15,6 +15,7 @@ type
     Panel4: TPanel;
     lblMenuClientes: TLabel;
     lblMenuProdutos: TLabel;
+    lblMenuPedidos: TLabel;
     procedure lblMenuClientesMouseEnter(Sender: TObject);
     procedure lblMenuClientesMouseLeave(Sender: TObject);
     procedure lblMenuClientesClick(Sender: TObject);

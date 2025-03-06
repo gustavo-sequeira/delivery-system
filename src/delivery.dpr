@@ -13,7 +13,8 @@ uses
   uFrmClientes in 'views\uFrmClientes.pas' {frmClientes},
   uClienteController in 'controllers\uClienteController.pas',
   uFrmProdutos in 'views\uFrmProdutos.pas' {frmProdutos},
-  uProdutoController in 'controllers\uProdutoController.pas';
+  uProdutoController in 'controllers\uProdutoController.pas',
+  uFrmPedidos in 'views\uFrmPedidos.pas' {frmPedidos};
 
 {$R *.res}
 
@@ -24,5 +25,6 @@ begin
   Application.CreateForm(TfrmBaseCadastro, frmBaseCadastro);
   Application.CreateForm(TfrmClientes, frmClientes);
   Application.CreateForm(TfrmProdutos, frmProdutos);
+  Application.CreateForm(TfrmPedidos, frmPedidos);
   Application.Run;
 end.

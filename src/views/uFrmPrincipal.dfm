@@ -101,6 +101,29 @@ object frmPrincipal: TfrmPrincipal
         ExplicitLeft = 275
         ExplicitTop = 6
       end
+      object lblMenuPedidos: TLabel
+        AlignWithMargins = True
+        Left = 315
+        Top = 3
+        Width = 150
+        Height = 18
+        Align = alLeft
+        Alignment = taCenter
+        AutoSize = False
+        Caption = 'PEDIDOS'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clNavy
+        Font.Height = -12
+        Font.Name = 'Segoe UI'
+        Font.Style = [fsBold]
+        ParentFont = False
+        Transparent = False
+        OnClick = lblMenuProdutosClick
+        OnMouseEnter = lblMenuProdutosMouseEnter
+        OnMouseLeave = lblMenuProdutosMouseLeave
+        ExplicitLeft = 431
+        ExplicitTop = 6
+      end
     end
   end
 end

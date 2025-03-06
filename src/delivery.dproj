@@ -147,6 +147,10 @@
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="controllers\uProdutoController.pas"/>
+        <DCCReference Include="views\uFrmPedidos.pas">
+            <Form>frmPedidos</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
