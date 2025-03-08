@@ -10,7 +10,7 @@ uses
   FireDAC.DApt.Intf, FireDAC.Comp.DataSet, FireDAC.Comp.Client, FireDAC.Comp.UI,
   Vcl.Grids, Vcl.DBGrids, Vcl.ExtCtrls, Vcl.StdCtrls, FireDAC.Stan.StorageBin,
   FireDAC.Stan.Def, FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys,
-  FireDAC.Phys.FB, FireDAC.Phys.FBDef, FireDAC.DApt;
+  FireDAC.Phys.FB, FireDAC.Phys.FBDef, FireDAC.DApt, FireDAC.Phys.IBBase;
 
 type
   TfrmProdutos = class(TfrmBaseCadastro)
@@ -128,7 +128,7 @@ begin
 
     vProduto.Observacao := memObservacao.Text;
 
-    FDMemTable.CloneCursor(vController.ListarProdutos(vProduto));
+    FDMemTable.CloneCursor(vController.ListarProdutos(vProduto),true, true);
 
     inherited;
   finally

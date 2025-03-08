@@ -185,10 +185,6 @@ object frmBaseCadastro: TfrmBaseCadastro
     ParentBackground = False
     ParentCtl3D = False
     TabOrder = 0
-    ExplicitLeft = 288
-    ExplicitTop = 24
-    ExplicitWidth = 673
-    ExplicitHeight = 577
     object Panel1: TPanel
       Left = 0
       Top = 0
@@ -206,7 +202,6 @@ object frmBaseCadastro: TfrmBaseCadastro
       ParentCtl3D = False
       ParentFont = False
       TabOrder = 0
-      ExplicitWidth = 673
       object Label2: TLabel
         AlignWithMargins = True
         Left = 3
@@ -226,7 +221,6 @@ object frmBaseCadastro: TfrmBaseCadastro
         BevelOuter = bvNone
         ParentColor = True
         TabOrder = 0
-        ExplicitWidth = 456
         object Shape1: TShape
           AlignWithMargins = True
           Left = 3
@@ -328,7 +322,6 @@ object frmBaseCadastro: TfrmBaseCadastro
       Color = clWhite
       TabOrder = 1
       Visible = False
-      ExplicitWidth = 673
       object Label16: TLabel
         Left = 220
         Top = 472

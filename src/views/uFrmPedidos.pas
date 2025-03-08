@@ -47,7 +47,11 @@ begin
   frmItensPedido := TFrmItensPedido.Create(Self);
   try
     frmItensPedido.ShowModal;
-    frmItensPedido.ItemPedido.ID_Produto;
+    if frmItensPedido.ItemPedido.ID_Produto > 0 then
+    begin
+
+  //  frmItensPedido.ItemPedido.ID_Produto;
+    end;
   finally
    frmItensPedido.Free;
   end;

@@ -148,6 +148,7 @@ begin
 
   FDQuery := TFDQuery.Create(nil);
   FDQuery.Connection := FConnection;
+//  FDQuery.FormatOptions.StrsEncoding := setUTF8;
   FDQuery.SQL.Text := 'SELECT * FROM PRODUTOS ' + vWhere + ' ORDER BY CODIGO';
   FDQuery.Open;
 

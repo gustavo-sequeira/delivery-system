@@ -1,8 +1,6 @@
 inherited frmProdutos: TfrmProdutos
   Caption = 'frmProdutos'
   StyleElements = [seFont, seClient, seBorder]
-  ExplicitLeft = -142
-  ExplicitTop = -171
   TextHeight = 15
   inherited pnlMenu: TPanel
     StyleElements = [seFont, seClient, seBorder]
@@ -39,28 +37,35 @@ inherited frmProdutos: TfrmProdutos
         Left = 178
         Width = 740
         StyleElements = [seFont, seClient, seBorder]
+        ExplicitLeft = 178
+        ExplicitWidth = 740
         inherited Shape1: TShape
           Width = 734
+          ExplicitWidth = 734
         end
         inherited Shape2: TShape
           Width = 717
+          ExplicitWidth = 717
         end
         inherited Shape3: TShape
           Width = 697
+          ExplicitWidth = 697
         end
         inherited Shape4: TShape
           Width = 677
+          ExplicitWidth = 677
         end
         inherited Shape5: TShape
           Width = 657
+          ExplicitWidth = 657
         end
         inherited Shape6: TShape
           Width = 637
+          ExplicitWidth = 637
         end
       end
     end
     inherited pnlManutencao: TPanel
-      TabOrder = 2
       StyleElements = [seFont, seClient, seBorder]
       inherited Label16: TLabel
         Left = 218
@@ -305,12 +310,11 @@ inherited frmProdutos: TfrmProdutos
       end
     end
     inherited pnlPesquisa: TPanel
-      Left = 637
-      Top = 69
-      TabOrder = 1
+      Left = -33
+      Top = 104
       StyleElements = [seFont, seClient, seBorder]
-      ExplicitLeft = 637
-      ExplicitTop = 69
+      ExplicitLeft = -33
+      ExplicitTop = 104
       inherited DBGrid: TDBGrid
         OnCellClick = DBGridCellClick
         Columns = <
@@ -383,7 +387,6 @@ inherited frmProdutos: TfrmProdutos
           item
             Expanded = False
             FieldName = 'OBSERVACAO'
-            Width = -1
             Visible = False
           end
           item

@@ -45,10 +45,12 @@ begin
     FDConnection.Params.Add('Password=' + Senha);
     FDConnection.Params.Add('Protocol=TCPIP');
     FDConnection.Params.Add('Server=localhost');
-    FDConnection.Params.Add('CharacterSet=UTF8');
+    FDConnection.Params.Add('CharacterSet=NONE');
     FDConnection.Params.Add('Port=3050');
     FDConnection.LoginPrompt := False;
     FDConnection.Connected := True;
+
+
   except
     on E: Exception do
       raise Exception.Create('Erro ao conectar ao banco: ' + E.Message);

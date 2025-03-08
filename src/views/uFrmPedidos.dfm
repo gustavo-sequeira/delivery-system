@@ -30,13 +30,8 @@ inherited frmPedidos: TfrmPedidos
   end
   inherited pnlCentral: TPanel
     StyleElements = [seFont, seClient, seBorder]
-    ExplicitLeft = 223
-    ExplicitTop = 0
-    ExplicitWidth = 918
-    ExplicitHeight = 622
     inherited Panel1: TPanel
       StyleElements = [seFont, seClient, seBorder]
-      ExplicitWidth = 918
       inherited Label2: TLabel
         Width = 149
         Height = 66
@@ -78,7 +73,6 @@ inherited frmPedidos: TfrmPedidos
     end
     inherited pnlManutencao: TPanel
       StyleElements = [seFont, seClient, seBorder]
-      ExplicitWidth = 918
       inherited Label16: TLabel
         Left = 0
         Top = 441
