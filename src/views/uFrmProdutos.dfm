@@ -67,14 +67,7 @@ inherited frmProdutos: TfrmProdutos
     end
     inherited pnlManutencao: TPanel
       StyleElements = [seFont, seClient, seBorder]
-      inherited Label16: TLabel
-        Left = 218
-        Top = 383
-        StyleElements = [seFont, seClient, seBorder]
-        ExplicitLeft = 218
-        ExplicitTop = 383
-      end
-      object Label4: TLabel
+      object Label4: TLabel [0]
         Left = 144
         Top = 72
         Width = 49
@@ -87,7 +80,7 @@ inherited frmProdutos: TfrmProdutos
         Font.Style = [fsBold]
         ParentFont = False
       end
-      object Label3: TLabel
+      object Label3: TLabel [1]
         Left = 144
         Top = 108
         Width = 88
@@ -100,7 +93,7 @@ inherited frmProdutos: TfrmProdutos
         Font.Style = [fsBold]
         ParentFont = False
       end
-      object Label5: TLabel
+      object Label5: TLabel [2]
         Left = 144
         Top = 143
         Width = 51
@@ -113,7 +106,7 @@ inherited frmProdutos: TfrmProdutos
         Font.Style = [fsBold]
         ParentFont = False
       end
-      object Label6: TLabel
+      object Label6: TLabel [3]
         Left = 144
         Top = 176
         Width = 71
@@ -126,7 +119,7 @@ inherited frmProdutos: TfrmProdutos
         Font.Style = [fsBold]
         ParentFont = False
       end
-      object Label7: TLabel
+      object Label7: TLabel [4]
         Left = 144
         Top = 212
         Width = 87
@@ -139,7 +132,7 @@ inherited frmProdutos: TfrmProdutos
         Font.Style = [fsBold]
         ParentFont = False
       end
-      object Label8: TLabel
+      object Label8: TLabel [5]
         Left = 144
         Top = 247
         Width = 118
@@ -152,7 +145,7 @@ inherited frmProdutos: TfrmProdutos
         Font.Style = [fsBold]
         ParentFont = False
       end
-      object Label9: TLabel
+      object Label9: TLabel [6]
         Left = 144
         Top = 39
         Width = 62
@@ -165,7 +158,7 @@ inherited frmProdutos: TfrmProdutos
         Font.Style = [fsBold]
         ParentFont = False
       end
-      object Label10: TLabel
+      object Label10: TLabel [7]
         Left = 144
         Top = 284
         Width = 123
@@ -178,7 +171,7 @@ inherited frmProdutos: TfrmProdutos
         Font.Style = [fsBold]
         ParentFont = False
       end
-      object Label11: TLabel
+      object Label11: TLabel [8]
         Left = 144
         Top = 319
         Width = 104
@@ -191,7 +184,7 @@ inherited frmProdutos: TfrmProdutos
         Font.Style = [fsBold]
         ParentFont = False
       end
-      object edtNome: TEdit
+      object edtNome: TEdit [9]
         Left = 272
         Top = 69
         Width = 250
@@ -204,7 +197,7 @@ inherited frmProdutos: TfrmProdutos
         ParentFont = False
         TabOrder = 1
       end
-      object edtDescricao: TEdit
+      object edtDescricao: TEdit [10]
         Left = 272
         Top = 105
         Width = 250
@@ -217,7 +210,7 @@ inherited frmProdutos: TfrmProdutos
         ParentFont = False
         TabOrder = 2
       end
-      object edtPreco: TEdit
+      object edtPreco: TEdit [11]
         Left = 272
         Top = 140
         Width = 250
@@ -230,7 +223,7 @@ inherited frmProdutos: TfrmProdutos
         ParentFont = False
         TabOrder = 3
       end
-      object edtEstoque: TEdit
+      object edtEstoque: TEdit [12]
         Left = 272
         Top = 173
         Width = 250
@@ -243,7 +236,7 @@ inherited frmProdutos: TfrmProdutos
         ParentFont = False
         TabOrder = 4
       end
-      object edtCategoria: TEdit
+      object edtCategoria: TEdit [13]
         Left = 272
         Top = 209
         Width = 250
@@ -256,7 +249,7 @@ inherited frmProdutos: TfrmProdutos
         ParentFont = False
         TabOrder = 5
       end
-      object edtSubCategoria: TEdit
+      object edtSubCategoria: TEdit [14]
         Left = 272
         Top = 244
         Width = 250
@@ -269,7 +262,7 @@ inherited frmProdutos: TfrmProdutos
         ParentFont = False
         TabOrder = 6
       end
-      object edtCodigo: TEdit
+      object edtCodigo: TEdit [15]
         Left = 272
         Top = 36
         Width = 250
@@ -282,7 +275,7 @@ inherited frmProdutos: TfrmProdutos
         ParentFont = False
         TabOrder = 0
       end
-      object edtDataValidade: TEdit
+      object edtDataValidade: TEdit [16]
         Left = 272
         Top = 281
         Width = 250
@@ -295,7 +288,7 @@ inherited frmProdutos: TfrmProdutos
         ParentFont = False
         TabOrder = 7
       end
-      object memObservacao: TMemo
+      object memObservacao: TMemo [17]
         Left = 272
         Top = 317
         Width = 249
@@ -308,13 +301,20 @@ inherited frmProdutos: TfrmProdutos
         ParentFont = False
         TabOrder = 8
       end
+      inherited Panel5: TPanel
+        TabOrder = 9
+        StyleElements = [seFont, seClient, seBorder]
+        inherited Label16: TLabel
+          StyleElements = [seFont, seClient, seBorder]
+        end
+      end
     end
     inherited pnlPesquisa: TPanel
-      Left = -33
-      Top = 104
+      Left = 370
+      Top = 78
       StyleElements = [seFont, seClient, seBorder]
-      ExplicitLeft = -33
-      ExplicitTop = 104
+      ExplicitLeft = 370
+      ExplicitTop = 78
       inherited DBGrid: TDBGrid
         OnCellClick = DBGridCellClick
         Columns = <

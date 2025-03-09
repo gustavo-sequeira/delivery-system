@@ -15,7 +15,9 @@ uses
   uFrmProdutos in 'views\uFrmProdutos.pas' {frmProdutos},
   uProdutoController in 'controllers\uProdutoController.pas',
   uFrmPedidos in 'views\uFrmPedidos.pas' {frmPedidos},
-  uFrmItensPedido in 'views\uFrmItensPedido.pas' {frmItensPedido};
+  uFrmItensPedido in 'views\uFrmItensPedido.pas' {frmItensPedido},
+  uPedidoController in 'controllers\uPedidoController.pas',
+  uItemPedidoController in 'controllers\uItemPedidoController.pas';
 
 {$R *.res}
 

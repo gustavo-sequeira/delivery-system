@@ -37,8 +37,8 @@ end;
 
 destructor TProdutoController.Destroy;
 begin
-  inherited;
   FConnection.Free;
+  inherited;
 end;
 
 procedure TProdutoController.InserirProduto(AProduto: TProduto);

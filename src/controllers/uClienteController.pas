@@ -37,8 +37,8 @@ end;
 
 destructor TClienteController.Destroy;
 begin
-  inherited;
   FConnection.Free;
+  inherited;
 end;
 
 procedure TClienteController.InserirCliente(ACliente: TCliente);
@@ -147,7 +147,7 @@ begin
 
   FDQuery := TFDQuery.Create(nil);
   FDQuery.Connection := FConnection;
-  FDQuery.SQL.Text := 'SELECT * FROM CLIENTES '+vWhere+' ORDER BY ID_CLIENTE';
+  FDQuery.SQL.Text := 'SELECT * FROM CLIENTES '+vWhere+' ORDER BY NOME';
   FDQuery.Open;
 
   Result := FDQuery;

@@ -322,33 +322,44 @@ object frmBaseCadastro: TfrmBaseCadastro
       Color = clWhite
       TabOrder = 1
       Visible = False
-      object Label16: TLabel
-        Left = 220
-        Top = 472
-        Width = 177
-        Height = 28
-        Hint = 'Pesquisar registro'
-        Alignment = taCenter
-        AutoSize = False
-        Caption = 'PESQUISAR'
-        Color = clWhite
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clNavy
-        Font.Height = -20
-        Font.Name = 'Segoe UI'
-        Font.Style = [fsBold]
-        ParentColor = False
-        ParentFont = False
-        Transparent = False
-        Visible = False
-        OnClick = Label16Click
-        OnMouseEnter = Label16MouseEnter
-        OnMouseLeave = Label16MouseLeave
+      object Panel5: TPanel
+        Left = 0
+        Top = 493
+        Width = 918
+        Height = 41
+        Align = alBottom
+        BevelOuter = bvNone
+        TabOrder = 0
+        ExplicitLeft = 120
+        ExplicitTop = 384
+        ExplicitWidth = 601
+        object Label16: TLabel
+          Left = 370
+          Top = 7
+          Width = 177
+          Height = 28
+          Hint = 'Pesquisar registro'
+          Alignment = taCenter
+          AutoSize = False
+          Caption = 'PESQUISAR'
+          Color = clWhite
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clNavy
+          Font.Height = -20
+          Font.Name = 'Segoe UI'
+          Font.Style = [fsBold]
+          ParentColor = False
+          ParentFont = False
+          Transparent = False
+          OnClick = Label16Click
+          OnMouseEnter = Label16MouseEnter
+          OnMouseLeave = Label16MouseLeave
+        end
       end
     end
     object pnlPesquisa: TPanel
-      Left = 41
-      Top = 135
+      Left = 489
+      Top = 166
       Width = 673
       Height = 385
       BevelOuter = bvNone

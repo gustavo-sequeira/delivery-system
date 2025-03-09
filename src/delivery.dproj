@@ -157,6 +157,8 @@
             <Form>frmItensPedido</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="controllers\uPedidoController.pas"/>
+        <DCCReference Include="controllers\uItemPedidoController.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

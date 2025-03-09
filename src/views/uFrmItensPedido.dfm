@@ -221,6 +221,7 @@ object frmItensPedido: TfrmItensPedido
     Top = 67
     Width = 400
     Height = 29
+    AutoComplete = False
     CharCase = ecUpperCase
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -237,6 +238,7 @@ object frmItensPedido: TfrmItensPedido
     Top = 100
     Width = 400
     Height = 29
+    AutoComplete = False
     CharCase = ecUpperCase
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -253,6 +255,7 @@ object frmItensPedido: TfrmItensPedido
     Top = 133
     Width = 400
     Height = 29
+    AutoComplete = False
     CharCase = ecUpperCase
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -291,11 +294,8 @@ object frmItensPedido: TfrmItensPedido
       ParentFont = False
       Layout = tlCenter
       OnClick = Label6Click
+      ExplicitLeft = 695
       ExplicitHeight = 28
     end
-  end
-  object FDQuery1: TFDQuery
-    Left = 352
-    Top = 192
   end
 end

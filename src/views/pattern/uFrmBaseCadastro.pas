@@ -10,7 +10,7 @@ uses
   FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
   FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
   FireDAC.Comp.DataSet, FireDAC.Comp.Client, FireDAC.Phys.FBDef, FireDAC.Phys,
-  FireDAC.Phys.IBBase, FireDAC.Phys.FB;
+  FireDAC.Phys.IBBase, FireDAC.Phys.FB,Vcl.WinXPickers;
 
 type
   TTransactionState = (tsInsert, tsEdit, tsSearch);
@@ -37,9 +37,10 @@ type
     lblMenuSalvar: TLabel;
     lblMenuCancelar: TLabel;
     FDGUIxWaitCursor: TFDGUIxWaitCursor;
-    Label16: TLabel;
     DataSource: TDataSource;
     FDMemTable: TFDMemTable;
+    Panel5: TPanel;
+    Label16: TLabel;
     procedure FormResize(Sender: TObject);
     procedure Label1Click(Sender: TObject);
     procedure lblMenuPesquisaClick(Sender: TObject);
@@ -230,7 +231,7 @@ begin
   lblMenuSalvar.Enabled := True;
   lblMenuCancelar.Enabled := True;
 
-  Label16.Visible := False;
+  Panel5.Visible := False;
 
   LimparComponentes;
 end;
@@ -277,6 +278,20 @@ begin
   begin
     if Self.Components[i] is TEdit then
       TEdit(Self.Components[i]).Text := '';
+
+    if Self.Components[i] is TComboBox then
+    begin
+      TCombobox(Self.Components[i]).Text := '';
+      TCombobox(Self.Components[i]).Items.Clear;
+    end;
+
+    if Self.Components[i] is TDatePicker then
+      TDatePicker(Self.Components[i]).Date := now;
+
+    if Self.Components[i] is TMemo then
+      TMemo(Self.Components[i]).Lines.Clear;
+
+
   end;
 end;
 

@@ -3,12 +3,12 @@ unit uFrmItensPedido;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  Winapi.Windows, Winapi.Messages, System.Variants,
   System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
   Vcl.StdCtrls, uItemPedido, FireDAC.Stan.Intf, FireDAC.Stan.Option,
   FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
   FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, Data.DB,
-  FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.ExtCtrls;
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.ExtCtrls, System.UITypes;
 
 type
   TfrmItensPedido = class(TForm)
@@ -25,7 +25,6 @@ type
     cbxCodigo: TComboBox;
     cbxNome: TComboBox;
     cbxDescricao: TComboBox;
-    FDQuery1: TFDQuery;
     Panel1: TPanel;
     Bevel1: TBevel;
     Bevel2: TBevel;
@@ -62,7 +61,7 @@ var
 implementation
 
 uses
-  uProdutoController, uProduto;
+  uProdutoController, uProduto, System.SysUtils;
 
 {$R *.dfm}
 
@@ -132,6 +131,10 @@ begin
       ItemPedido.ID_Produto := vMemTable.FieldByName('ID_PRODUTO').AsInteger;
       ItemPedido.PrecoUnitario := vMemTable.FieldByName('PRECO').AsInteger;
 
+      ItemPedido.Codigo := vMemTable.FieldByName('CODIGO').AsString;
+      ItemPedido.Nome := vMemTable.FieldByName('NOME').AsString;
+      ItemPedido.Descricao := vMemTable.FieldByName('DESCRICAO').AsString;
+
       Label7.Caption := vMemTable.FieldByName('OBSERVACAO').AsString;
 
     end
@@ -189,6 +192,7 @@ begin
     CarregarProduto(cbxCodigo);
     cbxCodigo.SelStart := Length(cbxCodigo.Text);
     cbxCodigo.DroppedDown := True;
+
   end;
 end;
 
@@ -252,7 +256,7 @@ end;
 
 procedure TfrmItensPedido.edtQuantidadeKeyPress(Sender: TObject; var Key: Char);
 begin
-  if not (Key in ['0'..'9', #8]) then
+  if not CharInSet(Key , ['0'..'9', #8]) then
     Key := #0;
 end;
 
