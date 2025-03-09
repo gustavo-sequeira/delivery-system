@@ -304,6 +304,9 @@ inherited frmProdutos: TfrmProdutos
       inherited Panel5: TPanel
         TabOrder = 9
         StyleElements = [seFont, seClient, seBorder]
+        ExplicitLeft = 0
+        ExplicitTop = 493
+        ExplicitWidth = 918
         inherited Label16: TLabel
           StyleElements = [seFont, seClient, seBorder]
         end

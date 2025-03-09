@@ -3,14 +3,15 @@
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, uFrmBaseCadastro, Data.DB,
-  FireDAC.UI.Intf, FireDAC.VCLUI.Wait, FireDAC.Stan.Intf, FireDAC.Stan.Option,
-  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
-  FireDAC.DApt.Intf, FireDAC.Comp.DataSet, FireDAC.Comp.Client, FireDAC.Comp.UI,
-  Vcl.Grids, Vcl.DBGrids, Vcl.ExtCtrls, Vcl.StdCtrls, FireDAC.Stan.StorageBin,
-  FireDAC.Stan.Def, FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys,
-  FireDAC.Phys.FB, FireDAC.Phys.FBDef, FireDAC.DApt, FireDAC.Phys.IBBase;
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
+  uFrmBaseCadastro, Data.DB, FireDAC.UI.Intf, FireDAC.VCLUI.Wait,
+  FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error,
+  FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Comp.DataSet,
+  FireDAC.Comp.Client, FireDAC.Comp.UI, Vcl.Grids, Vcl.DBGrids, Vcl.ExtCtrls,
+  Vcl.StdCtrls, FireDAC.Stan.StorageBin, FireDAC.Stan.Def, FireDAC.Stan.Pool,
+  FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.FB, FireDAC.Phys.FBDef,
+  FireDAC.DApt, FireDAC.Phys.IBBase;
 
 type
   TfrmProdutos = class(TfrmBaseCadastro)
@@ -117,7 +118,7 @@ begin
     if trim(edtPreco.Text) <> '' then
       vProduto.Preco := StrToFloat(edtPreco.Text);
 
-    if trim(edtEstoque.Text)  <> '' then
+    if trim(edtEstoque.Text) <> '' then
       vProduto.Estoque := StrToInt(edtEstoque.Text);
 
     vProduto.Categoria := edtCategoria.Text;
@@ -128,7 +129,7 @@ begin
 
     vProduto.Observacao := memObservacao.Text;
 
-    FDMemTable.CloneCursor(vController.ListarProdutos(vProduto),true, true);
+    FDMemTable.CloneCursor(vController.ListarProdutos(vProduto), true, true);
 
     inherited;
   finally
@@ -143,36 +144,36 @@ var
   vValidacao: TStringList;
   vProduto: TProduto;
 begin
+
   vValidacao := TStringList.Create;
+
+  if Trim(edtNome.Text) = '' then
+    vValidacao.Add('- Nome é um campo obrigatório');
+
+  if Trim(edtPreco.Text) = '' then
+    vValidacao.Add('- Preço é um campo obrigatório');
+
+  if Trim(edtEstoque.Text) = '' then
+    vValidacao.Add('- Estoque é um campo obrigatório');
+
+  if Trim(edtCategoria.Text) = '' then
+    vValidacao.Add('- Categoria é um campo obrigatório');
+
+  if Trim(edtSubCategoria.Text) = '' then
+    vValidacao.Add('- Subcategoria é um campo obrigatório');
+
+  if Trim(edtDataValidade.Text) = '' then
+    vValidacao.Add('- Data de validade é um campo obrigatório');
+
+  if vValidacao.Count > 0 then
+  begin
+    MessageDlg(vValidacao.Text, mtError, [mbOK], 0);
+    Abort;
+  end;
+
   vProduto := TProduto.create;
 
   try
-
-    if Trim(edtNome.Text) = '' then
-      vValidacao.Add('- Nome é um campo obrigatório');
-
-    if Trim(edtPreco.Text) = '' then
-      vValidacao.Add('- Preço é um campo obrigatório');
-
-    if Trim(edtEstoque.Text) = '' then
-      vValidacao.Add('- Estoque é um campo obrigatório');
-
-    if Trim(edtCategoria.Text) = '' then
-      vValidacao.Add('- Categoria é um campo obrigatório');
-
-    if Trim(edtSubCategoria.Text) = '' then
-      vValidacao.Add('- Subcategoria é um campo obrigatório');
-
-    if Trim(edtDataValidade.Text) = '' then
-      vValidacao.Add('- Data de validade é um campo obrigatório');
-
-    if vValidacao.Count > 0 then
-    begin
-      MessageDlg(vValidacao.Text, mtError, [mbOK], 0);
-      Abort;
-    end;
-
-
     vProduto.Codigo := edtCodigo.Text;
     vProduto.Nome := edtNome.Text;
     if Trim(edtDescricao.Text) <> '' then
@@ -220,3 +221,4 @@ begin
 end;
 
 end.
+

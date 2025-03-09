@@ -294,7 +294,6 @@ object frmItensPedido: TfrmItensPedido
       ParentFont = False
       Layout = tlCenter
       OnClick = Label6Click
-      ExplicitLeft = 695
       ExplicitHeight = 28
     end
   end

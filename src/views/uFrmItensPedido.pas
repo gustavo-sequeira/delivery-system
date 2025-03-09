@@ -3,12 +3,12 @@ unit uFrmItensPedido;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.Variants,
-  System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
-  Vcl.StdCtrls, uItemPedido, FireDAC.Stan.Intf, FireDAC.Stan.Option,
-  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
-  FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, Data.DB,
-  FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.ExtCtrls, System.UITypes;
+  Winapi.Windows, Winapi.Messages, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, uItemPedido,
+  FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error,
+  FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async,
+  FireDAC.DApt, Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.ExtCtrls,
+  System.UITypes;
 
 type
   TfrmItensPedido = class(TForm)
@@ -256,22 +256,30 @@ end;
 
 procedure TfrmItensPedido.edtQuantidadeKeyPress(Sender: TObject; var Key: Char);
 begin
-  if not CharInSet(Key , ['0'..'9', #8]) then
+  if not CharInSet(Key, ['0'..'9', #8]) then
     Key := #0;
 end;
 
 procedure TfrmItensPedido.Label16Click(Sender: TObject);
 var
   vValidacao: TStringList;
+  vProdutoController: TProdutoController;
+  vProduto: TProduto;
 begin
   vValidacao := TStringList.Create;
-
+  vProdutoController := TProdutoController.Create;
+  vProduto := TProduto.Create;
   try
     if Trim(cbxCodigo.Text) = '' then
       vValidacao.Add('- É nescessário ter um produto');
 
     if StrToInt(edtQuantidade.Text) <= 0 then
       vValidacao.Add('- Quantidade é um campo obrigatório');
+
+    vProduto.ID := ItemPedido.ID_Produto;
+
+    if TFDQuery(vProdutoController.ListarProdutos(vProduto)).FieldByName('ESTOQUE').AsInteger < StrToInt(edtQuantidade.Text) then
+      vValidacao.Add('- Quantidade superior ao estoque');
 
     if vValidacao.Count > 0 then
     begin
@@ -280,6 +288,8 @@ begin
     end;
 
   finally
+    vProduto.Free;
+    vProdutoController.Create;
     vValidacao.Free;
   end;
 

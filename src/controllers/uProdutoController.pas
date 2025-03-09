@@ -117,6 +117,9 @@ begin
 
   if Assigned(AProduto) then
   begin
+    if AProduto.ID > 0 then
+      vWhere := vWhere + ' AND ID_PRODUTO = ' + IntToStr( AProduto.ID);
+
     if AProduto.Nome <> '' then
       vWhere := vWhere + ' AND UPPER(NOME) LIKE ' + QuotedStr('%' + UpperCase(AProduto.Nome) + '%');
 

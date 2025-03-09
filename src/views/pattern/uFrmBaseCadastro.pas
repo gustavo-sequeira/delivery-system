@@ -10,7 +10,8 @@ uses
   FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
   FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
   FireDAC.Comp.DataSet, FireDAC.Comp.Client, FireDAC.Phys.FBDef, FireDAC.Phys,
-  FireDAC.Phys.IBBase, FireDAC.Phys.FB,Vcl.WinXPickers;
+  FireDAC.Phys.IBBase, FireDAC.Phys.FB,Vcl.WinXPickers, System.ImageList,
+  Vcl.ImgList;
 
 type
   TTransactionState = (tsInsert, tsEdit, tsSearch);
@@ -41,6 +42,7 @@ type
     FDMemTable: TFDMemTable;
     Panel5: TPanel;
     Label16: TLabel;
+    ImageList1: TImageList;
     procedure FormResize(Sender: TObject);
     procedure Label1Click(Sender: TObject);
     procedure lblMenuPesquisaClick(Sender: TObject);
@@ -83,8 +85,9 @@ procedure TfrmBaseCadastro.DBGridDrawColumnCell(Sender: TObject;
   const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 var
   Grid: TDBGrid;
-  Texto: string;
-  BotaoRect: TRect;
+
+  ImgIndex: Integer;
+  ImgX, ImgY: Integer;
 begin
   inherited;
 
@@ -104,19 +107,24 @@ begin
   // Redesenha o texto da célula
   Grid.DefaultDrawColumnCell(Rect, DataCol, Column, State);
 
+
   // Verifica se a coluna é a de edição ou exclusão
   if Column.Index = Grid.Columns.Count - 2 then
-    Texto := '?' // Texto do botão de edição
+    ImgIndex := 0
   else if Column.Index = Grid.Columns.Count - 1 then
-    Texto := '?' // Texto do botão de exclusão
+    ImgIndex := 1
   else
-    Exit;
+    ImgIndex := -1;
 
-  // Desenha o botão na célula
-  BotaoRect := Rect;
-  InflateRect(BotaoRect, -3, -3); // Ajusta tamanho do botão
-  Grid.Canvas.FillRect(Rect);
-  Grid.Canvas.TextRect(BotaoRect, Texto, [tfCenter, tfVerticalCenter]);
+  if ImgIndex >= 0 then
+    begin
+      // Calcula a posição da imagem no centro da célula
+      ImgX := Rect.Left + (Rect.Width - ImageList1.Width) div 2;
+      ImgY := Rect.Top + (Rect.Height - ImageList1.Height) div 2;
+
+      // Desenha a imagem
+      ImageList1.Draw(DBGrid.Canvas, ImgX, ImgY, ImgIndex);
+    end;
 end;
 
 procedure TfrmBaseCadastro.FormCreate(Sender: TObject);
@@ -148,6 +156,9 @@ begin
   lblMenuNovo.Enabled := True;
   lblMenuSalvar.Enabled := False;
   lblMenuCancelar.Enabled := False;
+
+  pnlPesquisa.Visible := False;
+  pnlManutencao.Visible := False;
 
   LimparComponentes;
 end;
@@ -255,6 +266,9 @@ begin
   lblMenuNovo.Enabled := True;
   lblMenuSalvar.Enabled := False;
   lblMenuCancelar.Enabled := False;
+
+  pnlPesquisa.Visible := False;
+  pnlManutencao.Visible := False;
 
   LimparComponentes;
 end;

@@ -1,4 +1,4 @@
-unit uFrmPedidos;
+﻿unit uFrmPedidos;
 
 interface
 
@@ -11,7 +11,8 @@ uses
   FireDAC.Comp.Client, FireDAC.Comp.UI, Vcl.Grids, Vcl.DBGrids, Vcl.ExtCtrls,
   Vcl.StdCtrls, Vcl.WinXPickers, Vcl.ComCtrls, FireDAC.Stan.Def,
   FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.FB,
-  FireDAC.Phys.FBDef, FireDAC.DApt, FireDAC.Stan.StorageBin;
+  FireDAC.Phys.FBDef, FireDAC.DApt, FireDAC.Stan.StorageBin, uPedido,
+  System.UITypes, System.ImageList, Vcl.ImgList;
 
 type
   TfrmPedidos = class(TfrmBaseCadastro)
@@ -30,11 +31,27 @@ type
     memObservacao: TMemo;
     DataSource1: TDataSource;
     FDMemTable1: TFDMemTable;
+    FDConnection1: TFDConnection;
+    FDQuery1: TFDQuery;
+    DBGridItens: TDBGrid;
+    FDMemTableID_PEDIDO: TIntegerField;
+    FDMemTableID_CLIENTE: TIntegerField;
+    FDMemTableDATA_PEDIDO: TSQLTimeStampField;
+    FDMemTableTOTAL: TFMTBCDField;
+    FDMemTableSTATUS: TStringField;
+    FDMemTableID_ENTREGADOR: TIntegerField;
+    FDMemTableDATA_ENTREGA: TSQLTimeStampField;
+    FDMemTableNOME: TStringField;
+    chbPesquisaData: TCheckBox;
+    FDMemTable1ID_PEDIDO: TIntegerField;
+    FDMemTable1QUANTIDADE: TIntegerField;
     FDMemTable1ID_PRODUTO: TIntegerField;
     FDMemTable1CODIGO: TStringField;
     FDMemTable1NOME: TStringField;
     FDMemTable1DESCRICAO: TStringField;
-    FDMemTable1QUANTIDADE: TIntegerField;
+    FDMemTable1CATEGORIA: TStringField;
+    FDMemTable1SUBCATEGORIA: TStringField;
+    FDMemTable1PRECO: TFMTBCDField;
     procedure Label5Click(Sender: TObject);
     procedure lblMenuNovoClick(Sender: TObject);
     procedure lblMenuPesquisaClick(Sender: TObject);
@@ -44,15 +61,24 @@ type
     procedure edtPedidoExit(Sender: TObject);
     procedure cbxClienteChange(Sender: TObject);
     procedure cbxClienteSelect(Sender: TObject);
-    procedure DBGrid1DrawColumnCell(Sender: TObject; const Rect: TRect;
-      DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure DBGrid1DrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure Label5MouseEnter(Sender: TObject);
     procedure Label5MouseLeave(Sender: TObject);
+    procedure cbxClienteExit(Sender: TObject);
+    procedure Label16Click(Sender: TObject);
+    procedure chbPesquisaDataClick(Sender: TObject);
+    procedure FDMemTableAfterScroll(DataSet: TDataSet);
+    procedure DBGridCellClick(Column: TColumn);
+    procedure DBGridItensDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure DBGrid1CellClick(Column: TColumn);
   private
     { Private declarations }
+    FPedido: TPedido;
     procedure CarregarCliente(ACombobox: TComboBox);
   public
     { Public declarations }
+    constructor Create(AOwner: TComponent); override;
+    destructor Destroy; override;
   end;
 
 var
@@ -62,7 +88,7 @@ implementation
 
 uses
   uFrmItensPedido, uPedidoController, uClienteController, uCliente,
-  uProdutoController, uProduto;
+  uProdutoController, uProduto, uItemPedidoController, uItemPedido;
 
 {$R *.dfm}
 
@@ -88,8 +114,6 @@ begin
     if vMemTable.RecordCount = 1 then
     begin
       ACombobox.Items.Add(vMemTable.FieldByName('NOME').AsString);
-     // ACombobox.Text := vMemTable.FieldByName('NOME').AsString;
-
     end
     else
     begin
@@ -123,24 +147,108 @@ begin
   cbxCliente.DroppedDown := True;
 end;
 
+procedure TfrmPedidos.cbxClienteExit(Sender: TObject);
+var
+  vClienteController: TClienteController;
+  vCliente: TCliente;
+begin
+  inherited;
+
+  if Trim(cbxCliente.Text) = '' then
+    Exit;
+
+  vClienteController := TClienteController.Create;
+  vCliente := TCliente.create;
+
+  try
+    vCliente.Nome := cbxCliente.Text;
+    FPedido.IDCliente := TFDQuery(vClienteController.ListarClientes(vCliente)).FieldByName('ID_CLIENTE').AsInteger;
+  finally
+    vClienteController.Free;
+    vCliente.Free;
+  end;
+end;
+
 procedure TfrmPedidos.cbxClienteSelect(Sender: TObject);
 begin
   cbxCliente.DroppedDown := False;
  // CarregarCliente(cbxCliente);
 end;
 
-procedure TfrmPedidos.DBGrid1DrawColumnCell(Sender: TObject; const Rect: TRect;
-  DataCol: Integer; Column: TColumn; State: TGridDrawState);
+procedure TfrmPedidos.chbPesquisaDataClick(Sender: TObject);
+begin
+  inherited;
+  Label3.Enabled := chbPesquisaData.Checked;
+  dtpDataPedido.Enabled := chbPesquisaData.Checked;
+end;
+
+constructor TfrmPedidos.Create(AOwner: TComponent);
+begin
+  inherited;
+  FPedido := TPedido.Create;
+end;
+
+procedure TfrmPedidos.DBGrid1CellClick(Column: TColumn);
+var
+  vProdutoController: TProdutoController;
+  vProduto: TProduto;
+  vHabilitaObservacao: Boolean;
+  vObservacao: string;
+begin
+  inherited;
+  if Column.Index = DBGrid1.Columns.Count - 1 then
+  begin
+    if MessageDlg('Deseja realmente excluir o registro?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+    begin
+
+      FDMemTable1.Delete;
+
+      FDMemTable1.DisableControls;
+      vProdutoController := TProdutoController.Create;
+      vProduto := TProduto.Create;
+      vHabilitaObservacao := False;
+      try
+        FDMemTable1.First;
+
+        while not (FDMemTable1.Eof) do
+        begin
+
+          vProduto.ID := FDMemTable1ID_PRODUTO.AsInteger;
+
+          if vHabilitaObservacao = False then
+          begin
+            vObservacao := TFDQuery(vProdutoController.ListarProdutos(vProduto)).FieldByName('OBSERVACAO').AsString;
+            vHabilitaObservacao := vObservacao <> '';
+            memObservacao.Lines.Text := vObservacao;
+            memObservacao.Enabled := False;
+          end;
+          FDMemTable1.Next;
+        end;
+
+        lblObservacao.Visible := vHabilitaObservacao;
+        memObservacao.Visible := vHabilitaObservacao;
+
+      finally
+        vProdutoController.Free;
+        vProduto.Free;
+      end;
+      FDMemTable1.EnableControls;
+
+    end;
+  end;
+end;
+
+procedure TfrmPedidos.DBGrid1DrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 var
   Grid: TDBGrid;
-  Texto: string;
-  BotaoRect: TRect;
+  ImgIndex: Integer;
+  ImgX, ImgY: Integer;
 begin
   inherited;
 
   Grid := Sender as TDBGrid;
 
-  // Verifica se a linha N�O est� selecionada para aplicar o efeito zebrado
+  // Verifica se a linha NÃO está selecionada para aplicar o efeito zebrado
   if not (gdSelected in State) then
   begin
     if (Grid.DataSource.DataSet.RecNo mod 2 = 0) then
@@ -151,19 +259,155 @@ begin
     Grid.Canvas.FillRect(Rect);
   end;
 
-  // Redesenha o texto da c�lula
+  // Redesenha o texto da célula
   Grid.DefaultDrawColumnCell(Rect, DataCol, Column, State);
 
-   if Column.Index = Grid.Columns.Count - 1 then
-    Texto := '?' // Texto do bot�o de exclus�o
+  if Column.Index = Grid.Columns.Count - 1 then
+    ImgIndex := 1
   else
-    Exit;
+    ImgIndex := -1;
 
-  // Desenha o bot�o na c�lula
-  BotaoRect := Rect;
-  InflateRect(BotaoRect, -3, -3); // Ajusta tamanho do bot�o
-  Grid.Canvas.FillRect(Rect);
-  Grid.Canvas.TextRect(BotaoRect, Texto, [tfCenter, tfVerticalCenter]);
+  if ImgIndex >= 0 then
+  begin
+      // Calcula a posição da imagem no centro da célula
+    ImgX := Rect.Left + (Rect.Width - ImageList1.Width) div 2;
+    ImgY := Rect.Top + (Rect.Height - ImageList1.Height) div 2;
+
+      // Desenha a imagem
+    ImageList1.Draw(DBGrid1.Canvas, ImgX, ImgY, ImgIndex);
+  end;
+end;
+
+procedure TfrmPedidos.DBGridCellClick(Column: TColumn);
+var
+  vController: TPedidoController;
+  vItemController: TItemPedidoController;
+  vProdutoController: TProdutoController;
+  vProduto: TProduto;
+  vHabilitaObservacao: Boolean;
+  vObservacao: string;
+begin
+  inherited;
+
+  if FDMemTable.IsEmpty then
+    Abort;
+
+  vController := TPedidoController.Create;
+  vHabilitaObservacao := False;
+
+  try
+
+    if Column.Index = DBGrid.Columns.Count - 2 then
+    begin
+
+      if FDMemTableSTATUS.AsString <> 'PENDENTE' then
+      begin
+        MessageDlg('Pedido já saiu para entrega e não poderá ser alterado', mtInformation, [mbOk], 0);
+        Abort;
+      end;
+
+      lblMenuNovo.onClick(Self);
+
+      FTransactionState := tsEdit;
+
+      edtPedido.Text := IntToStr(FDMemTableID_PEDIDO.AsInteger);
+      dtpDataPedido.Date := FDMemTableDATA_PEDIDO.AsDateTime;
+      cbxCliente.Text := FDMemTableNOME.AsString;
+
+      edtPedido.Enabled := False;
+      dtpDataPedido.Enabled := False;
+      cbxCliente.Enabled := False;
+      Label9.Enabled := False;
+      Label3.Enabled := False;
+      Label4.Enabled := False;
+
+      vItemController := TItemPedidoController.Create;
+
+      try
+        FPedido.IDPedido := FDMemTableID_PEDIDO.AsInteger;
+        FDMemTable1.CloneCursor(vItemController.ListarItensPedido(FPedido));
+      finally
+        vItemController.Free;
+      end;
+
+      FDMemTable1.DisableControls;
+      vProdutoController := TProdutoController.Create;
+      vProduto := TProduto.Create;
+      try
+        FDMemTable1.First;
+
+        while not (FDMemTable1.Eof) do
+        begin
+
+          vProduto.ID := FDMemTable1ID_PRODUTO.AsInteger;
+
+          if vHabilitaObservacao = False then
+          begin
+            vObservacao := TFDQuery(vProdutoController.ListarProdutos(vProduto)).FieldByName('OBSERVACAO').AsString;
+            vHabilitaObservacao := vObservacao <> '';
+            memObservacao.Lines.Text := vObservacao;
+            memObservacao.Enabled := False;
+          end;
+          FDMemTable1.Next;
+        end;
+
+        lblObservacao.Visible := vHabilitaObservacao;
+        memObservacao.Visible := vHabilitaObservacao;
+
+      finally
+        vProdutoController.Free;
+        vProduto.Free;
+      end;
+      FDMemTable1.EnableControls;
+
+    end
+    else if Column.Index = DBGrid.Columns.Count - 1 then
+    begin
+
+      if FDMemTableSTATUS.AsString <> 'PENDENTE' then
+      begin
+        MessageDlg('Pedido já saiu para entrega e não poderá ser excluído', mtInformation, [mbOk], 0);
+        Abort;
+      end;
+
+      if MessageDlg('Deseja realmente excluir o registro?', mtConfirmation, [mbYes, mbNo], 0) = mrYes then
+      begin
+        vController.ExcluirPedido(FDMemTableID_PEDIDO.AsInteger);
+        FDMemTable.Delete;
+      end;
+    end;
+  finally
+    vController.Free;
+  end;
+end;
+
+procedure TfrmPedidos.DBGridItensDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+var
+  Grid: TDBGrid;
+begin
+  inherited;
+
+  Grid := Sender as TDBGrid;
+
+  // Verifica se a linha NÃO está selecionada para aplicar o efeito zebrado
+  if not (gdSelected in State) then
+  begin
+    if (Grid.DataSource.DataSet.RecNo mod 2 = 0) then
+      Grid.Canvas.Brush.Color := clCream // Cinza claro
+    else
+      Grid.Canvas.Brush.Color := clWhite; // Branco
+
+    Grid.Canvas.FillRect(Rect);
+  end;
+
+  // Redesenha o texto da célula
+  Grid.DefaultDrawColumnCell(Rect, DataCol, Column, State);
+end;
+
+destructor TfrmPedidos.Destroy;
+begin
+  FPedido.Free;
+  inherited;
 end;
 
 procedure TfrmPedidos.edtPedidoExit(Sender: TObject);
@@ -180,27 +424,129 @@ begin
     Key := #0;
 end;
 
+procedure TfrmPedidos.FDMemTableAfterScroll(DataSet: TDataSet);
+var
+  vController: TItemPedidoController;
+  vPedido: TPedido;
+begin
+  inherited;
+  if not (FDMemTable.IsEmpty) then
+  begin
+    vController := TItemPedidoController.Create;
+    vPedido := TPedido.Create;
+    try
+      vPedido.IDPedido := FDMemTableID_PEDIDO.AsInteger;
+      FDMemTable1.CloneCursor(vController.ListarItensPedido(vPedido), True);
+    finally
+      vPedido.Free;
+      vController.Free;
+    end;
+  end;
+end;
+
+procedure TfrmPedidos.Label16Click(Sender: TObject);
+var
+  vController: TPedidoController;
+  vClienteController: TClienteController;
+  vCliente: TCliente;
+  vPedido: TPedido;
+begin
+  vController := TPedidoController.Create;
+  vPedido := TPedido.create;
+  try
+    if trim(edtPedido.Text) <> '' then
+      vPedido.IDPedido := StrToInt(edtPedido.Text);
+
+    if chbPesquisaData.Checked then
+      vPedido.DataPedido := dtpDataPedido.Date;
+
+    if trim(cbxCliente.Text) <> '' then
+    begin
+      vClienteController := tClienteController.Create;
+      vCliente := TCliente.Create;
+      try
+        vCliente.Nome := trim(cbxCliente.Text);
+
+        vPedido.IDCliente := TFDQuery(vClienteController.ListarClientes(vCliente)).FieldByName('ID_CLIENTE').AsInteger;
+
+      finally
+        vClienteController.Free;
+        vCliente.Free;
+      end;
+    end;
+
+    FDMemTable.CloneCursor(vController.ListarPedido(vPedido));
+
+    inherited;
+  finally
+    vController.Free;
+    vPedido.Free;
+  end;
+end;
+
 procedure TfrmPedidos.Label5Click(Sender: TObject);
 var
   frmItensPedido: TFrmItensPedido;
+  vProdutoController: TProdutoController;
+  vProduto: TProduto;
+  vHabilitaObservacao: Boolean;
+  vObservacao: string;
 begin
   frmItensPedido := TFrmItensPedido.Create(Self);
+  vHabilitaObservacao := False;
+  vObservacao := '';
 
   try
     frmItensPedido.ShowModal;
     if frmItensPedido.ItemPedido.ID_Produto > 0 then
     begin
+      if not (FDMemTable1.Active) then
+        FDMemTable1.Open;
+
       FDMemTable1.Append;
-      FDMemTable1.FieldByName('ID_PRODUTO').AsInteger :=  frmItensPedido.ItemPedido.ID_Produto;
-      FDMemTable1.FieldByName('CODIGO').AsString :=  frmItensPedido.ItemPedido.Codigo;
-      FDMemTable1.FieldByName('NOME').AsString :=  frmItensPedido.ItemPedido.Nome;
-      FDMemTable1.FieldByName('DESCRICAO').AsString :=  frmItensPedido.ItemPedido.Descricao;
-      FDMemTable1.FieldByName('QUANTIDADE').AsInteger :=  frmItensPedido.ItemPedido.Quantidade;
+      FDMemTable1.FieldByName('ID_PRODUTO').AsInteger := frmItensPedido.ItemPedido.ID_Produto;
+
+      if FDMemTable1.FieldByName('CODIGO').ReadOnly then
+        FDMemTable1.FieldByName('CODIGO').ReadOnly := False;
+
+      FDMemTable1.FieldByName('CODIGO').AsString := frmItensPedido.ItemPedido.Codigo;
+      FDMemTable1.FieldByName('NOME').AsString := frmItensPedido.ItemPedido.Nome;
+      FDMemTable1.FieldByName('DESCRICAO').AsString := frmItensPedido.ItemPedido.Descricao;
+      FDMemTable1.FieldByName('QUANTIDADE').AsInteger := frmItensPedido.ItemPedido.Quantidade;
+      FDMemTable1.FieldByName('PRECO').AsFloat := frmItensPedido.ItemPedido.PrecoUnitario;
       FDMemTable1.Post;
 
+      FDMemTable1.DisableControls;
+      vProdutoController := TProdutoController.Create;
+      vProduto := TProduto.Create;
+      try
+        FDMemTable1.First;
+
+        while not (FDMemTable1.Eof) do
+        begin
+
+          vProduto.ID := FDMemTable1ID_PRODUTO.AsInteger;
+
+          if vHabilitaObservacao = False then
+          begin
+            vObservacao := TFDQuery(vProdutoController.ListarProdutos(vProduto)).FieldByName('OBSERVACAO').AsString;
+            vHabilitaObservacao := vObservacao <> '';
+            memObservacao.Lines.Text := vObservacao;
+            memObservacao.Enabled := False;
+          end;
+          FDMemTable1.Next;
+        end;
+
+        lblObservacao.Visible := vHabilitaObservacao;
+        memObservacao.Visible := vHabilitaObservacao;
+
+      finally
+        vProdutoController.Free;
+        vProduto.Free;
+      end;
+      FDMemTable1.EnableControls;
     end;
   finally
-
     frmItensPedido.Free;
   end;
 end;
@@ -232,38 +578,150 @@ begin
   inherited;
   vPedidoController := TPedidoController.Create;
   try
+    edtPedido.Enabled := True;
     edtPedido.Text := IntToStr(vPedidoController.gerarNumeracaoPedido);
-    edtPedido.Enabled := False;
-    Label9.Enabled := False;
+    FPedido.IDPedido := StrToInt(edtPedido.Text);
+    cbxCliente.Enabled := True;
+    cbxCliente.SetFocus;
+
   finally
     vPedidoController.Free;
   end;
+
+  FDMemTable1.Close;
+
+  chbPesquisaData.Visible := False;
+  edtPedido.Enabled := False;
+  dtpDataPedido.Enabled := True;
+
+  Label9.Enabled := False;
+  Label3.Enabled := True;
+  Label4.Enabled := True;
 
   dtpDataPedido.Date := Now;
 
   pnlNovoItem.Visible := True;
   Panel5.Visible := False;
 
+  lblObservacao.Visible := False;
+  memObservacao.Visible := False;
+
 end;
 
 procedure TfrmPedidos.lblMenuPesquisaClick(Sender: TObject);
 begin
   inherited;
-  edtPedido.Enabled := True;
-  Label9.Enabled := True;
 
-  edtPedido.Text := '0';
+  edtPedido.Enabled := True;
+  edtPedido.SetFocus;
+  dtpDataPedido.Enabled := True;
+  cbxCliente.Enabled := True;
+  Label9.Enabled := True;
+  Label3.Enabled := True;
+  Label4.Enabled := True;
+
   dtpDataPedido.Date := Now;
+  chbPesquisaData.Visible := True;
+
+  DBGrid.Height := Round(Screen.Height * 0.2);
+  DBGrid.Align := alTop;
+
+  DBGridItens.Align := alClient;
+
+  FDMemTable1.Close;
 
   pnlNovoItem.Visible := False;
   Panel5.Visible := True;
+  lblObservacao.Visible := False;
+  memObservacao.Visible := False;
 end;
 
 procedure TfrmPedidos.lblMenuSalvarClick(Sender: TObject);
+var
+  vValidacao: TStringList;
+  vController: TPedidoController;
+  vItemController: TItemPedidoController;
+  vItem: TItemPedido;
 begin
-  inherited;
+  DBGrid1.SetFocus;
+  vValidacao := TStringList.Create;
+  if Trim(cbxCliente.Text) = '' then
+    vValidacao.Add('- Cliente é um campo obrigatório');
+
+  if dtpDataPedido.Date < now - 1 then
+    vValidacao.Add('- Não é possível retroagir o pedido');
+
+  if FDMemTable1.RecordCount = 0 then
+    vValidacao.Add('- É necessário ter algum item ao pedido');
+
+  if vValidacao.Count > 0 then
+  begin
+    MessageDlg(vValidacao.Text, mtError, [mbOK], 0);
+    Abort;
+  end;
+
+  vController := TPedidoController.Create;
+  vItemController := TItemPedidoController.Create;
+
+  try
+
+    FPedido.DataPedido := dtpDataPedido.Date;
+
+    try
+      case FTransactionState of
+        tsInsert:
+          begin
+            vController.InserirPedido(FPedido);
+          end;
+      end;
+
+      vItemController.ExcluirTodosItemPedido(FPedido.IDPedido);
+
+      FDMemTable1.First;
+      while not (FDMemTable1.Eof) do
+      begin
+        vItem := TItemPedido.Create;
+        try
+          vItem.ID_Pedido := FPedido.IDPedido;
+          vItem.ID_Produto := FDMemTable1.FieldByName('ID_PRODUTO').AsInteger;
+          vItem.Quantidade := FDMemTable1.FieldByName('QUANTIDADE').AsInteger;
+          vItem.PrecoUnitario := FDMemTable1.FieldByName('PRECO').AsFloat;
+
+          vItemController.InserirItemPedido(vItem);
+        finally
+          vItem.Free;
+        end;
+        FDMemTable1.Next;
+      end;
+
+      case FTransactionState of
+        tsInsert:
+          begin
+            MessageDlg('Pedido incluído com sucesso', mtInformation, [mbOK], 0);
+          end;
+        tsEdit:
+          begin
+            MessageDlg('Pedido alterado com sucesso', mtInformation, [mbOK], 0);
+          end;
+      end;
+
+    except
+      on e: Exception do
+      begin
+        vController.ExcluirPedido(FPedido.IDPedido);
+        raise Exception.Create(e.Message);
+      end;
+    end;
+
+  finally
+    vItemController.Free;
+    vController.Free;
+    vValidacao.Free;
+  end;
+  FDMemTable1.Close;
   edtPedido.Enabled := True;
   Label9.Enabled := True;
+  inherited;
 end;
 
 end.

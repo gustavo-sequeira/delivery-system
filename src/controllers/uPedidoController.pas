@@ -24,7 +24,7 @@ type
 implementation
 
 uses
-  uConexaoFirebird;
+  uConexaoFirebird, uItemPedidoController;
 
 { TPedidoController }
 
@@ -119,8 +119,32 @@ begin
 end;
 
 function TPedidoController.ListarPedido(APedido: TPedido): TFDQuery;
+var
+  FDQuery: TFDQuery;
+  vWhere: string;
 begin
-  Result := nil;
+
+  vWhere := ' WHERE 1 =1 ';
+
+  if Assigned(APedido) then
+  begin
+    if APedido.IDPedido > 0 then
+      vWhere := vWhere + ' AND P.ID_PEDIDO = ' + IntToStr(APedido.IDPedido);
+
+    if APedido.IDCliente > 0 then
+      vWhere := vWhere + ' AND P.ID_CLIENTE = ' + IntToStr(APedido.IDCliente);
+
+    if DateToStr(APedido.DataPedido) <> '' then
+      vWhere := vWhere + ' AND CAST(P.DATA_PEDIDO as DATE) = ' + QuotedStr(FormatDateTime('yyyy-mm-dd', APedido.DataPedido));
+
+  end;
+
+  FDQuery := TFDQuery.Create(nil);
+  FDQuery.Connection := FConnection;
+  FDQuery.SQL.Text := 'SELECT p.*, c.nome FROM PEDIDOS p JOIN clientes c ON p.ID_CLIENTE = c.ID_CLIENTE ' + vWhere + ' ORDER BY ID_PEDIDO';
+  FDQuery.Open;
+
+  Result := FDQuery;
 end;
 
 end.
