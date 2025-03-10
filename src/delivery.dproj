@@ -159,6 +159,10 @@
         </DCCReference>
         <DCCReference Include="controllers\uPedidoController.pas"/>
         <DCCReference Include="controllers\uItemPedidoController.pas"/>
+        <DCCReference Include="views\uFrmEntregas.pas">
+            <Form>frmEntregas</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

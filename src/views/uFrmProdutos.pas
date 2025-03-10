@@ -11,7 +11,7 @@ uses
   FireDAC.Comp.Client, FireDAC.Comp.UI, Vcl.Grids, Vcl.DBGrids, Vcl.ExtCtrls,
   Vcl.StdCtrls, FireDAC.Stan.StorageBin, FireDAC.Stan.Def, FireDAC.Stan.Pool,
   FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.FB, FireDAC.Phys.FBDef,
-  FireDAC.DApt, FireDAC.Phys.IBBase;
+  FireDAC.DApt, FireDAC.Phys.IBBase, System.ImageList, Vcl.ImgList;
 
 type
   TfrmProdutos = class(TfrmBaseCadastro)
@@ -159,8 +159,6 @@ begin
   if Trim(edtCategoria.Text) = '' then
     vValidacao.Add('- Categoria é um campo obrigatório');
 
-  if Trim(edtSubCategoria.Text) = '' then
-    vValidacao.Add('- Subcategoria é um campo obrigatório');
 
   if Trim(edtDataValidade.Text) = '' then
     vValidacao.Add('- Data de validade é um campo obrigatório');

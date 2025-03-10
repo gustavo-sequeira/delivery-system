@@ -57,7 +57,7 @@ implementation
 
 constructor TPedido.Create;
 begin
-  FDataPedido := Now;
+ // FDataPedido := Now;
   FStatus := 'PENDENTE';
 end;
 

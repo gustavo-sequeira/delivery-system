@@ -134,7 +134,7 @@ begin
     if APedido.IDCliente > 0 then
       vWhere := vWhere + ' AND P.ID_CLIENTE = ' + IntToStr(APedido.IDCliente);
 
-    if DateToStr(APedido.DataPedido) <> '' then
+    if DateToStr(APedido.DataPedido) <> '30/12/1899' then
       vWhere := vWhere + ' AND CAST(P.DATA_PEDIDO as DATE) = ' + QuotedStr(FormatDateTime('yyyy-mm-dd', APedido.DataPedido));
 
   end;

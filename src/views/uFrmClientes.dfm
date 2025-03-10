@@ -1,6 +1,7 @@
 inherited frmClientes: TfrmClientes
   Caption = 'frmClientes'
   StyleElements = [seFont, seClient, seBorder]
+  ExplicitTop = -107
   TextHeight = 15
   inherited pnlMenu: TPanel
     StyleElements = [seFont, seClient, seBorder]
@@ -193,12 +194,15 @@ inherited frmClientes: TfrmClientes
         Width = 669
         TabOrder = 9
         StyleElements = [seFont, seClient, seBorder]
+        ExplicitLeft = 80
+        ExplicitTop = 469
+        ExplicitWidth = 669
         inherited Label16: TLabel
           Left = 246
-          Top = 336
+          Top = 2
           StyleElements = [seFont, seClient, seBorder]
           ExplicitLeft = 246
-          ExplicitTop = 336
+          ExplicitTop = 2
         end
       end
       object edtNome: TEdit

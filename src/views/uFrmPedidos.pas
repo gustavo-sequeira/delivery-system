@@ -454,7 +454,7 @@ begin
   vController := TPedidoController.Create;
   vPedido := TPedido.create;
   try
-    if trim(edtPedido.Text) <> '' then
+    if (trim(edtPedido.Text) <> '') and (trim(edtPedido.Text) <> '0') then
       vPedido.IDPedido := StrToInt(edtPedido.Text);
 
     if chbPesquisaData.Checked then
@@ -648,7 +648,7 @@ begin
   if Trim(cbxCliente.Text) = '' then
     vValidacao.Add('- Cliente é um campo obrigatório');
 
-  if dtpDataPedido.Date < now - 1 then
+  if (dtpDataPedido.Date < now - 1) and (FTransactionState = tsInsert) then
     vValidacao.Add('- Não é possível retroagir o pedido');
 
   if FDMemTable1.RecordCount = 0 then

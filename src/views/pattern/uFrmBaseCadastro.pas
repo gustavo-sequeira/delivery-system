@@ -215,6 +215,7 @@ begin
   pnlPesquisa.Visible := False;
 
   Label16.Visible := True;
+  Panel5.Visible := True;
 
   LimparComponentes;
 end;

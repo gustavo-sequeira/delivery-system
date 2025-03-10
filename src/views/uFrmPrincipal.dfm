@@ -23,7 +23,6 @@ object frmPrincipal: TfrmPrincipal
     Color = clWhite
     ParentBackground = False
     TabOrder = 0
-    ExplicitWidth = 995
     object Panel3: TPanel
       Left = 704
       Top = 1
@@ -33,8 +32,6 @@ object frmPrincipal: TfrmPrincipal
       BevelOuter = bvNone
       Caption = 'pnlLogin'
       TabOrder = 0
-      ExplicitLeft = 688
-      ExplicitHeight = 191
     end
   end
   object Panel2: TPanel
@@ -47,9 +44,6 @@ object frmPrincipal: TfrmPrincipal
     Color = clWhite
     ParentBackground = False
     TabOrder = 1
-    ExplicitTop = 193
-    ExplicitWidth = 995
-    ExplicitHeight = 468
     object Panel4: TPanel
       Left = 0
       Top = 0
@@ -60,7 +54,6 @@ object frmPrincipal: TfrmPrincipal
       Color = clWhite
       ParentBackground = False
       TabOrder = 0
-      ExplicitWidth = 995
       object lblMenuClientes: TLabel
         AlignWithMargins = True
         Left = 3
@@ -150,6 +143,29 @@ object frmPrincipal: TfrmPrincipal
         OnMouseLeave = lblMenuSairSistemaMouseLeave
         ExplicitLeft = 587
         ExplicitTop = 6
+      end
+      object lblMenuEntregas: TLabel
+        AlignWithMargins = True
+        Left = 471
+        Top = 3
+        Width = 150
+        Height = 18
+        Align = alLeft
+        Alignment = taCenter
+        AutoSize = False
+        Caption = 'ENTREGAS'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clNavy
+        Font.Height = -12
+        Font.Name = 'Segoe UI'
+        Font.Style = [fsBold]
+        ParentFont = False
+        Transparent = False
+        OnClick = lblMenuEntregasClick
+        OnMouseEnter = lblMenuEntregasMouseEnter
+        OnMouseLeave = lblMenuEntregasMouseLeave
+        ExplicitLeft = 579
+        ExplicitTop = 5
       end
     end
   end

@@ -17,6 +17,7 @@ type
     lblMenuProdutos: TLabel;
     lblMenuPedidos: TLabel;
     lblMenuSairSistema: TLabel;
+    lblMenuEntregas: TLabel;
     procedure lblMenuClientesMouseEnter(Sender: TObject);
     procedure lblMenuClientesMouseLeave(Sender: TObject);
     procedure lblMenuClientesClick(Sender: TObject);
@@ -25,10 +26,13 @@ type
     procedure lblMenuProdutosMouseLeave(Sender: TObject);
     procedure lblMenuPedidosMouseLeave(Sender: TObject);
     procedure lblMenuPedidosMouseEnter(Sender: TObject);
-    procedure lblMenuPedidosClick(Sender: TObject);
     procedure lblMenuSairSistemaClick(Sender: TObject);
     procedure lblMenuSairSistemaMouseEnter(Sender: TObject);
     procedure lblMenuSairSistemaMouseLeave(Sender: TObject);
+    procedure lblMenuEntregasMouseLeave(Sender: TObject);
+    procedure lblMenuEntregasMouseEnter(Sender: TObject);
+    procedure lblMenuPedidosClick(Sender: TObject);
+    procedure lblMenuEntregasClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -43,8 +47,31 @@ implementation
 {$R *.dfm}
 
 uses
-  uConexaoFirebird, uFrmBaseCadastro, uFrmClientes,
-  uFrmProdutos, uFrmPedidos;
+  uConexaoFirebird, uFrmBaseCadastro, uFrmClientes, uFrmProdutos, uFrmPedidos, uFrmEntregas;
+
+procedure TfrmPrincipal.lblMenuEntregasClick(Sender: TObject);
+var
+  frmEntregas: TfrmEntregas;
+begin
+  frmEntregas := TfrmEntregas.Create(Self);
+  try
+    frmEntregas.Parent := Panel2;
+    frmEntregas.Show;
+  finally
+   // frmEntregas.Free;
+  end;
+end;
+
+procedure TfrmPrincipal.lblMenuEntregasMouseEnter(Sender: TObject);
+begin
+  if lblMenuEntregas.Enabled then
+    lblMenuEntregas.Color := clSilver;
+end;
+
+procedure TfrmPrincipal.lblMenuEntregasMouseLeave(Sender: TObject);
+begin
+  lblMenuEntregas.Color := clWhite;
+end;
 
 procedure TfrmPrincipal.lblMenuClientesClick(Sender: TObject);
 var
@@ -67,7 +94,7 @@ end;
 
 procedure TfrmPrincipal.lblMenuClientesMouseLeave(Sender: TObject);
 begin
- lblMenuClientes.Color := clWhite;
+  lblMenuClientes.Color := clWhite;
 end;
 
 procedure TfrmPrincipal.lblMenuPedidosClick(Sender: TObject);
