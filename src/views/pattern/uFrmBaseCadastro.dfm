@@ -316,20 +316,22 @@ object frmBaseCadastro: TfrmBaseCadastro
       Left = 0
       Top = 72
       Width = 918
-      Height = 534
-      Align = alTop
+      Height = 550
+      Align = alClient
       BevelOuter = bvNone
       Color = clWhite
-      TabOrder = 1
+      TabOrder = 2
       Visible = False
+      ExplicitHeight = 534
       object Panel5: TPanel
         Left = 0
-        Top = 493
+        Top = 509
         Width = 918
         Height = 41
         Align = alBottom
         BevelOuter = bvNone
         TabOrder = 0
+        ExplicitTop = 493
         object Label16: TLabel
           Left = 370
           Top = 7
@@ -355,14 +357,19 @@ object frmBaseCadastro: TfrmBaseCadastro
       end
     end
     object pnlPesquisa: TPanel
-      Left = 489
-      Top = 166
-      Width = 673
-      Height = 385
+      Left = 0
+      Top = 72
+      Width = 918
+      Height = 550
+      Align = alClient
       BevelOuter = bvNone
       ParentColor = True
-      TabOrder = 2
+      TabOrder = 1
       Visible = False
+      ExplicitLeft = 489
+      ExplicitTop = 166
+      ExplicitWidth = 673
+      ExplicitHeight = 385
       object DBGrid: TDBGrid
         AlignWithMargins = True
         Left = 3
@@ -372,26 +379,32 @@ object frmBaseCadastro: TfrmBaseCadastro
         BorderStyle = bsNone
         Color = clWhite
         DataSource = DataSource
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Segoe UI'
+        Font.Style = []
         Options = [dgTitles, dgIndicator, dgColLines, dgRowLines, dgTabs, dgTitleHotTrack]
+        ParentFont = False
         TabOrder = 0
         TitleFont.Charset = DEFAULT_CHARSET
         TitleFont.Color = clWindowText
-        TitleFont.Height = -12
+        TitleFont.Height = -16
         TitleFont.Name = 'Segoe UI'
-        TitleFont.Style = []
+        TitleFont.Style = [fsBold]
         OnDrawColumnCell = DBGridDrawColumnCell
       end
     end
   end
   object FDGUIxWaitCursor: TFDGUIxWaitCursor
     Provider = 'Forms'
-    Left = 240
+    Left = 24
     Top = 24
   end
   object DataSource: TDataSource
     DataSet = FDMemTable
-    Left = 240
-    Top = 80
+    Left = 56
+    Top = 24
   end
   object FDMemTable: TFDMemTable
     FetchOptions.AssignedValues = [evMode]
@@ -401,14 +414,14 @@ object frmBaseCadastro: TfrmBaseCadastro
     UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
     UpdateOptions.CheckRequired = False
     UpdateOptions.AutoCommitUpdates = True
-    Left = 240
-    Top = 144
+    Left = 88
+    Top = 24
   end
   object ImageList1: TImageList
-    Left = 391
-    Top = 128
+    Left = 119
+    Top = 24
     Bitmap = {
-      494C010102000804040010001000FFFFFFFFFF00FFFFFFFFFFFFFFFF424D3600
+      494C010102000804040010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000001000000001002000000000000010
       00000000000000000000000000000000000000000000ACACAC00434343000000
       0000000000000000000000000000000000000000000000000000000000000C0C
@@ -544,6 +557,7 @@ object frmBaseCadastro: TfrmBaseCadastro
       3FF9C003000000003BF980010000000030F90000000000003079000000000000
       383900000000000038190000000000003C090000000000003E41000000000000
       3F230000000000003F110000000000001F888001000000008004C00300000000
-      C020E00700000000FFF0F00F00000000}
+      C020E00700000000FFF0F00F0000000000000000000000000000000000000000
+      000000000000}
   end
 end

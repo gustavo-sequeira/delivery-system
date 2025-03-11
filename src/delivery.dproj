@@ -163,6 +163,12 @@
             <Form>frmEntregas</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="controllers\uEntregaController.pas"/>
+        <DCCReference Include="views\uFrmEntregadores.pas">
+            <Form>frmEntregadores</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="controllers\uEntregadorController.pas"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

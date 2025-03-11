@@ -100,7 +100,7 @@ object frmPrincipal: TfrmPrincipal
       end
       object lblMenuPedidos: TLabel
         AlignWithMargins = True
-        Left = 315
+        Left = 471
         Top = 3
         Width = 150
         Height = 18
@@ -146,7 +146,7 @@ object frmPrincipal: TfrmPrincipal
       end
       object lblMenuEntregas: TLabel
         AlignWithMargins = True
-        Left = 471
+        Left = 627
         Top = 3
         Width = 150
         Height = 18
@@ -166,6 +166,28 @@ object frmPrincipal: TfrmPrincipal
         OnMouseLeave = lblMenuEntregasMouseLeave
         ExplicitLeft = 579
         ExplicitTop = 5
+      end
+      object lblMenuEntregadores: TLabel
+        AlignWithMargins = True
+        Left = 315
+        Top = 3
+        Width = 150
+        Height = 18
+        Align = alLeft
+        Alignment = taCenter
+        AutoSize = False
+        Caption = 'ENTREGADORES'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clNavy
+        Font.Height = -12
+        Font.Name = 'Segoe UI'
+        Font.Style = [fsBold]
+        ParentFont = False
+        Transparent = False
+        OnClick = lblMenuEntregadoresClick
+        OnMouseEnter = lblMenuEntregadoresMouseEnter
+        OnMouseLeave = lblMenuEntregadoresMouseLeave
+        ExplicitLeft = 391
       end
     end
   end

@@ -27,9 +27,6 @@ implementation
 uses
   uConexaoFirebird;
 
-{ TPedidoController }
-
-
 { TItemPedidoController }
 
 

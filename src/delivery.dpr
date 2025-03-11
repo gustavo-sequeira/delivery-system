@@ -18,7 +18,10 @@ uses
   uFrmItensPedido in 'views\uFrmItensPedido.pas' {frmItensPedido},
   uPedidoController in 'controllers\uPedidoController.pas',
   uItemPedidoController in 'controllers\uItemPedidoController.pas',
-  uFrmEntregas in 'views\uFrmEntregas.pas' {frmEntregas};
+  uFrmEntregas in 'views\uFrmEntregas.pas' {frmEntregas},
+  uEntregaController in 'controllers\uEntregaController.pas',
+  uFrmEntregadores in 'views\uFrmEntregadores.pas' {frmEntregadores},
+  uEntregadorController in 'controllers\uEntregadorController.pas';
 
 {$R *.res}
 

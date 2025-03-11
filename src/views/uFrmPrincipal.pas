@@ -18,6 +18,7 @@ type
     lblMenuPedidos: TLabel;
     lblMenuSairSistema: TLabel;
     lblMenuEntregas: TLabel;
+    lblMenuEntregadores: TLabel;
     procedure lblMenuClientesMouseEnter(Sender: TObject);
     procedure lblMenuClientesMouseLeave(Sender: TObject);
     procedure lblMenuClientesClick(Sender: TObject);
@@ -33,6 +34,9 @@ type
     procedure lblMenuEntregasMouseEnter(Sender: TObject);
     procedure lblMenuPedidosClick(Sender: TObject);
     procedure lblMenuEntregasClick(Sender: TObject);
+    procedure lblMenuEntregadoresClick(Sender: TObject);
+    procedure lblMenuEntregadoresMouseEnter(Sender: TObject);
+    procedure lblMenuEntregadoresMouseLeave(Sender: TObject);
   private
     { Private declarations }
   public
@@ -47,7 +51,8 @@ implementation
 {$R *.dfm}
 
 uses
-  uConexaoFirebird, uFrmBaseCadastro, uFrmClientes, uFrmProdutos, uFrmPedidos, uFrmEntregas;
+  uConexaoFirebird, uFrmBaseCadastro, uFrmClientes, uFrmProdutos, uFrmPedidos, uFrmEntregas,
+  uFrmEntregadores;
 
 procedure TfrmPrincipal.lblMenuEntregasClick(Sender: TObject);
 var
@@ -72,6 +77,30 @@ procedure TfrmPrincipal.lblMenuEntregasMouseLeave(Sender: TObject);
 begin
   lblMenuEntregas.Color := clWhite;
 end;
+
+procedure TfrmPrincipal.lblMenuEntregadoresClick(Sender: TObject);
+var
+  frmEntregadores: TFrmEntregadores;
+begin
+  frmEntregadores := TFrmEntregadores.Create(Self);
+  try
+    frmEntregadores.Parent := Panel2;
+    frmEntregadores.Show;
+  finally
+   // frmClientes.Free;
+  end;
+end;
+procedure TfrmPrincipal.lblMenuEntregadoresMouseEnter(Sender: TObject);
+begin
+  if lblMenuEntregadores.Enabled then
+    lblMenuEntregadores.Color := clSilver;
+end;
+
+procedure TfrmPrincipal.lblMenuEntregadoresMouseLeave(Sender: TObject);
+begin
+  lblMenuEntregadores.Color := clWhite;
+end;
+
 
 procedure TfrmPrincipal.lblMenuClientesClick(Sender: TObject);
 var
