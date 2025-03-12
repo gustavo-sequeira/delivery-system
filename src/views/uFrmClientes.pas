@@ -11,7 +11,8 @@ uses
   FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
   FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client,
   FireDAC.Stan.StorageBin, FireDAC.Stan.Def, FireDAC.Stan.Pool, FireDAC.Phys,
-  FireDAC.Phys.FB, FireDAC.Phys.FBDef, System.ImageList, Vcl.ImgList;
+  FireDAC.Phys.FB, FireDAC.Phys.FBDef, System.ImageList, Vcl.ImgList,
+  Vcl.Imaging.jpeg, Vcl.Imaging.pngimage;
 
 type
   TfrmClientes = class(TfrmBaseCadastro)

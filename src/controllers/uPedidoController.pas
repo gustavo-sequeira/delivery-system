@@ -35,11 +35,10 @@ begin
   FDQuery := TFDQuery.Create(nil);
   try
     FDQuery.Connection := FConnection;
-    FDQuery.SQL.Text := 'EXECUTE PROCEDURE SP_ALTERAR_PEDIDO(:P_ID, :P_STATUS, :P_DATA_ENTREGA, :P_ID_ENTREGADOR)';
+    FDQuery.SQL.Text := 'EXECUTE PROCEDURE SP_ALTERAR_PEDIDO(:P_ID, :P_STATUS, :P_ID_ENTREGADOR)';
 
     FDQuery.ParamByName('P_ID').AsInteger := APedido.IDPedido;
     FDQuery.ParamByName('P_STATUS').AsString := APedido.Status;
-    FDQuery.ParamByName('P_DATA_ENTREGA').AsDate := APedido.DataEntrega;
     FDQuery.ParamByName('P_ID_ENTREGADOR').AsInteger := APedido.IDEntregador;
 
     FDQuery.ExecSQL;

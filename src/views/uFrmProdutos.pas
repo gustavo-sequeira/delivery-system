@@ -11,7 +11,8 @@ uses
   FireDAC.Comp.Client, FireDAC.Comp.UI, Vcl.Grids, Vcl.DBGrids, Vcl.ExtCtrls,
   Vcl.StdCtrls, FireDAC.Stan.StorageBin, FireDAC.Stan.Def, FireDAC.Stan.Pool,
   FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.FB, FireDAC.Phys.FBDef,
-  FireDAC.DApt, FireDAC.Phys.IBBase, System.ImageList, Vcl.ImgList;
+  FireDAC.DApt, FireDAC.Phys.IBBase, System.ImageList, Vcl.ImgList,
+  Vcl.Imaging.jpeg, Vcl.Imaging.pngimage;
 
 type
   TfrmProdutos = class(TfrmBaseCadastro)

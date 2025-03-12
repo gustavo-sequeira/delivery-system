@@ -5,23 +5,19 @@ inherited frmPedidos: TfrmPedidos
   inherited pnlMenu: TPanel
     StyleElements = [seFont, seClient, seBorder]
     inherited Label1: TLabel
-      Width = 177
       StyleElements = [seFont, seClient, seBorder]
+      ExplicitTop = 568
     end
     inherited lblMenuPesquisa: TLabel
-      Width = 177
       StyleElements = [seFont, seClient, seBorder]
     end
     inherited lblMenuNovo: TLabel
-      Width = 177
       StyleElements = [seFont, seClient, seBorder]
     end
     inherited lblMenuSalvar: TLabel
-      Width = 177
       StyleElements = [seFont, seClient, seBorder]
     end
     inherited lblMenuCancelar: TLabel
-      Width = 177
       StyleElements = [seFont, seClient, seBorder]
     end
     inherited Panel2: TPanel
@@ -34,41 +30,9 @@ inherited frmPedidos: TfrmPedidos
       StyleElements = [seFont, seClient, seBorder]
       inherited Label2: TLabel
         Width = 149
-        Height = 66
         Caption = 'Pedidos'
         StyleElements = [seFont, seClient, seBorder]
         ExplicitWidth = 149
-      end
-      inherited Panel3: TPanel
-        Left = 155
-        Width = 763
-        StyleElements = [seFont, seClient, seBorder]
-        ExplicitLeft = 155
-        ExplicitWidth = 763
-        inherited Shape1: TShape
-          Width = 757
-          ExplicitWidth = 757
-        end
-        inherited Shape2: TShape
-          Width = 740
-          ExplicitWidth = 740
-        end
-        inherited Shape3: TShape
-          Width = 720
-          ExplicitWidth = 720
-        end
-        inherited Shape4: TShape
-          Width = 700
-          ExplicitWidth = 700
-        end
-        inherited Shape5: TShape
-          Width = 680
-          ExplicitWidth = 680
-        end
-        inherited Shape6: TShape
-          Width = 660
-          ExplicitWidth = 660
-        end
       end
     end
     inherited pnlManutencao: TPanel
@@ -356,17 +320,11 @@ inherited frmPedidos: TfrmPedidos
       end
     end
     inherited pnlPesquisa: TPanel
-      Left = 743
-      Top = 122
       StyleElements = [seFont, seClient, seBorder]
-      ExplicitLeft = 743
-      ExplicitTop = 122
+      ExplicitLeft = 0
+      ExplicitTop = 72
       inherited DBGrid: TDBGrid
-        Font.Height = -16
         Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgTitleHotTrack]
-        ParentFont = False
-        TitleFont.Height = -16
-        TitleFont.Style = [fsBold]
         OnCellClick = DBGridCellClick
         Columns = <
           item

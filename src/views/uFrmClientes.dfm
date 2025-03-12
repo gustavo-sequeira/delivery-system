@@ -1,22 +1,28 @@
 inherited frmClientes: TfrmClientes
   Caption = 'frmClientes'
   StyleElements = [seFont, seClient, seBorder]
+  ExplicitTop = -171
   TextHeight = 15
   inherited pnlMenu: TPanel
     StyleElements = [seFont, seClient, seBorder]
     inherited Label1: TLabel
+      Width = 177
       StyleElements = [seFont, seClient, seBorder]
     end
     inherited lblMenuPesquisa: TLabel
+      Width = 177
       StyleElements = [seFont, seClient, seBorder]
     end
     inherited lblMenuNovo: TLabel
+      Width = 177
       StyleElements = [seFont, seClient, seBorder]
     end
     inherited lblMenuSalvar: TLabel
+      Width = 177
       StyleElements = [seFont, seClient, seBorder]
     end
     inherited lblMenuCancelar: TLabel
+      Width = 177
       StyleElements = [seFont, seClient, seBorder]
     end
     inherited Panel2: TPanel
@@ -25,47 +31,103 @@ inherited frmClientes: TfrmClientes
   end
   inherited pnlCentral: TPanel
     StyleElements = [seFont, seClient, seBorder]
-    inherited Panel1: TPanel
+    inherited pnlPesquisa: TPanel [0]
+      StyleElements = [seFont, seClient, seBorder]
+      inherited DBGrid: TDBGrid
+        Width = 912
+        Height = 544
+        Align = alClient
+        OnCellClick = DBGridCellClick
+        Columns = <
+          item
+            Expanded = False
+            FieldName = 'ID_CLIENTE'
+            Title.Caption = 'C'#243'digo'
+            Width = 70
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'NOME'
+            Title.Caption = 'Nome'
+            Width = 260
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'CPF'
+            Title.Caption = 'Cpf'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'TELEFONE'
+            Title.Caption = 'Telefone'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'EMAIL'
+            Title.Caption = 'Email'
+            Width = 300
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'DATA_CADASTRO'
+            Visible = False
+          end
+          item
+            Expanded = False
+            FieldName = 'CEP'
+            Visible = False
+          end
+          item
+            Expanded = False
+            FieldName = 'LOGRADOURO'
+            Visible = False
+          end
+          item
+            Expanded = False
+            FieldName = 'LOGRADOURO_NUMERO'
+            Visible = False
+          end
+          item
+            Expanded = False
+            FieldName = 'CIDADE'
+            Visible = False
+          end
+          item
+            Expanded = False
+            FieldName = 'BAIRRO'
+            Visible = False
+          end
+          item
+            Expanded = False
+            Width = 40
+            Visible = True
+          end
+          item
+            Expanded = False
+            Width = 40
+            Visible = True
+          end>
+      end
+    end
+    inherited Panel1: TPanel [1]
       StyleElements = [seFont, seClient, seBorder]
       inherited Label2: TLabel
         Width = 149
+        Height = 66
         Caption = 'Clientes'
         StyleElements = [seFont, seClient, seBorder]
         ExplicitWidth = 149
       end
-      inherited Panel3: TPanel
+      inherited Image2: TImage
         Left = 155
-        Width = 763
-        StyleElements = [seFont, seClient, seBorder]
-        ExplicitLeft = 155
-        ExplicitWidth = 763
-        inherited Shape1: TShape
-          Width = 757
-          ExplicitWidth = 512
-        end
-        inherited Shape2: TShape
-          Width = 740
-          ExplicitWidth = 495
-        end
-        inherited Shape3: TShape
-          Width = 720
-          ExplicitWidth = 475
-        end
-        inherited Shape4: TShape
-          Width = 700
-          ExplicitWidth = 455
-        end
-        inherited Shape5: TShape
-          Width = 680
-          ExplicitWidth = 435
-        end
-        inherited Shape6: TShape
-          Width = 660
-          ExplicitWidth = 415
-        end
       end
     end
-    inherited pnlManutencao: TPanel
+    inherited pnlManutencao: TPanel [2]
       Top = 75
       Width = 669
       Align = alNone
@@ -327,91 +389,6 @@ inherited frmClientes: TfrmClientes
         Font.Style = []
         ParentFont = False
         TabOrder = 8
-      end
-    end
-    inherited pnlPesquisa: TPanel
-      StyleElements = [seFont, seClient, seBorder]
-      ExplicitLeft = 0
-      ExplicitTop = 72
-      inherited DBGrid: TDBGrid
-        Width = 912
-        Height = 544
-        Align = alClient
-        OnCellClick = DBGridCellClick
-        Columns = <
-          item
-            Expanded = False
-            FieldName = 'ID_CLIENTE'
-            Title.Caption = 'C'#243'digo'
-            Width = 70
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'NOME'
-            Title.Caption = 'Nome'
-            Width = 260
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'CPF'
-            Title.Caption = 'Cpf'
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'TELEFONE'
-            Title.Caption = 'Telefone'
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'EMAIL'
-            Title.Caption = 'Email'
-            Width = 300
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'DATA_CADASTRO'
-            Visible = False
-          end
-          item
-            Expanded = False
-            FieldName = 'CEP'
-            Visible = False
-          end
-          item
-            Expanded = False
-            FieldName = 'LOGRADOURO'
-            Visible = False
-          end
-          item
-            Expanded = False
-            FieldName = 'LOGRADOURO_NUMERO'
-            Visible = False
-          end
-          item
-            Expanded = False
-            FieldName = 'CIDADE'
-            Visible = False
-          end
-          item
-            Expanded = False
-            FieldName = 'BAIRRO'
-            Visible = False
-          end
-          item
-            Expanded = False
-            Width = 40
-            Visible = True
-          end
-          item
-            Expanded = False
-            Width = 40
-            Visible = True
-          end>
       end
     end
   end

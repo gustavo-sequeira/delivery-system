@@ -33,37 +33,6 @@ inherited frmProdutos: TfrmProdutos
         StyleElements = [seFont, seClient, seBorder]
         ExplicitWidth = 172
       end
-      inherited Panel3: TPanel
-        Left = 178
-        Width = 740
-        StyleElements = [seFont, seClient, seBorder]
-        ExplicitLeft = 178
-        ExplicitWidth = 740
-        inherited Shape1: TShape
-          Width = 734
-          ExplicitWidth = 734
-        end
-        inherited Shape2: TShape
-          Width = 717
-          ExplicitWidth = 717
-        end
-        inherited Shape3: TShape
-          Width = 697
-          ExplicitWidth = 697
-        end
-        inherited Shape4: TShape
-          Width = 677
-          ExplicitWidth = 677
-        end
-        inherited Shape5: TShape
-          Width = 657
-          ExplicitWidth = 657
-        end
-        inherited Shape6: TShape
-          Width = 637
-          ExplicitWidth = 637
-        end
-      end
     end
     inherited pnlManutencao: TPanel
       StyleElements = [seFont, seClient, seBorder]

@@ -1,29 +1,32 @@
 inherited frmEntregas: TfrmEntregas
   Caption = 'frmEntregas'
   StyleElements = [seFont, seClient, seBorder]
-  ExplicitLeft = -192
-  ExplicitTop = -171
   TextHeight = 15
   inherited pnlMenu: TPanel
     StyleElements = [seFont, seClient, seBorder]
     inherited Label1: TLabel
+      Width = 177
       StyleElements = [seFont, seClient, seBorder]
     end
     inherited lblMenuPesquisa: TLabel
+      Width = 177
       Caption = 'ACOMPANHAR'
       StyleElements = [seFont, seClient, seBorder]
       ExplicitWidth = 143
     end
     inherited lblMenuNovo: TLabel
+      Width = 177
       Caption = 'ASSOCIAR'
       StyleElements = [seFont, seClient, seBorder]
       ExplicitWidth = 96
     end
     inherited lblMenuSalvar: TLabel
+      Width = 177
       Visible = False
       StyleElements = [seFont, seClient, seBorder]
     end
     inherited lblMenuCancelar: TLabel
+      Width = 177
       StyleElements = [seFont, seClient, seBorder]
     end
     inherited Panel2: TPanel
@@ -32,47 +35,23 @@ inherited frmEntregas: TfrmEntregas
   end
   inherited pnlCentral: TPanel
     StyleElements = [seFont, seClient, seBorder]
-    inherited Panel1: TPanel
+    inherited pnlPesquisa: TPanel [0]
+      StyleElements = [seFont, seClient, seBorder]
+    end
+    inherited Panel1: TPanel [1]
       StyleElements = [seFont, seClient, seBorder]
       inherited Label2: TLabel
         Width = 164
+        Height = 66
         Caption = 'Entregas'
         StyleElements = [seFont, seClient, seBorder]
         ExplicitWidth = 164
       end
-      inherited Panel3: TPanel
+      inherited Image2: TImage
         Left = 170
-        Width = 748
-        StyleElements = [seFont, seClient, seBorder]
-        ExplicitLeft = 170
-        ExplicitWidth = 748
-        inherited Shape1: TShape
-          Width = 742
-          ExplicitWidth = 742
-        end
-        inherited Shape2: TShape
-          Width = 725
-          ExplicitWidth = 725
-        end
-        inherited Shape3: TShape
-          Width = 705
-          ExplicitWidth = 705
-        end
-        inherited Shape4: TShape
-          Width = 685
-          ExplicitWidth = 685
-        end
-        inherited Shape5: TShape
-          Width = 665
-          ExplicitWidth = 665
-        end
-        inherited Shape6: TShape
-          Width = 645
-          ExplicitWidth = 645
-        end
       end
     end
-    inherited pnlManutencao: TPanel
+    inherited pnlManutencao: TPanel [2]
       StyleElements = [seFont, seClient, seBorder]
       object Label4: TLabel [0]
         Left = 0
@@ -103,7 +82,6 @@ inherited frmEntregas: TfrmEntregas
         Font.Name = 'Segoe UI'
         Font.Style = [fsBold]
         ParentFont = False
-        ExplicitTop = 154
         ExplicitWidth = 137
       end
       inherited Panel5: TPanel
@@ -144,7 +122,6 @@ inherited frmEntregas: TfrmEntregas
           item
             Expanded = False
             FieldName = 'LEVEL'
-            Width = -1
             Visible = False
           end
           item
@@ -165,8 +142,8 @@ inherited frmEntregas: TfrmEntregas
             Expanded = False
             FieldName = 'DATA_ENTREGA'
             Title.Caption = 'Data Entrega'
-            Width = 110
-            Visible = True
+            Width = -1
+            Visible = False
           end
           item
             Expanded = False
@@ -188,17 +165,15 @@ inherited frmEntregas: TfrmEntregas
         Left = 3
         Top = 382
         Width = 912
-        Height = 149
+        Height = 165
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 3
-        ExplicitTop = 358
-        ExplicitHeight = 171
         object Shape7: TShape
           Left = 598
           Top = 0
           Width = 1
-          Height = 149
+          Height = 165
           Align = alRight
           ExplicitLeft = 656
           ExplicitHeight = 132
@@ -208,12 +183,10 @@ inherited frmEntregas: TfrmEntregas
           Left = 3
           Top = 3
           Width = 592
-          Height = 143
+          Height = 159
           Align = alClient
           BevelOuter = bvNone
           TabOrder = 0
-          ExplicitWidth = 598
-          ExplicitHeight = 132
           object Label3: TLabel
             AlignWithMargins = True
             Left = 3
@@ -231,65 +204,62 @@ inherited frmEntregas: TfrmEntregas
             ParentFont = False
             ExplicitWidth = 158
           end
-          object Label7: TLabel
+          object lblEndereco5: TLabel
             AlignWithMargins = True
             Left = 3
             Top = 138
             Width = 586
             Height = 21
             Align = alTop
-            Caption = '1.'
+            Caption = '5.'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
             Font.Height = -16
             Font.Name = 'Segoe UI'
             Font.Style = []
             ParentFont = False
-            ExplicitTop = 120
             ExplicitWidth = 12
           end
-          object Label8: TLabel
+          object lblEndereco4: TLabel
             AlignWithMargins = True
             Left = 3
             Top = 111
             Width = 586
             Height = 21
             Align = alTop
-            Caption = '1.'
+            Caption = '4.'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
             Font.Height = -16
             Font.Name = 'Segoe UI'
             Font.Style = []
             ParentFont = False
-            ExplicitTop = 99
             ExplicitWidth = 12
           end
-          object Label9: TLabel
+          object lblEndereco3: TLabel
             AlignWithMargins = True
             Left = 3
             Top = 84
             Width = 586
             Height = 21
             Align = alTop
-            Caption = '1.'
+            Caption = '3.'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
             Font.Height = -16
             Font.Name = 'Segoe UI'
             Font.Style = []
             ParentFont = False
-            ExplicitTop = 78
             ExplicitWidth = 12
           end
-          object Label10: TLabel
+          object lblEndereco2: TLabel
             AlignWithMargins = True
             Left = 3
             Top = 57
             Width = 586
             Height = 21
             Align = alTop
-            Caption = '1.'
+            Caption = '2.'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
             Font.Height = -16
@@ -298,7 +268,7 @@ inherited frmEntregas: TfrmEntregas
             ParentFont = False
             ExplicitWidth = 12
           end
-          object Label11: TLabel
+          object lblEndereco1: TLabel
             AlignWithMargins = True
             Left = 3
             Top = 30
@@ -320,12 +290,10 @@ inherited frmEntregas: TfrmEntregas
           Left = 602
           Top = 3
           Width = 307
-          Height = 143
+          Height = 159
           Align = alRight
           BevelOuter = bvNone
           TabOrder = 1
-          ExplicitLeft = 608
-          ExplicitHeight = 132
           object Label12: TLabel
             AlignWithMargins = True
             Left = 3
@@ -499,7 +467,6 @@ inherited frmEntregas: TfrmEntregas
         BevelOuter = bvNone
         Caption = 'mapa'
         TabOrder = 2
-        ExplicitTop = 317
         object Label5: TLabel
           AlignWithMargins = True
           Left = 3
@@ -538,13 +505,14 @@ inherited frmEntregas: TfrmEntregas
           ParentFont = False
           Transparent = False
           Layout = tlCenter
+          OnClick = lblMenuPedidosClick
           OnMouseEnter = lblMenuPedidosMouseEnter
           OnMouseLeave = lblMenuPedidosMouseLeave
           ExplicitLeft = 656
           ExplicitTop = 3
           ExplicitHeight = 29
         end
-        object ComboBox1: TComboBox
+        object cbxEntregador: TComboBox
           AlignWithMargins = True
           Left = 122
           Top = 3
@@ -552,6 +520,8 @@ inherited frmEntregas: TfrmEntregas
           Height = 29
           Margins.Left = 10
           Align = alLeft
+          Style = csDropDownList
+          CharCase = ecUpperCase
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -16
@@ -559,7 +529,6 @@ inherited frmEntregas: TfrmEntregas
           Font.Style = []
           ParentFont = False
           TabOrder = 0
-          Text = 'ComboBox1'
           Items.Strings = (
             '1 - RELAMPAGO MCQUEEN'
             '2 - PENELOPE CHARMOSA'
@@ -567,32 +536,27 @@ inherited frmEntregas: TfrmEntregas
         end
       end
     end
-    inherited pnlPesquisa: TPanel
-      Left = 4890
-      StyleElements = [seFont, seClient, seBorder]
-      ExplicitLeft = 4890
-    end
   end
   inherited FDGUIxWaitCursor: TFDGUIxWaitCursor
-    Left = 64
-    Top = 16
+    Left = 96
+    Top = 216
   end
   inherited DataSource: TDataSource
-    Left = 104
-    Top = 16
+    Left = 128
+    Top = 216
   end
   inherited FDMemTable: TFDMemTable
-    Left = 136
-    Top = 16
+    Left = 32
+    Top = 264
   end
   inherited ImageList1: TImageList
-    Left = 55
-    Top = 64
+    Left = 63
+    Top = 216
   end
   object dsPedidos: TDataSource
     DataSet = memPedidos
-    Left = 528
-    Top = 184
+    Left = 32
+    Top = 216
   end
   object memPedidos: TFDMemTable
     Active = True
@@ -642,8 +606,8 @@ inherited frmEntregas: TfrmEntregas
     UpdateOptions.CheckRequired = False
     UpdateOptions.AutoCommitUpdates = True
     StoreDefs = True
-    Left = 624
-    Top = 152
+    Left = 128
+    Top = 264
     Content = {
       4144425310000000BF020000FF00010001FF02FF030400140000006D0065006D
       00500065006400690064006F0073000500140000006D0065006D005000650064
@@ -712,72 +676,10 @@ inherited frmEntregas: TfrmEntregas
       Size = 522
     end
   end
-  object FDConnection1: TFDConnection
-    Params.Strings = (
-      
-        'Database=C:\projetos\repositorios\portfolio\delivery-system\data' +
-        'base\DELIVERY.FDB'
-      'User_Name=sysdba'
-      'Password=masterkey'
-      'DriverID=FB')
-    Connected = True
-    LoginPrompt = False
-    Left = 560
-    Top = 296
-  end
-  object p: TFDQuery
-    Active = True
-    Connection = FDConnection1
-    SQL.Strings = (
-      'WITH VPROD AS'
-      '  (SELECT MIN(LEVEL) LEVEL,'
-      '                     ID_PEDIDO'
-      '   FROM'
-      '     (SELECT P.*,'
-      '             1 AS LEVEL'
-      '      FROM PRODUTOS P'
-      '      WHERE P.CATEGORIA = '#39'MEDICAMENTOS'#39
-      '        AND P.SUBCATEGORIA = '#39'SENSIVEIS'#39
-      '      UNION ALL SELECT P.*,'
-      '                       2 AS LEVEL'
-      '      FROM PRODUTOS P'
-      '      WHERE P.CATEGORIA = '#39'MEDICAMENTOS'#39
-      '        AND P.SUBCATEGORIA = '#39'CONTROLADOS'#39
-      '      UNION ALL SELECT P.*,'
-      '                       3 AS LEVEL'
-      '      FROM PRODUTOS P'
-      '      WHERE P.CATEGORIA = '#39'MEDICAMENTOS'#39
-      '        AND P.SUBCATEGORIA = '#39'PERECIVEIS'#39
-      '      UNION ALL SELECT P.*,'
-      '                       4 AS LEVEL'
-      '      FROM PRODUTOS P'
-      '      WHERE P.SUBCATEGORIA NOT IN ('#39'SENSIVEIS'#39','
-      '                                   '#39'CONTROLADOS'#39','
-      '                                   '#39'PERECIVEIS'#39')) PROD'
-      '   JOIN ITENS_PEDIDO IP ON IP.ID_PRODUTO = PROD.ID_PRODUTO'
-      '   GROUP BY ID_PEDIDO)'
-      'SELECT LEVEL,'
-      '       P.ID_PEDIDO,'
-      '       P.STATUS,'
-      '       P.DATA_ENTREGA,'
-      '       C.NOME,'
-      
-        '       C.LOGRADOURO || '#39', '#39'||C.LOGRADOURO_NUMERO || '#39' '#39'||C.BAIRR' +
-        'O || '#39' '#39'||C.CIDADE ||'#39' - '#39'||C.CEP AS ENDERECO,'
-      '       FALSE SELECIONADO'
-      'FROM VPROD'
-      'JOIN PEDIDOS P ON VPROD.ID_PEDIDO = P.ID_PEDIDO'
-      'JOIN CLIENTES C ON P.ID_CLIENTE = C.ID_CLIENTE'
-      'ORDER BY LEVEL,'
-      '         DATA_ENTREGA,'
-      '         P.ID_PEDIDO')
-    Left = 632
-    Top = 280
-  end
   object dsItens: TDataSource
     DataSet = memItens
-    Left = 328
-    Top = 272
+    Left = 64
+    Top = 264
   end
   object memItens: TFDMemTable
     Active = True
@@ -849,8 +751,8 @@ inherited frmEntregas: TfrmEntregas
     UpdateOptions.CheckRequired = False
     UpdateOptions.AutoCommitUpdates = True
     StoreDefs = True
-    Left = 400
-    Top = 296
+    Left = 96
+    Top = 264
     Content = {
       414442531000000040040000FF00010001FF02FF030400100000006D0065006D
       004900740065006E0073000500100000006D0065006D004900740065006E0073

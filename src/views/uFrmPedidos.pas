@@ -12,7 +12,8 @@ uses
   Vcl.StdCtrls, Vcl.WinXPickers, Vcl.ComCtrls, FireDAC.Stan.Def,
   FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.FB,
   FireDAC.Phys.FBDef, FireDAC.DApt, FireDAC.Stan.StorageBin, uPedido,
-  System.UITypes, System.ImageList, Vcl.ImgList;
+  System.UITypes, System.ImageList, Vcl.ImgList, Vcl.Imaging.jpeg,
+  Vcl.Imaging.pngimage;
 
 type
   TfrmPedidos = class(TfrmBaseCadastro)

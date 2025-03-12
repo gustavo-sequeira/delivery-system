@@ -5,13 +5,13 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
   System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
-  Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.Imaging.pngimage;
+  Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.Imaging.pngimage, Vcl.Imaging.jpeg,
+  uFrmClientes, uFrmProdutos, uFrmPedidos, uFrmEntregas, uFrmEntregadores;
 
 type
   TfrmPrincipal = class(TForm)
     Panel1: TPanel;
     Panel2: TPanel;
-    Panel3: TPanel;
     Panel4: TPanel;
     lblMenuClientes: TLabel;
     lblMenuProdutos: TLabel;
@@ -19,6 +19,7 @@ type
     lblMenuSairSistema: TLabel;
     lblMenuEntregas: TLabel;
     lblMenuEntregadores: TLabel;
+    Image1: TImage;
     procedure lblMenuClientesMouseEnter(Sender: TObject);
     procedure lblMenuClientesMouseLeave(Sender: TObject);
     procedure lblMenuClientesClick(Sender: TObject);
@@ -38,8 +39,17 @@ type
     procedure lblMenuEntregadoresMouseEnter(Sender: TObject);
     procedure lblMenuEntregadoresMouseLeave(Sender: TObject);
   private
+    frmClientes: TFrmClientes;
+    frmProdutos: TFrmProdutos;
+    frmEntregadores: TFrmEntregadores;
+    frmPedidos: TFrmPedidos;
+    frmEntregas: TfrmEntregas;
+
+    function IsFormCreated(AFormClass: TFormClass): Boolean;
+
     { Private declarations }
   public
+    destructor Destroy; override;
     { Public declarations }
   end;
 
@@ -51,20 +61,14 @@ implementation
 {$R *.dfm}
 
 uses
-  uConexaoFirebird, uFrmBaseCadastro, uFrmClientes, uFrmProdutos, uFrmPedidos, uFrmEntregas,
-  uFrmEntregadores;
+  uConexaoFirebird, uFrmBaseCadastro;
 
 procedure TfrmPrincipal.lblMenuEntregasClick(Sender: TObject);
-var
-  frmEntregas: TfrmEntregas;
 begin
-  frmEntregas := TfrmEntregas.Create(Self);
-  try
-    frmEntregas.Parent := Panel2;
-    frmEntregas.Show;
-  finally
-   // frmEntregas.Free;
-  end;
+  if not (IsFormCreated(TfrmEntregas)) then
+    frmEntregas := TfrmEntregas.Create(Self);
+  frmEntregas.Parent := Panel2;
+  frmEntregas.Show;
 end;
 
 procedure TfrmPrincipal.lblMenuEntregasMouseEnter(Sender: TObject);
@@ -79,17 +83,13 @@ begin
 end;
 
 procedure TfrmPrincipal.lblMenuEntregadoresClick(Sender: TObject);
-var
-  frmEntregadores: TFrmEntregadores;
 begin
-  frmEntregadores := TFrmEntregadores.Create(Self);
-  try
-    frmEntregadores.Parent := Panel2;
-    frmEntregadores.Show;
-  finally
-   // frmClientes.Free;
-  end;
+  if not (IsFormCreated(TFrmEntregadores)) then
+    frmEntregadores := TFrmEntregadores.Create(Self);
+  frmEntregadores.Parent := Panel2;
+  frmEntregadores.Show;
 end;
+
 procedure TfrmPrincipal.lblMenuEntregadoresMouseEnter(Sender: TObject);
 begin
   if lblMenuEntregadores.Enabled then
@@ -101,18 +101,12 @@ begin
   lblMenuEntregadores.Color := clWhite;
 end;
 
-
 procedure TfrmPrincipal.lblMenuClientesClick(Sender: TObject);
-var
-  frmClientes: TFrmClientes;
 begin
-  frmClientes := TFrmClientes.Create(Self);
-  try
-    frmClientes.Parent := Panel2;
-    frmClientes.Show;
-  finally
-   // frmClientes.Free;
-  end;
+  if not (IsFormCreated(TfrmClientes)) then
+    frmClientes := TFrmClientes.Create(Self);
+  frmClientes.Parent := Panel2;
+  frmClientes.Show;
 end;
 
 procedure TfrmPrincipal.lblMenuClientesMouseEnter(Sender: TObject);
@@ -127,16 +121,11 @@ begin
 end;
 
 procedure TfrmPrincipal.lblMenuPedidosClick(Sender: TObject);
-var
-  frmPedidos: TFrmPedidos;
 begin
-  frmPedidos := TFrmPedidos.Create(Self);
-  try
-    frmPedidos.Parent := Panel2;
-    frmPedidos.Show;
-  finally
-   // frmProdutos.Free;
-  end;
+  if not (IsFormCreated(TFrmPedidos)) then
+    frmPedidos := TFrmPedidos.Create(Self);
+  frmPedidos.Parent := Panel2;
+  frmPedidos.Show;
 end;
 
 procedure TfrmPrincipal.lblMenuPedidosMouseEnter(Sender: TObject);
@@ -151,16 +140,11 @@ begin
 end;
 
 procedure TfrmPrincipal.lblMenuProdutosClick(Sender: TObject);
-var
-  frmProdutos: TFrmProdutos;
 begin
-  frmProdutos := TFrmProdutos.Create(Self);
-  try
-    frmProdutos.Parent := Panel2;
-    frmProdutos.Show;
-  finally
-   // frmProdutos.Free;
-  end;
+  if not (IsFormCreated(TFrmProdutos)) then
+    frmProdutos := TFrmProdutos.Create(Self);
+  frmProdutos.Parent := Panel2;
+  frmProdutos.Show;
 end;
 
 procedure TfrmPrincipal.lblMenuProdutosMouseEnter(Sender: TObject);
@@ -188,6 +172,37 @@ end;
 procedure TfrmPrincipal.lblMenuSairSistemaMouseLeave(Sender: TObject);
 begin
   lblMenuSairSistema.Color := clWhite;
+end;
+
+destructor TfrmPrincipal.Destroy;
+begin
+  if IsFormCreated(TFrmClientes) then
+    frmClientes.Free;
+  if IsFormCreated(TFrmProdutos) then
+    frmProdutos.Free;
+  if IsFormCreated(TFrmEntregadores) then
+    frmEntregadores.Free;
+  if IsFormCreated(TFrmPedidos) then
+    frmPedidos.Free;
+  if IsFormCreated(TfrmEntregas) then
+    frmEntregas.Free;
+
+  inherited;
+end;
+
+function TfrmPrincipal.IsFormCreated(AFormClass: TFormClass): Boolean;
+var
+  I: Integer;
+begin
+  Result := False;
+  for I := 0 to Screen.FormCount - 1 do
+  begin
+    if Screen.Forms[I] is AFormClass then
+    begin
+      Result := True;
+      Exit;
+    end;
+  end;
 end;
 
 end.

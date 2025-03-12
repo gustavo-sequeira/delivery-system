@@ -11,7 +11,7 @@ uses
   FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
   FireDAC.Comp.DataSet, FireDAC.Comp.Client, FireDAC.Phys.FBDef, FireDAC.Phys,
   FireDAC.Phys.IBBase, FireDAC.Phys.FB,Vcl.WinXPickers, System.ImageList,
-  Vcl.ImgList;
+  Vcl.ImgList, Vcl.Imaging.pngimage, Vcl.Imaging.jpeg;
 
 type
   TTransactionState = (tsInsert, tsEdit, tsSearch);
@@ -25,13 +25,6 @@ type
     lblMenuPesquisa: TLabel;
     lblMenuNovo: TLabel;
     Label2: TLabel;
-    Panel3: TPanel;
-    Shape1: TShape;
-    Shape2: TShape;
-    Shape3: TShape;
-    Shape4: TShape;
-    Shape5: TShape;
-    Shape6: TShape;
     pnlManutencao: TPanel;
     pnlPesquisa: TPanel;
     DBGrid: TDBGrid;
@@ -43,6 +36,8 @@ type
     Panel5: TPanel;
     Label16: TLabel;
     ImageList1: TImageList;
+    Image1: TImage;
+    Image2: TImage;
     procedure FormResize(Sender: TObject);
     procedure Label1Click(Sender: TObject);
     procedure lblMenuPesquisaClick(Sender: TObject);
