@@ -1,32 +1,28 @@
 inherited frmEntregas: TfrmEntregas
   Caption = 'frmEntregas'
   StyleElements = [seFont, seClient, seBorder]
+  ExplicitTop = 2
   TextHeight = 15
   inherited pnlMenu: TPanel
     StyleElements = [seFont, seClient, seBorder]
     inherited Label1: TLabel
-      Width = 177
       StyleElements = [seFont, seClient, seBorder]
     end
     inherited lblMenuPesquisa: TLabel
-      Width = 177
       Caption = 'ACOMPANHAR'
       StyleElements = [seFont, seClient, seBorder]
       ExplicitWidth = 143
     end
     inherited lblMenuNovo: TLabel
-      Width = 177
       Caption = 'ASSOCIAR'
       StyleElements = [seFont, seClient, seBorder]
       ExplicitWidth = 96
     end
     inherited lblMenuSalvar: TLabel
-      Width = 177
       Visible = False
       StyleElements = [seFont, seClient, seBorder]
     end
     inherited lblMenuCancelar: TLabel
-      Width = 177
       Visible = False
       StyleElements = [seFont, seClient, seBorder]
     end
@@ -40,7 +36,6 @@ inherited frmEntregas: TfrmEntregas
       StyleElements = [seFont, seClient, seBorder]
       inherited Label2: TLabel
         Width = 164
-        Height = 66
         Caption = 'Entregas'
         StyleElements = [seFont, seClient, seBorder]
         ExplicitWidth = 164
@@ -50,10 +45,67 @@ inherited frmEntregas: TfrmEntregas
         ExplicitLeft = 170
       end
     end
-    inherited pnlManutencao: TPanel [1]
-      TabOrder = 2
+    inherited pnlPesquisa: TPanel
       StyleElements = [seFont, seClient, seBorder]
-      ExplicitTop = 75
+      inherited DBGrid: TDBGrid
+        Width = 912
+        Height = 544
+        Align = alClient
+        OnCellClick = DBGridCellClick
+        Columns = <
+          item
+            Expanded = False
+            FieldName = 'LEVEL'
+            Visible = False
+          end
+          item
+            Alignment = taCenter
+            Expanded = False
+            FieldName = 'ID_PEDIDO'
+            Title.Alignment = taCenter
+            Title.Caption = 'Pedido'
+            Width = 60
+            Visible = True
+          end
+          item
+            Alignment = taCenter
+            Expanded = False
+            FieldName = 'STATUS'
+            Title.Alignment = taCenter
+            Title.Caption = 'Status'
+            Width = 100
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'ENTREGADOR'
+            Title.Caption = 'Entregador'
+            Width = 200
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'CLIENTE'
+            Title.Caption = 'Cliente'
+            Width = 200
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'ENDERECO'
+            Title.Caption = 'Endereco'
+            Width = 430
+            Visible = True
+          end
+          item
+            Expanded = False
+            Width = 40
+            Visible = True
+          end>
+      end
+    end
+    inherited pnlManutencao: TPanel
+      StyleElements = [seFont, seClient, seBorder]
       object Label4: TLabel [0]
         Left = 0
         Top = 0
@@ -534,66 +586,6 @@ inherited frmEntregas: TfrmEntregas
             '2 - PENELOPE CHARMOSA'
             '3 - MARCHA LENTA')
         end
-      end
-    end
-    inherited pnlPesquisa: TPanel [2]
-      TabOrder = 1
-      StyleElements = [seFont, seClient, seBorder]
-      inherited DBGrid: TDBGrid
-        Width = 912
-        Height = 544
-        Align = alClient
-        OnCellClick = DBGridCellClick
-        Columns = <
-          item
-            Expanded = False
-            FieldName = 'LEVEL'
-            Visible = False
-          end
-          item
-            Alignment = taCenter
-            Expanded = False
-            FieldName = 'ID_PEDIDO'
-            Title.Alignment = taCenter
-            Title.Caption = 'Pedido'
-            Width = 60
-            Visible = True
-          end
-          item
-            Alignment = taCenter
-            Expanded = False
-            FieldName = 'STATUS'
-            Title.Alignment = taCenter
-            Title.Caption = 'Status'
-            Width = 100
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'ENTREGADOR'
-            Title.Caption = 'Entregador'
-            Width = 200
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'CLIENTE'
-            Title.Caption = 'Cliente'
-            Width = 200
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'ENDERECO'
-            Title.Caption = 'Endereco'
-            Width = 430
-            Visible = True
-          end
-          item
-            Expanded = False
-            Width = 40
-            Visible = True
-          end>
       end
     end
   end

@@ -1,4 +1,3 @@
-src/Win32/
 src/models/__recovery/
 src/views/__recovery/
 src/delivery.dproj.local

@@ -182,7 +182,7 @@ end;
 
 procedure TfrmBaseCadastro.Label1Click(Sender: TObject);
 begin
-  Self.Close;
+  Self.Free;
 end;
 
 procedure TfrmBaseCadastro.Label1MouseEnter(Sender: TObject);
