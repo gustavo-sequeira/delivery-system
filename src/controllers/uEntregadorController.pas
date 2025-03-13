@@ -142,7 +142,7 @@ begin
   FDQuery := TFDQuery.Create(nil);
   FDQuery.Connection := FConnection;
   FDQuery.SQL.Text :=
-      '   SELECT E.NOME                                           ' +
+      '   SELECT E.NOME AS NOME                                   ' +
       '     FROM ENTREGADORES e                                   ' +
       'WHERE NOT EXISTS (  SELECT 1                               ' +
       '                    FROM PEDIDOS p                         ' +

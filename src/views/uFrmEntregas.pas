@@ -12,7 +12,7 @@ uses
   Vcl.Grids, Vcl.DBGrids, Vcl.ExtCtrls, Vcl.StdCtrls, FireDAC.Stan.StorageBin,
   FireDAC.Stan.Def, FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys,
   FireDAC.Phys.FB, FireDAC.Phys.FBDef, FireDAC.DApt, Vcl.Imaging.jpeg,
-  Vcl.Imaging.pngimage;
+  Vcl.Imaging.pngimage, System.UITypes;
 
 type
   TfrmEntregas = class(TfrmBaseCadastro)
@@ -58,6 +58,12 @@ type
     Label14: TLabel;
     Label15: TLabel;
     Label17: TLabel;
+    FDMemTableLEVEL: TIntegerField;
+    FDMemTableID_PEDIDO: TIntegerField;
+    FDMemTableSTATUS: TStringField;
+    FDMemTableENTREGADOR: TStringField;
+    FDMemTableCLIENTE: TStringField;
+    FDMemTableENDERECO: TStringField;
     procedure memPedidosAfterScroll(DataSet: TDataSet);
     procedure lblMenuNovoClick(Sender: TObject);
     procedure lblMenuPedidosMouseEnter(Sender: TObject);
@@ -65,8 +71,9 @@ type
     procedure DBGrid1DrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure DBGrid2DrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure lblMenuPedidosClick(Sender: TObject);
-    procedure lblMenuCancelarClick(Sender: TObject);
     procedure lblMenuPesquisaClick(Sender: TObject);
+    procedure DBGridDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure DBGridCellClick(Column: TColumn);
   private
     procedure CarregarEntregadores;
     { Private declarations }
@@ -81,7 +88,7 @@ implementation
 
 uses
   uItemPedidoController, uPedido, uEntregaController, uEntregadorController,
-  uEntregador, uPedidoController;
+  uEntregador, uPedidoController, uFrmFinalizacaoPedido;
 
 {$R *.dfm}
 
@@ -136,27 +143,135 @@ begin
     Grid.Canvas.FillRect(Rect);
   end;
 
+  if Grid.DataSource.DataSet.FieldByName('SUBCATEGORIA').AsString = 'SENSIVEIS' then
+    Grid.Canvas.Font.Color := clRed
+  else if Grid.DataSource.DataSet.FieldByName('SUBCATEGORIA').AsString = 'CONTROLADOS' then
+    Grid.Canvas.Font.Color := clPurple
+  else if Grid.DataSource.DataSet.FieldByName('SUBCATEGORIA').AsString = 'PERECIVEIS' then
+    Grid.Canvas.Font.Color := clBlue
+  else
+    Grid.Canvas.Font.Color := clWindowText;
+
+  if gdSelected in State then
+    Font.Color := clHighlightText;
+
+
   Grid.DefaultDrawColumnCell(Rect, DataCol, Column, State);
 end;
 
-procedure TfrmEntregas.lblMenuCancelarClick(Sender: TObject);
+procedure TfrmEntregas.DBGridCellClick(Column: TColumn);
+var
+  frmFinalizacaoPedido: TfrmFinalizacaoPedido;
+  vPedidoController: TPedidoController;
+  vPedido: TPedido;
+
+  vEntregadorController : TEntregadorController;
+  vEntregador :  TEntregador;
 begin
   inherited;
-  lblEndereco1.Caption := '1.';
-  lblEndereco2.Caption := '2.';
-  lblEndereco3.Caption := '3.';
-  lblEndereco4.Caption := '4.';
-  lblEndereco5.Caption := '5.';
+  if Column.Index = DBGrid.Columns.Count - 1 then
+  begin
+    frmFinalizacaoPedido := TfrmFinalizacaoPedido.Create(Self);
+
+    try
+      if frmFinalizacaoPedido.ShowModal = mrOk then
+      begin
+        vPedidoController := TPedidoController.Create;
+        vPedido := TPedido.Create;
+
+        vEntregadorController := TEntregadorController.Create;
+        vEntregador := TEntregador.Create;
+
+        vEntregador.Nome := FDMemTableENTREGADOR.AsString;
+
+        try
+          vPedido.IDPedido := FDMemTableID_PEDIDO.AsInteger;
+          vPedido.Status := 'ENTREGUE';
+          vPedido.IDEntregador := TFDQuery(vEntregadorController.ListarEntregador(vEntregador)).FieldByName('ID_ENTREGADOR').AsInteger;
+          vPedido.Observacao := frmFinalizacaoPedido.Memo1.Text;
+          vPedidoController.AlterarPedido(vPedido);
+
+          MessageDlg('Pedido finalizado com sucesso', mtInformation, [mbOk], 0);
+          lblMenuPesquisaClick(Self);
+
+        finally
+          vEntregadorController.Free;
+          vEntregador.Free;
+          vPedidoController.Free;
+          vPedido.Free;
+        end;
+      end;
+    finally
+      frmFinalizacaoPedido.Free;
+    end;
+  end;
+end;
+
+procedure TfrmEntregas.DBGridDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+var
+  Grid: TDBGrid;
+  ImgIndex: Integer;
+  ImgX, ImgY: Integer;
+begin
+  Grid := Sender as TDBGrid;
+
+  if not (gdSelected in State) then
+  begin
+    if (Grid.DataSource.DataSet.RecNo mod 2 = 0) then
+      Grid.Canvas.Brush.Color := clCream
+    else
+      Grid.Canvas.Brush.Color := clWhite;
+
+    Grid.Canvas.FillRect(Rect);
+  end;
+
+   if Grid.DataSource.DataSet.FieldByName('LEVEL').AsInteger = 1 then
+    Grid.Canvas.Font.Color := clRed
+  else if Grid.DataSource.DataSet.FieldByName('LEVEL').AsInteger = 2 then
+    Grid.Canvas.Font.Color := clPurple
+  else if Grid.DataSource.DataSet.FieldByName('LEVEL').AsInteger = 3 then
+    Grid.Canvas.Font.Color := clBlue
+  else
+    Grid.Canvas.Font.Color := clWindowText;
+
+
+  Grid.DefaultDrawColumnCell(Rect, DataCol, Column, State);
+
+  if Column.Index = Grid.Columns.Count - 1 then
+    ImgIndex := 2
+  else
+    ImgIndex := -1;
+
+  if ImgIndex >= 0 then
+  begin
+
+    ImgX := Rect.Left + (Rect.Width - ImageList1.Width) div 2;
+    ImgY := Rect.Top + (Rect.Height - ImageList1.Height) div 2;
+
+    ImageList1.Draw(DBGrid.Canvas, ImgX, ImgY, ImgIndex);
+  end;
 end;
 
 procedure TfrmEntregas.lblMenuNovoClick(Sender: TObject);
 var
   vController: TEntregaController;
 begin
-  inherited;
+ // inherited;
+
+  pnlManutencao.Visible := true;
+  pnlPesquisa.Visible := false;
+
+  lblEndereco1.Caption := '1.';
+  lblEndereco2.Caption := '2.';
+  lblEndereco3.Caption := '3.';
+  lblEndereco4.Caption := '4.';
+  lblEndereco5.Caption := '5.';
+
   vController := TEntregaController.Create;
   try
     memPedidos.CloneCursor(vController.ListarPedidos, True);
+    if memPedidos.IsEmpty then
+      memItens.Close;
     CarregarEntregadores;
   finally
     vController.Free;
@@ -279,10 +394,19 @@ begin
 end;
 
 procedure TfrmEntregas.lblMenuPesquisaClick(Sender: TObject);
+var
+  vEntregaController: TEntregaController;
 begin
 //  inherited;
   pnlPesquisa.Visible := True;
   pnlManutencao.Visible := False;
+
+  vEntregaController := TEntregaController.Create;
+  try
+    FDMemTable.CloneCursor(vEntregaController.ListarPedidosEmRota);
+  finally
+    vEntregaController.Free;
+  end;
 end;
 
 procedure TfrmEntregas.memPedidosAfterScroll(DataSet: TDataSet);

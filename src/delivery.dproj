@@ -169,6 +169,10 @@
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="controllers\uEntregadorController.pas"/>
+        <DCCReference Include="views\uFrmFinalizacaoPedido.pas">
+            <Form>frmFinalizacaoPedido</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>

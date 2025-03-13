@@ -10,7 +10,7 @@ uses
   FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
   FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
   FireDAC.Comp.DataSet, FireDAC.Comp.Client, FireDAC.Phys.FBDef, FireDAC.Phys,
-  FireDAC.Phys.IBBase, FireDAC.Phys.FB,Vcl.WinXPickers, System.ImageList,
+  FireDAC.Phys.IBBase, FireDAC.Phys.FB, Vcl.WinXPickers, System.ImageList,
   Vcl.ImgList, Vcl.Imaging.pngimage, Vcl.Imaging.jpeg;
 
 type
@@ -58,8 +58,7 @@ type
     procedure Label16MouseEnter(Sender: TObject);
     procedure Label16MouseLeave(Sender: TObject);
     procedure Label16Click(Sender: TObject);
-    procedure DBGridDrawColumnCell(Sender: TObject; const Rect: TRect;
-      DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure DBGridDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
   private
     procedure LimparComponentes;
   protected
@@ -76,11 +75,9 @@ implementation
 
 {$R *.dfm}
 
-procedure TfrmBaseCadastro.DBGridDrawColumnCell(Sender: TObject;
-  const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+procedure TfrmBaseCadastro.DBGridDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 var
   Grid: TDBGrid;
-
   ImgIndex: Integer;
   ImgX, ImgY: Integer;
 begin
@@ -88,22 +85,20 @@ begin
 
   Grid := Sender as TDBGrid;
 
-  // Verifica se a linha NÃO está selecionada para aplicar o efeito zebrado
   if not (gdSelected in State) then
   begin
     if (Grid.DataSource.DataSet.RecNo mod 2 = 0) then
-      Grid.Canvas.Brush.Color := clCream // Cinza claro
+      Grid.Canvas.Brush.Color := clCream
     else
-      Grid.Canvas.Brush.Color := clWhite; // Branco
+      Grid.Canvas.Brush.Color := clWhite;
 
     Grid.Canvas.FillRect(Rect);
   end;
 
-  // Redesenha o texto da célula
+
   Grid.DefaultDrawColumnCell(Rect, DataCol, Column, State);
 
 
-  // Verifica se a coluna é a de edição ou exclusão
   if Column.Index = Grid.Columns.Count - 2 then
     ImgIndex := 0
   else if Column.Index = Grid.Columns.Count - 1 then
@@ -112,14 +107,13 @@ begin
     ImgIndex := -1;
 
   if ImgIndex >= 0 then
-    begin
-      // Calcula a posição da imagem no centro da célula
-      ImgX := Rect.Left + (Rect.Width - ImageList1.Width) div 2;
-      ImgY := Rect.Top + (Rect.Height - ImageList1.Height) div 2;
+  begin
 
-      // Desenha a imagem
-      ImageList1.Draw(DBGrid.Canvas, ImgX, ImgY, ImgIndex);
-    end;
+    ImgX := Rect.Left + (Rect.Width - ImageList1.Width) div 2;
+    ImgY := Rect.Top + (Rect.Height - ImageList1.Height) div 2;
+
+    ImageList1.Draw(DBGrid.Canvas, ImgX, ImgY, ImgIndex);
+  end;
 end;
 
 procedure TfrmBaseCadastro.FormCreate(Sender: TObject);
@@ -183,7 +177,7 @@ end;
 
 procedure TfrmBaseCadastro.Label16MouseLeave(Sender: TObject);
 begin
-    Label16.Color := clWhite;
+  Label16.Color := clWhite;
 end;
 
 procedure TfrmBaseCadastro.Label1Click(Sender: TObject);
@@ -301,14 +295,8 @@ begin
     if Self.Components[i] is TMemo then
       TMemo(Self.Components[i]).Lines.Clear;
 
-
   end;
 end;
 
 end.
-
-
-
-
-
 

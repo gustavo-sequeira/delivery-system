@@ -21,7 +21,8 @@ uses
   uFrmEntregas in 'views\uFrmEntregas.pas' {frmEntregas},
   uEntregaController in 'controllers\uEntregaController.pas',
   uFrmEntregadores in 'views\uFrmEntregadores.pas' {frmEntregadores},
-  uEntregadorController in 'controllers\uEntregadorController.pas';
+  uEntregadorController in 'controllers\uEntregadorController.pas',
+  uFrmFinalizacaoPedido in 'views\uFrmFinalizacaoPedido.pas' {frmFinalizacaoPedido};
 
 {$R *.res}
 

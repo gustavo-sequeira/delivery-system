@@ -32,8 +32,6 @@ type
     memObservacao: TMemo;
     DataSource1: TDataSource;
     FDMemTable1: TFDMemTable;
-    FDConnection1: TFDConnection;
-    FDQuery1: TFDQuery;
     DBGridItens: TDBGrid;
     FDMemTableID_PEDIDO: TIntegerField;
     FDMemTableID_CLIENTE: TIntegerField;
@@ -72,6 +70,7 @@ type
     procedure DBGridCellClick(Column: TColumn);
     procedure DBGridItensDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure DBGrid1CellClick(Column: TColumn);
+    procedure DBGridDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
   private
     { Private declarations }
     FPedido: TPedido;
@@ -173,7 +172,6 @@ end;
 procedure TfrmPedidos.cbxClienteSelect(Sender: TObject);
 begin
   cbxCliente.DroppedDown := False;
- // CarregarCliente(cbxCliente);
 end;
 
 procedure TfrmPedidos.chbPesquisaDataClick(Sender: TObject);
@@ -249,18 +247,29 @@ begin
 
   Grid := Sender as TDBGrid;
 
-  // Verifica se a linha NÃO está selecionada para aplicar o efeito zebrado
   if not (gdSelected in State) then
   begin
     if (Grid.DataSource.DataSet.RecNo mod 2 = 0) then
-      Grid.Canvas.Brush.Color := clCream // Cinza claro
+      Grid.Canvas.Brush.Color := clCream
     else
-      Grid.Canvas.Brush.Color := clWhite; // Branco
+      Grid.Canvas.Brush.Color := clWhite;
 
     Grid.Canvas.FillRect(Rect);
   end;
 
-  // Redesenha o texto da célula
+
+  if Grid.DataSource.DataSet.FieldByName('SUBCATEGORIA').AsString = 'SENSIVEIS' then
+    Grid.Canvas.Font.Color := clRed
+  else if Grid.DataSource.DataSet.FieldByName('SUBCATEGORIA').AsString = 'CONTROLADOS' then
+    Grid.Canvas.Font.Color := clPurple
+  else if Grid.DataSource.DataSet.FieldByName('SUBCATEGORIA').AsString = 'PERECIVEIS' then
+    Grid.Canvas.Font.Color := clBlue
+  else
+    Grid.Canvas.Font.Color := clWindowText;
+
+  if gdSelected in State then
+    Font.Color := clHighlightText;
+
   Grid.DefaultDrawColumnCell(Rect, DataCol, Column, State);
 
   if Column.Index = Grid.Columns.Count - 1 then
@@ -270,11 +279,9 @@ begin
 
   if ImgIndex >= 0 then
   begin
-      // Calcula a posição da imagem no centro da célula
     ImgX := Rect.Left + (Rect.Width - ImageList1.Width) div 2;
     ImgY := Rect.Top + (Rect.Height - ImageList1.Height) div 2;
 
-      // Desenha a imagem
     ImageList1.Draw(DBGrid1.Canvas, ImgX, ImgY, ImgIndex);
   end;
 end;
@@ -301,9 +308,15 @@ begin
     if Column.Index = DBGrid.Columns.Count - 2 then
     begin
 
-      if FDMemTableSTATUS.AsString <> 'PENDENTE' then
+      if FDMemTableSTATUS.AsString  = 'EM ROTA' then
       begin
         MessageDlg('Pedido já saiu para entrega e não poderá ser alterado', mtInformation, [mbOk], 0);
+        Abort;
+      end;
+
+      if FDMemTableSTATUS.AsString = 'ENTREGUE' then
+      begin
+        MessageDlg('Pedido já foi entregue e não poderá ser alterado', mtInformation, [mbOk], 0);
         Abort;
       end;
 
@@ -365,9 +378,15 @@ begin
     else if Column.Index = DBGrid.Columns.Count - 1 then
     begin
 
-      if FDMemTableSTATUS.AsString <> 'PENDENTE' then
+      if FDMemTableSTATUS.AsString = 'EM ROTA' then
       begin
         MessageDlg('Pedido já saiu para entrega e não poderá ser excluído', mtInformation, [mbOk], 0);
+        Abort;
+      end;
+
+      if FDMemTableSTATUS.AsString = 'ENTREGUE' then
+      begin
+        MessageDlg('Pedido já foi entregue e não poderá ser excluído', mtInformation, [mbOk], 0);
         Abort;
       end;
 
@@ -382,6 +401,57 @@ begin
   end;
 end;
 
+procedure TfrmPedidos.DBGridDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+var
+  Grid: TDBGrid;
+  ImgIndex: Integer;
+  ImgX, ImgY: Integer;
+begin
+ // inherited;
+
+  Grid := Sender as TDBGrid;
+
+  if not (gdSelected in State) then
+  begin
+    if (Grid.DataSource.DataSet.RecNo mod 2 = 0) then
+      Grid.Canvas.Brush.Color := clCream
+    else
+      Grid.Canvas.Brush.Color := clWhite;
+
+    Grid.Canvas.FillRect(Rect);
+  end;
+
+  if Grid.DataSource.DataSet.FieldByName('STATUS').AsString = 'PENDENTE' then
+    Grid.Canvas.Font.Color := clWebChocolate
+  else if Grid.DataSource.DataSet.FieldByName('STATUS').AsString = 'EM ROTA' then
+    Grid.Canvas.Font.Color := clGreen
+  else if Grid.DataSource.DataSet.FieldByName('STATUS').AsString = 'ENTREGUE' then
+    Grid.Canvas.Font.Color := clBlue
+  else
+    Grid.Canvas.Font.Color := clWindowText;
+
+  if gdSelected in State then
+    Font.Color := clHighlightText;
+
+  Grid.DefaultDrawColumnCell(Rect, DataCol, Column, State);
+
+  if Column.Index = Grid.Columns.Count - 2 then
+    ImgIndex := 0
+  else if Column.Index = Grid.Columns.Count - 1 then
+    ImgIndex := 1
+  else
+    ImgIndex := -1;
+
+  if ImgIndex >= 0 then
+  begin
+    ImgX := Rect.Left + (Rect.Width - ImageList1.Width) div 2;
+    ImgY := Rect.Top + (Rect.Height - ImageList1.Height) div 2;
+
+    ImageList1.Draw(DBGrid.Canvas, ImgX, ImgY, ImgIndex);
+  end;
+
+end;
+
 procedure TfrmPedidos.DBGridItensDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 var
   Grid: TDBGrid;
@@ -390,18 +460,28 @@ begin
 
   Grid := Sender as TDBGrid;
 
-  // Verifica se a linha NÃO está selecionada para aplicar o efeito zebrado
   if not (gdSelected in State) then
   begin
     if (Grid.DataSource.DataSet.RecNo mod 2 = 0) then
-      Grid.Canvas.Brush.Color := clCream // Cinza claro
+      Grid.Canvas.Brush.Color := clCream
     else
-      Grid.Canvas.Brush.Color := clWhite; // Branco
+      Grid.Canvas.Brush.Color := clWhite;
+
+    if Grid.DataSource.DataSet.FieldByName('SUBCATEGORIA').AsString = 'SENSIVEIS' then
+      Grid.Canvas.Font.Color := clRed
+    else if Grid.DataSource.DataSet.FieldByName('SUBCATEGORIA').AsString = 'CONTROLADOS' then
+      Grid.Canvas.Font.Color := clPurple
+    else if Grid.DataSource.DataSet.FieldByName('SUBCATEGORIA').AsString = 'PERECIVEIS' then
+      Grid.Canvas.Font.Color := clBlue
+    else
+      Grid.Canvas.Font.Color := clWindowText;
+
+    if gdSelected in State then
+      Font.Color := clHighlightText;
 
     Grid.Canvas.FillRect(Rect);
   end;
 
-  // Redesenha o texto da célula
   Grid.DefaultDrawColumnCell(Rect, DataCol, Column, State);
 end;
 
@@ -442,6 +522,11 @@ begin
       vPedido.Free;
       vController.Free;
     end;
+  end
+  else
+  begin
+    if FDMemTable1.Active then
+      FDMemTable1.Close;
   end;
 end;
 
@@ -492,10 +577,14 @@ var
   vProduto: TProduto;
   vHabilitaObservacao: Boolean;
   vObservacao: string;
+  vMemTable: TFDMemTable;
 begin
   frmItensPedido := TFrmItensPedido.Create(Self);
   vHabilitaObservacao := False;
   vObservacao := '';
+  vProdutoController := TProdutoController.Create;
+  vMemTable := TFDMemTable.Create(nil);
+  vProduto := TProduto.Create;
 
   try
     frmItensPedido.ShowModal;
@@ -510,16 +599,23 @@ begin
       if FDMemTable1.FieldByName('CODIGO').ReadOnly then
         FDMemTable1.FieldByName('CODIGO').ReadOnly := False;
 
+
+      vProduto.ID :=  frmItensPedido.ItemPedido.ID_Produto;
+
+      vMemTable.CloneCursor(vProdutoController.ListarProdutos(vProduto));
+
       FDMemTable1.FieldByName('CODIGO').AsString := frmItensPedido.ItemPedido.Codigo;
       FDMemTable1.FieldByName('NOME').AsString := frmItensPedido.ItemPedido.Nome;
       FDMemTable1.FieldByName('DESCRICAO').AsString := frmItensPedido.ItemPedido.Descricao;
       FDMemTable1.FieldByName('QUANTIDADE').AsInteger := frmItensPedido.ItemPedido.Quantidade;
+      FDMemTable1.FieldByName('CATEGORIA').AsString := vMemTable.FieldByName('CATEGORIA').AsString ;
+      FDMemTable1.FieldByName('SUBCATEGORIA').AsString := vMemTable.FieldByName('SUBCATEGORIA').AsString;
       FDMemTable1.FieldByName('PRECO').AsFloat := frmItensPedido.ItemPedido.PrecoUnitario;
       FDMemTable1.Post;
 
       FDMemTable1.DisableControls;
-      vProdutoController := TProdutoController.Create;
-      vProduto := TProduto.Create;
+
+
       try
         FDMemTable1.First;
 
@@ -542,12 +638,13 @@ begin
         memObservacao.Visible := vHabilitaObservacao;
 
       finally
-        vProdutoController.Free;
         vProduto.Free;
       end;
       FDMemTable1.EnableControls;
     end;
   finally
+    vMemTable.Free;
+    vProdutoController.Free;
     frmItensPedido.Free;
   end;
 end;

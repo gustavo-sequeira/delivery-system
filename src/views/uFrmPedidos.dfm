@@ -6,18 +6,17 @@ inherited frmPedidos: TfrmPedidos
     StyleElements = [seFont, seClient, seBorder]
     inherited Label1: TLabel
       StyleElements = [seFont, seClient, seBorder]
-      ExplicitTop = 568
     end
-    inherited lblMenuPesquisa: TLabel
+    inherited lblMenuNovo: TLabel [1]
       StyleElements = [seFont, seClient, seBorder]
     end
-    inherited lblMenuNovo: TLabel
+    inherited lblMenuSalvar: TLabel [2]
       StyleElements = [seFont, seClient, seBorder]
     end
-    inherited lblMenuSalvar: TLabel
+    inherited lblMenuCancelar: TLabel [3]
       StyleElements = [seFont, seClient, seBorder]
     end
-    inherited lblMenuCancelar: TLabel
+    inherited lblMenuPesquisa: TLabel [4]
       StyleElements = [seFont, seClient, seBorder]
     end
     inherited Panel2: TPanel
@@ -33,6 +32,10 @@ inherited frmPedidos: TfrmPedidos
         Caption = 'Pedidos'
         StyleElements = [seFont, seClient, seBorder]
         ExplicitWidth = 149
+      end
+      inherited Image2: TImage
+        Left = 155
+        ExplicitLeft = 155
       end
     end
     inherited pnlManutencao: TPanel
@@ -321,8 +324,6 @@ inherited frmPedidos: TfrmPedidos
     end
     inherited pnlPesquisa: TPanel
       StyleElements = [seFont, seClient, seBorder]
-      ExplicitLeft = 0
-      ExplicitTop = 72
       inherited DBGrid: TDBGrid
         Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgTitleHotTrack]
         OnCellClick = DBGridCellClick
@@ -464,12 +465,12 @@ inherited frmPedidos: TfrmPedidos
     end
   end
   inherited FDGUIxWaitCursor: TFDGUIxWaitCursor
-    Left = 200
-    Top = 272
+    Left = 48
+    Top = 216
   end
   inherited DataSource: TDataSource
-    Left = 288
-    Top = 352
+    Left = 176
+    Top = 216
   end
   inherited FDMemTable: TFDMemTable
     AfterScroll = FDMemTableAfterScroll
@@ -482,8 +483,8 @@ inherited frmPedidos: TfrmPedidos
     UpdateOptions.LockWait = True
     UpdateOptions.FetchGeneratorsPoint = gpNone
     StoreDefs = True
-    Left = 216
-    Top = 88
+    Left = 112
+    Top = 216
     object FDMemTableID_PEDIDO: TIntegerField
       DisplayWidth = 10
       FieldName = 'ID_PEDIDO'
@@ -528,8 +529,8 @@ inherited frmPedidos: TfrmPedidos
   end
   object DataSource1: TDataSource [5]
     DataSet = FDMemTable1
-    Left = 360
-    Top = 128
+    Left = 144
+    Top = 216
   end
   object FDMemTable1: TFDMemTable [6]
     Active = True
@@ -592,8 +593,8 @@ inherited frmPedidos: TfrmPedidos
     UpdateOptions.CheckRequired = False
     UpdateOptions.AutoCommitUpdates = True
     StoreDefs = True
-    Left = 320
-    Top = 208
+    Left = 80
+    Top = 216
     Content = {
       414442531000000049040000FF00010001FF02FF03040016000000460044004D
       0065006D005400610062006C0065003100050016000000460044004D0065006D
@@ -689,46 +690,8 @@ inherited frmPedidos: TfrmPedidos
       Size = 2
     end
   end
-  object FDConnection1: TFDConnection [7]
-    Params.Strings = (
-      
-        'Database=C:\projetos\repositorios\portfolio\delivery-system\data' +
-        'base\DELIVERY.FDB'
-      'User_Name=sysdba'
-      'Password=masterkey'
-      'DriverID=FB')
-    Connected = True
-    LoginPrompt = False
-    Left = 560
-    Top = 296
-  end
-  object FDQuery1: TFDQuery [8]
-    Connection = FDConnection1
-    SQL.Strings = (
-      ''
-      #9'  '
-      'WITH VPRODUTOS AS('#9'  '
-      
-        'SELECT P.*, 1 AS LEVEL FROM PRODUTOS p WHERE p.CATEGORIA = '#39'MEDI' +
-        'CAMENTOS'#39' AND p.SUBCATEGORIA = '#39'SENSIVEIS'#39' '#9'  '
-      'UNION ALL'
-      
-        'SELECT P.*, 2 AS LEVEL FROM PRODUTOS p WHERE p.CATEGORIA = '#39'MEDI' +
-        'CAMENTOS'#39' AND p.SUBCATEGORIA = '#39'CONTROLADOS'#39' '
-      'UNION ALL'
-      
-        'SELECT P.*, 3 AS LEVEL FROM PRODUTOS p WHERE p.CATEGORIA = '#39'MEDI' +
-        'CAMENTOS'#39' AND p.SUBCATEGORIA = '#39'PERECIVEIS'#39' '#9
-      'UNION ALL'
-      
-        'SELECT P.*, 4 AS LEVEL FROM PRODUTOS p WHERE p.SUBCATEGORIA NOT ' +
-        'IN ('#39'SENSIVEIS'#39','#39'CONTROLADOS'#39','#39'PERECIVEIS'#39')'
-      ') SELECT * FROM VPRODUTOS v'
-      'JOIN ITENS_PEDIDO ip ON ip.ID_PRODUTO = V.ID_PRODUTO'
-      'JOIN PEDIDOS p ON IP.ID_PEDIDO = P.ID_PEDIDO'
-      'WHERE P.STATUS = '#39'PENDENTE'#39
-      'ORDER BY LEVEL, NOME')
-    Left = 304
-    Top = 272
+  inherited ImageList1: TImageList
+    Left = 15
+    Top = 216
   end
 end

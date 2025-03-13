@@ -61,7 +61,7 @@ implementation
 {$R *.dfm}
 
 uses
-  uConexaoFirebird, uFrmBaseCadastro;
+  uConexaoFirebird;
 
 procedure TfrmPrincipal.lblMenuEntregasClick(Sender: TObject);
 begin

@@ -16,6 +16,7 @@ type
     FFormaPagamento: string;
     FIDEntregador: Integer;
     FDataEntrega: TDateTime;
+    FObservacao: string;
 
     procedure SetIDPedido(const Value: Integer);
     function GetIDPedido: Integer;
@@ -41,6 +42,9 @@ type
     procedure SetDataEntrega(const Value: TDateTime);
     function GetDataEntrega: TDateTime;
 
+    procedure SetObservacao(const Value: String);
+    function GetObservacao: string;
+
   public
     constructor Create;
     property IDPedido: Integer read GetIDPedido write SetIDPedido;
@@ -51,6 +55,7 @@ type
     property FormaPagamento: string read GetFormaPagamento write SetFormaPagamento;
     property IDEntregador: Integer read GetIDEntregador write SetIDEntregador;
     property DataEntrega: TDateTime read GetDataEntrega write SetDataEntrega;
+    property Observacao: string read GetObservacao write SetObservacao;
   end;
 
 implementation
@@ -66,9 +71,19 @@ begin
   FIDPedido := Value;
 end;
 
+procedure TPedido.SetObservacao(const Value: String);
+begin
+  FObservacao := Value;
+end;
+
 function TPedido.GetIDPedido: Integer;
 begin
   Result := FIDPedido;
+end;
+
+function TPedido.GetObservacao: string;
+begin
+  Result := FObservacao;
 end;
 
 procedure TPedido.SetIDCliente(const Value: Integer);

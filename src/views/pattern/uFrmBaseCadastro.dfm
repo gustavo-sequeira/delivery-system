@@ -5318,6 +5318,41 @@ object frmBaseCadastro: TfrmBaseCadastro
         ExplicitLeft = 832
       end
     end
+    object pnlPesquisa: TPanel
+      Left = 0
+      Top = 72
+      Width = 918
+      Height = 550
+      Align = alClient
+      BevelOuter = bvNone
+      ParentColor = True
+      TabOrder = 2
+      Visible = False
+      object DBGrid: TDBGrid
+        AlignWithMargins = True
+        Left = 3
+        Top = 3
+        Width = 667
+        Height = 70
+        BorderStyle = bsNone
+        Color = clWhite
+        DataSource = DataSource
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        Options = [dgTitles, dgIndicator, dgColLines, dgRowLines, dgTabs, dgTitleHotTrack]
+        ParentFont = False
+        TabOrder = 0
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -16
+        TitleFont.Name = 'Segoe UI'
+        TitleFont.Style = [fsBold]
+        OnDrawColumnCell = DBGridDrawColumnCell
+      end
+    end
     object pnlManutencao: TPanel
       Left = 0
       Top = 72
@@ -5326,7 +5361,7 @@ object frmBaseCadastro: TfrmBaseCadastro
       Align = alClient
       BevelOuter = bvNone
       Color = clWhite
-      TabOrder = 2
+      TabOrder = 1
       Visible = False
       object Panel5: TPanel
         Left = 0
@@ -5358,41 +5393,6 @@ object frmBaseCadastro: TfrmBaseCadastro
           OnMouseEnter = Label16MouseEnter
           OnMouseLeave = Label16MouseLeave
         end
-      end
-    end
-    object pnlPesquisa: TPanel
-      Left = 0
-      Top = 72
-      Width = 918
-      Height = 550
-      Align = alClient
-      BevelOuter = bvNone
-      ParentColor = True
-      TabOrder = 1
-      Visible = False
-      object DBGrid: TDBGrid
-        AlignWithMargins = True
-        Left = 3
-        Top = 3
-        Width = 667
-        Height = 70
-        BorderStyle = bsNone
-        Color = clWhite
-        DataSource = DataSource
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -16
-        Font.Name = 'Segoe UI'
-        Font.Style = []
-        Options = [dgTitles, dgIndicator, dgColLines, dgRowLines, dgTabs, dgTitleHotTrack]
-        ParentFont = False
-        TabOrder = 0
-        TitleFont.Charset = DEFAULT_CHARSET
-        TitleFont.Color = clWindowText
-        TitleFont.Height = -16
-        TitleFont.Name = 'Segoe UI'
-        TitleFont.Style = [fsBold]
-        OnDrawColumnCell = DBGridDrawColumnCell
       end
     end
   end

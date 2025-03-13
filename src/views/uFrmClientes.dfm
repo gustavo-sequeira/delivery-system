@@ -6,23 +6,18 @@ inherited frmClientes: TfrmClientes
   inherited pnlMenu: TPanel
     StyleElements = [seFont, seClient, seBorder]
     inherited Label1: TLabel
-      Width = 177
       StyleElements = [seFont, seClient, seBorder]
     end
     inherited lblMenuPesquisa: TLabel
-      Width = 177
       StyleElements = [seFont, seClient, seBorder]
     end
     inherited lblMenuNovo: TLabel
-      Width = 177
       StyleElements = [seFont, seClient, seBorder]
     end
     inherited lblMenuSalvar: TLabel
-      Width = 177
       StyleElements = [seFont, seClient, seBorder]
     end
     inherited lblMenuCancelar: TLabel
-      Width = 177
       StyleElements = [seFont, seClient, seBorder]
     end
     inherited Panel2: TPanel
@@ -31,7 +26,21 @@ inherited frmClientes: TfrmClientes
   end
   inherited pnlCentral: TPanel
     StyleElements = [seFont, seClient, seBorder]
-    inherited pnlPesquisa: TPanel [0]
+    inherited Panel1: TPanel
+      StyleElements = [seFont, seClient, seBorder]
+      inherited Label2: TLabel
+        Width = 149
+        Caption = 'Clientes'
+        StyleElements = [seFont, seClient, seBorder]
+        ExplicitWidth = 149
+      end
+      inherited Image2: TImage
+        Left = 155
+        ExplicitLeft = 155
+      end
+    end
+    inherited pnlPesquisa: TPanel
+      TabOrder = 1
       StyleElements = [seFont, seClient, seBorder]
       inherited DBGrid: TDBGrid
         Width = 912
@@ -114,23 +123,11 @@ inherited frmClientes: TfrmClientes
           end>
       end
     end
-    inherited Panel1: TPanel [1]
-      StyleElements = [seFont, seClient, seBorder]
-      inherited Label2: TLabel
-        Width = 149
-        Height = 66
-        Caption = 'Clientes'
-        StyleElements = [seFont, seClient, seBorder]
-        ExplicitWidth = 149
-      end
-      inherited Image2: TImage
-        Left = 155
-      end
-    end
-    inherited pnlManutencao: TPanel [2]
+    inherited pnlManutencao: TPanel
       Top = 75
       Width = 669
       Align = alNone
+      TabOrder = 2
       StyleElements = [seFont, seClient, seBorder]
       ExplicitTop = 75
       ExplicitWidth = 669

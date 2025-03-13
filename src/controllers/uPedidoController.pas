@@ -35,11 +35,12 @@ begin
   FDQuery := TFDQuery.Create(nil);
   try
     FDQuery.Connection := FConnection;
-    FDQuery.SQL.Text := 'EXECUTE PROCEDURE SP_ALTERAR_PEDIDO(:P_ID, :P_STATUS, :P_ID_ENTREGADOR)';
+    FDQuery.SQL.Text := 'EXECUTE PROCEDURE SP_ALTERAR_PEDIDO(:P_ID, :P_STATUS, :P_ID_ENTREGADOR, :P_OBSERVACAO)';
 
     FDQuery.ParamByName('P_ID').AsInteger := APedido.IDPedido;
     FDQuery.ParamByName('P_STATUS').AsString := APedido.Status;
     FDQuery.ParamByName('P_ID_ENTREGADOR').AsInteger := APedido.IDEntregador;
+    FDQuery.ParamByName('P_OBSERVACAO').AsString := APedido.Observacao;
 
     FDQuery.ExecSQL;
   finally
@@ -140,7 +141,10 @@ begin
 
   FDQuery := TFDQuery.Create(nil);
   FDQuery.Connection := FConnection;
-  FDQuery.SQL.Text := 'SELECT p.*, c.nome FROM PEDIDOS p JOIN clientes c ON p.ID_CLIENTE = c.ID_CLIENTE ' + vWhere + ' ORDER BY ID_PEDIDO';
+  FDQuery.SQL.Text := 'SELECT * FROM  ( ' +
+                      ' SELECT 1 ORDEM, p.*, c.nome FROM PEDIDOS p JOIN clientes c ON p.ID_CLIENTE = c.ID_CLIENTE ' + vWhere + ' AND STATUS = ''PENDENTE'' ' +
+                      ' UNION ALL SELECT 2 ORDEM, p.*, c.nome FROM PEDIDOS p JOIN clientes c ON p.ID_CLIENTE = c.ID_CLIENTE ' + vWhere + ' AND STATUS <> ''PENDENTE'') ' +
+                      ' ORDER BY ORDEM, DATA_ENTREGA, NOME';
   FDQuery.Open;
 
   Result := FDQuery;
