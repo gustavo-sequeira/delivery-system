@@ -5371,7 +5371,6 @@ object frmBaseCadastro: TfrmBaseCadastro
         Align = alBottom
         BevelOuter = bvNone
         Color = clWhite
-        ParentBackground = False
         TabOrder = 0
         object Label16: TLabel
           Left = 370
